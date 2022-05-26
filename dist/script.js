@@ -14014,7 +14014,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_tabs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/tabs */ "./src/js/modules/tabs.js");
 
 
- // I am well aware that there are warnings, but so far I do not plan to fix them, I just practice and do not want to get into the work boostrap, then I plan to work without it, and waste time on this now can not
+
+/*
+I know about the warnings associated with boostrap, but I will not eliminate them at this time, 
+this project is used to practice and do not intend to use it in the future, which at this time, 
+it would be a waste of time
+*/
 
 window.addEventListener('DOMContentLoaded', () => {
   Object(_modules_modals__WEBPACK_IMPORTED_MODULE_1__["default"])();

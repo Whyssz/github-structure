@@ -1,13 +1,18 @@
 import './slider';
 import modals from './modules/modals';
 import tabs from './modules/tabs';
+import forms from './modules/forms';
 
-// I am well aware that there are warnings, but so far I do not plan to fix them, I just practice and do not want to get into the work boostrap, then I plan to work without it, and waste time on this now can not
+/*
+I know about the warnings associated with boostrap, but I will not eliminate them at this time, 
+this project is used to practice and do not intend to use it in the future, which at this time, 
+it would be a waste of time
+*/
 
 window.addEventListener('DOMContentLoaded', () => {
-
+  'use strict';
   modals();
   tabs('.glazing_slider', '.glazing_block', '.glazing_content', 'slick-current');
   tabs('.decoration_slider', '.no_click', '.decoration_content > div > div', 'after_click');
-
+  forms();
 });
