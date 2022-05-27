@@ -14012,6 +14012,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _slider__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./slider */ "./src/js/slider.js");
 /* harmony import */ var _modules_modals__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/modals */ "./src/js/modules/modals.js");
 /* harmony import */ var _modules_tabs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/tabs */ "./src/js/modules/tabs.js");
+/* harmony import */ var _modules_forms__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/forms */ "./src/js/modules/forms.js");
+/* harmony import */ var _modules_changeModalState__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/changeModalState */ "./src/js/modules/changeModalState.js");
+
+
 
 
 
@@ -14022,10 +14026,176 @@ it would be a waste of time
 */
 
 window.addEventListener('DOMContentLoaded', () => {
+  'use strict';
+
+  let modaleState = {};
+  Object(_modules_changeModalState__WEBPACK_IMPORTED_MODULE_4__["default"])(modaleState);
   Object(_modules_modals__WEBPACK_IMPORTED_MODULE_1__["default"])();
   Object(_modules_tabs__WEBPACK_IMPORTED_MODULE_2__["default"])('.glazing_slider', '.glazing_block', '.glazing_content', 'slick-current');
   Object(_modules_tabs__WEBPACK_IMPORTED_MODULE_2__["default"])('.decoration_slider', '.no_click', '.decoration_content > div > div', 'after_click');
+  Object(_modules_tabs__WEBPACK_IMPORTED_MODULE_2__["default"])('.balcon_icons', '.balcon_icons_img', '.big_img > img', 'do_image_more', 'inline-block');
+  Object(_modules_forms__WEBPACK_IMPORTED_MODULE_3__["default"])(modaleState);
 });
+
+/***/ }),
+
+/***/ "./src/js/modules/changeModalState.js":
+/*!********************************************!*\
+  !*** ./src/js/modules/changeModalState.js ***!
+  \********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _checkNumInputs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./checkNumInputs */ "./src/js/modules/checkNumInputs.js");
+
+
+const changeModalState = state => {
+  const windowForms = document.querySelectorAll('.balcon_icons_img'),
+        windowWidth = document.querySelectorAll('#width'),
+        windowHeight = document.querySelectorAll('#height'),
+        windowType = document.querySelectorAll('#view_type'),
+        windowCheckbox = document.querySelectorAll('.checkbox');
+  Object(_checkNumInputs__WEBPACK_IMPORTED_MODULE_0__["default"])('#width');
+  Object(_checkNumInputs__WEBPACK_IMPORTED_MODULE_0__["default"])('#height');
+
+  function bindActionToElem(elem, event, prop) {
+    elem.forEach((item, i) => {
+      item.addEventListener(event, () => {
+        switch (item.nodeName) {
+          case 'SPAN':
+            state[prop] = i;
+            break;
+
+          case 'INPUT':
+            if (item.getAttribute('type') === 'checkbox') {
+              i === 0 ? state[prop] = 'Cold' : state[prop] = 'Warn';
+              elem.forEach((box, j) => {
+                box.checked = false;
+
+                if (i == j) {
+                  box.checked = true;
+                }
+              });
+            } else {
+              state[prop] = item.value;
+            }
+
+            break;
+
+          case 'SELECT':
+            state[prop] = item.value;
+            break;
+        }
+
+        console.log(state);
+      });
+    });
+  }
+
+  bindActionToElem(windowForms, 'click', 'form');
+  bindActionToElem(windowHeight, 'input', 'height');
+  bindActionToElem(windowWidth, 'input', 'width');
+  bindActionToElem(windowType, 'input', 'type');
+  bindActionToElem(windowCheckbox, 'input', 'checkbox');
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (changeModalState);
+
+/***/ }),
+
+/***/ "./src/js/modules/checkNumInputs.js":
+/*!******************************************!*\
+  !*** ./src/js/modules/checkNumInputs.js ***!
+  \******************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+const checkNumInputs = selector => {
+  const numInputs = document.querySelectorAll(selector);
+  numInputs.forEach(item => {
+    item.addEventListener('input', () => {
+      item.value = item.value.replace(/\D/, '');
+    });
+  });
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (checkNumInputs);
+
+/***/ }),
+
+/***/ "./src/js/modules/forms.js":
+/*!*********************************!*\
+  !*** ./src/js/modules/forms.js ***!
+  \*********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _checkNumInputs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./checkNumInputs */ "./src/js/modules/checkNumInputs.js");
+
+
+const forms = state => {
+  const form = document.querySelectorAll('form'),
+        input = document.querySelectorAll('input');
+  Object(_checkNumInputs__WEBPACK_IMPORTED_MODULE_0__["default"])('input[name="user_phone"]');
+  const message = {
+    loading: "Загрузка...",
+    success: 'Спасибо, всё прошло хорошо!',
+    failure: 'Что-то пошло не так...'
+  };
+
+  const postData = async (url, data) => {
+    document.querySelector('.status').textContent = message.loading;
+    let res = await fetch(url, {
+      method: 'POST',
+      body: data
+    });
+    return await res.text();
+  };
+
+  const clearInputs = () => {
+    input.forEach(item => {
+      item.value = '';
+    });
+  };
+
+  form.forEach(item => {
+    item.addEventListener('submit', e => {
+      e.preventDefault();
+      let statusMessage = document.createElement('div');
+      statusMessage.classList.add('status');
+      item.appendChild(statusMessage);
+      const formData = new FormData(item);
+
+      if (item.getAttribute('data-calc') === 'end') {
+        for (let key in state) {
+          formData.append(key, state[key]);
+        }
+      }
+
+      postData('assets/server.php', formData).then(res => {
+        console.log(res);
+        statusMessage.textContent = message.success;
+      }).catch(() => statusMessage.textContent = message.failure).finally(() => {
+        clearInputs();
+        setTimeout(() => {
+          statusMessage.remove();
+        }, 3000);
+        setTimeout(() => {
+          document.querySelectorAll('[data-modal]').forEach(item => item.style.display = 'none');
+          document.body.style.overflow = '';
+        }, 4000);
+      });
+    });
+  });
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (forms);
 
 /***/ }),
 
@@ -14040,20 +14210,28 @@ window.addEventListener('DOMContentLoaded', () => {
 __webpack_require__.r(__webpack_exports__);
 const modals = () => {
   function bindModal(triggerSelector, modalSelector, closeSelector) {
+    let closeClickOverlay = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 'true';
     const trigger = document.querySelectorAll(triggerSelector),
           modal = document.querySelector(modalSelector),
-          close = document.querySelector(closeSelector);
+          close = document.querySelector(closeSelector),
+          window = document.querySelectorAll('[data-modal]');
     trigger.forEach(item => {
       item.addEventListener('click', e => {
         if (e.target) {
           e.preventDefault();
         }
 
+        window.forEach(item => {
+          item.style.display = 'none';
+        });
         modal.style.display = 'block';
         document.body.style.overflow = 'hidden'; // document.body.classList.add('modal-open');
       });
       item.addEventListener('keydown', e => {
-        if (e.code === 'Escape' && modal.style.display === 'block') {
+        if (e.code === 'Escape' && modal.style.display === 'block' && closeClickOverlay) {
+          window.forEach(item => {
+            item.style.display = 'none';
+          });
           modal.style.display = 'none';
           document.body.style.overflow = '';
         }
@@ -14061,10 +14239,16 @@ const modals = () => {
     });
     close.addEventListener('click', () => {
       modal.style.display = 'none';
-      document.body.style.overflow = ''; // document.body.classList.remove('modal-open');
+      document.body.style.overflow = '';
+      window.forEach(item => {
+        item.style.display = 'none';
+      }); // document.body.classList.remove('modal-open');
     });
     modal.addEventListener('click', e => {
-      if (e.target === modal) {
+      if (e.target === modal && closeClickOverlay) {
+        window.forEach(item => {
+          item.style.display = 'none';
+        });
         modal.style.display = 'none';
         document.body.style.overflow = ''; // document.body.classList.remove('modal-open');
       }
@@ -14079,7 +14263,10 @@ const modals = () => {
   }
 
   bindModal('.popup_engineer_btn', '.popup_engineer', '.popup_engineer .popup_close');
-  bindModal('.phone_link', '.popup', '.popup .popup_close'); // opeModalByTime('.popup', 60000);
+  bindModal('.phone_link', '.popup', '.popup .popup_close');
+  bindModal('.popup_calc_btn', '.popup_calc', '.popup_calc_close');
+  bindModal('.popup_calc_button', '.popup_calc_profile', '.popup_calc_profile_close', false);
+  bindModal('.popup_calc_profile_button', '.popup_calc_end', '.popup_calc_end_close', false); // opeModalByTime('.popup', 60000);
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (modals);
@@ -14095,7 +14282,8 @@ const modals = () => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-const tabs = (headerSelector, tabSelector, contentSelector, activeClass) => {
+const tabs = function (headerSelector, tabSelector, contentSelector, activeClass) {
+  let display = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : 'block';
   const header = document.querySelector(headerSelector),
         tab = document.querySelectorAll(tabSelector),
         content = document.querySelectorAll(contentSelector);
@@ -14111,7 +14299,7 @@ const tabs = (headerSelector, tabSelector, contentSelector, activeClass) => {
 
   function showTabContent() {
     let i = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
-    content[i].style.display = 'block';
+    content[i].style.display = display;
     tab[i].classList.add(activeClass);
   }
 
