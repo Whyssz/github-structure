@@ -46,18 +46,18 @@ const slider = (slides, dir, prev, next) => {
   
   function activeAnimation() {
     document.querySelector('.main-slider').style.overflow = 'hidden';
-    
+
     if (dir === 'vertical') {
       paused = setInterval(function() {
         pluseSlide(1);
         items[slideIndex - 1].classList.add('fadeInUp');
-      }, 3000);
+      }, 5000);
     } else {
       paused = setInterval(function() {
         pluseSlide(1);
         items[slideIndex - 1].classList.remove('fadeInLeft');
         items[slideIndex - 1].classList.add('fadeInRight');
-      }, 3000);
+      }, 7000);
     }
   }
 
