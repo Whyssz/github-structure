@@ -46,6 +46,7 @@ const slider = (slides, dir, prev, next) => {
   
   function activeAnimation() {
     document.querySelector('.main-slider').style.overflow = 'hidden';
+    document.body.style.overflowX = 'hidden';
 
     if (dir === 'vertical') {
       paused = setInterval(function() {
