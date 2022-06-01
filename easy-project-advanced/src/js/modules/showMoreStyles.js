@@ -6,8 +6,8 @@ const showMoreStyles = (trigger, wrapper) => {
 
   btn.addEventListener('click', function() {
 
-    getResource('http://localhost:3000/styles')
-      .then(res => createCards(res))
+    getResource('assets/db.json')
+      .then(res => createCards(res.styles))
       .catch(error => fetchError(error));
 
     this.remove();
@@ -39,7 +39,6 @@ const showMoreStyles = (trigger, wrapper) => {
 
     card.innerHTML = `
       <div class=styles-block>
-        <img src="" alt="card">
         <h4>Произошла ошибка</h4>
         <a href=#>Error</a>
       </div>

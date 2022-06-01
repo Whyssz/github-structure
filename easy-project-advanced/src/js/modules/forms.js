@@ -4,6 +4,7 @@ import { postData } from "../services/requests";
 const forms = (state) => {
   const form = document.querySelectorAll('form'),
         input = document.querySelectorAll('input'),
+        select = document.querySelectorAll('select'),
         upload = document.querySelectorAll('[name= "upload"]');
 
   // checkNumInputs('input[name="user_phone"]');
@@ -30,18 +31,28 @@ const forms = (state) => {
     upload.forEach(item => {
       item.previousElementSibling.textContent = 'Файл не выбран';
     });
+    select.forEach(item => {
+      // if (item.value == 0 || '') {
+      //   console.dir(item[0]);
+      // }
+      item.value = item[0].value;
+    });
+    document.querySelector('.calc-price').textContent = "Для расчета нужно выбрать размер картины и материал картины";
   };
+  
 
   upload.forEach(item => {
     item.addEventListener('input', () => {
       console.log(item.files[0]);
       
-      let dot,
-      arr = item.files[0].name.split('.');
+      let formImg = 'image',
+        dot,
+        arr = item.files[0].name.split('.');
     
       arr[0].length > 5 ? dot = '...' : dot = '.';
       const name = arr[0].substring(0, 5) + dot + arr[1];
       item.previousElementSibling.textContent = name;
+      state[formImg] = item.files[0]; 
     });
   });
 
@@ -69,9 +80,17 @@ const forms = (state) => {
       statusMessage.appendChild(textMessage);
  
       const formData = new FormData(item);
+      
       let api;
       item.closest('.popup-design') || item.classList.contains('calc_form') ? api = path.designer : api = path.question; 
-      console.log(api);
+      // console.log(api);
+      if (item.getAttribute('data-calc') === 'end') {
+        for (let key in state) {
+          formData.append(key, state[key]);
+        }
+      }
+    
+
       
       postData(api, formData)
         .then(res => {

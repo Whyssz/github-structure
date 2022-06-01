@@ -4350,6 +4350,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_mask__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/mask */ "./src/js/modules/mask.js");
 /* harmony import */ var _modules_checkTstInputs__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/checkTstInputs */ "./src/js/modules/checkTstInputs.js");
 /* harmony import */ var _modules_showMoreStyles__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/showMoreStyles */ "./src/js/modules/showMoreStyles.js");
+/* harmony import */ var _modules_calc__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./modules/calc */ "./src/js/modules/calc.js");
+
 
 
 
@@ -4359,15 +4361,96 @@ __webpack_require__.r(__webpack_exports__);
 window.addEventListener('DOMContentLoaded', function () {
   'use strict';
 
+  var calcState = {};
   Object(_modules_modal__WEBPACK_IMPORTED_MODULE_0__["default"])();
   Object(_modules_slider__WEBPACK_IMPORTED_MODULE_1__["default"])('.feedback-slider-item', 'horizontal', '.main-prev-btn', '.main-next-btn');
   Object(_modules_slider__WEBPACK_IMPORTED_MODULE_1__["default"])('.main-slider-item', 'vertical');
-  Object(_modules_forms__WEBPACK_IMPORTED_MODULE_2__["default"])();
+  Object(_modules_forms__WEBPACK_IMPORTED_MODULE_2__["default"])(calcState);
   Object(_modules_mask__WEBPACK_IMPORTED_MODULE_3__["default"])('[name="phone"]');
   Object(_modules_checkTstInputs__WEBPACK_IMPORTED_MODULE_4__["default"])('[name="name"]');
   Object(_modules_checkTstInputs__WEBPACK_IMPORTED_MODULE_4__["default"])('[name="message"]');
   Object(_modules_showMoreStyles__WEBPACK_IMPORTED_MODULE_5__["default"])('.button-styles', '#styles .row');
+  Object(_modules_calc__WEBPACK_IMPORTED_MODULE_6__["default"])(calcState);
 });
+
+/***/ }),
+
+/***/ "./src/js/modules/calc.js":
+/*!********************************!*\
+  !*** ./src/js/modules/calc.js ***!
+  \********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+var calc = function calc(state) {
+  var sizePaint = document.querySelector('#size'),
+      materialPaint = document.querySelector('#material'),
+      optionsPaint = document.querySelector('#options'),
+      promocode = document.querySelector('.promocode'),
+      result = document.querySelector('.calc-price');
+  var sum = 0;
+
+  function calcFunc(selector, event, prop) {
+    var res = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 'price';
+    selector.addEventListener(event, function (item) {
+      sum = Math.round(+sizePaint.value * +materialPaint.value + +optionsPaint.value);
+
+      switch (item.target.nodeName) {
+        case 'INPUT':
+          if (promocode.value == 'IWANTPOPART') {
+            state[prop] = true;
+          }
+
+          break;
+
+        case 'SELECT':
+          state[prop] = item.target.value;
+          break;
+      }
+
+      if (sizePaint.value == '' || materialPaint.value == '') {
+        result.textContent = 'Пожалуйсат, выберите размер и материал картины';
+      } else {
+        if (state.promo) {
+          result.textContent = Math.round(sum * 0.7);
+          state[res] = sum * 0.7;
+        } else {
+          result.textContent = sum;
+          state[res] = sum;
+        }
+      } // console.log(item.target.nodeName);
+
+
+      console.log(state);
+    });
+  }
+
+  calcFunc(sizePaint, 'change', 'size');
+  calcFunc(materialPaint, 'change', 'material');
+  calcFunc(optionsPaint, 'change', 'options');
+  calcFunc(promocode, 'input', 'promo');
+  /*
+    function calcFunc() {
+        sum = Math.round((+sizePaint.value) * (+materialPaint.value) + (+optionsPaint.value)); 
+          if (sizePaint.value == '' || materialPaint.value == '') {
+          result.textContent = 'Пожалуйсат, выберите размер и материал картины';
+        } else if (promocode.value == 'IWANTPOPART') {
+          result.textContent = Math.round(sum * 0.7);
+        } else {
+          result.textContent = sum;
+        }
+      }
+        sizePaint.addEventListener('change', calcFunc);
+      materialPaint.addEventListener('change', calcFunc);
+      optionsPaint.addEventListener('change', calcFunc);
+      promocode.addEventListener('input', calcFunc);
+      calcFunc();
+  */
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (calc);
 
 /***/ }),
 
@@ -4436,6 +4519,7 @@ __webpack_require__.r(__webpack_exports__);
 var forms = function forms(state) {
   var form = document.querySelectorAll('form'),
       input = document.querySelectorAll('input'),
+      select = document.querySelectorAll('select'),
       upload = document.querySelectorAll('[name= "upload"]'); // checkNumInputs('input[name="user_phone"]');
 
   var message = {
@@ -4458,16 +4542,25 @@ var forms = function forms(state) {
     upload.forEach(function (item) {
       item.previousElementSibling.textContent = 'Файл не выбран';
     });
+    select.forEach(function (item) {
+      // if (item.value == 0 || '') {
+      //   console.dir(item[0]);
+      // }
+      item.value = item[0].value;
+    });
+    document.querySelector('.calc-price').textContent = "Для расчета нужно выбрать размер картины и материал картины";
   };
 
   upload.forEach(function (item) {
     item.addEventListener('input', function () {
       console.log(item.files[0]);
-      var dot,
+      var formImg = 'image',
+          dot,
           arr = item.files[0].name.split('.');
       arr[0].length > 5 ? dot = '...' : dot = '.';
       var name = arr[0].substring(0, 5) + dot + arr[1];
       item.previousElementSibling.textContent = name;
+      state[formImg] = item.files[0];
     });
   });
   form.forEach(function (item) {
@@ -4489,8 +4582,14 @@ var forms = function forms(state) {
       statusMessage.appendChild(textMessage);
       var formData = new FormData(item);
       var api;
-      item.closest('.popup-design') || item.classList.contains('calc_form') ? api = path.designer : api = path.question;
-      console.log(api);
+      item.closest('.popup-design') || item.classList.contains('calc_form') ? api = path.designer : api = path.question; // console.log(api);
+
+      if (item.getAttribute('data-calc') === 'end') {
+        for (var key in state) {
+          formData.append(key, state[key]);
+        }
+      }
+
       Object(_services_requests__WEBPACK_IMPORTED_MODULE_6__["postData"])(api, formData).then(function (res) {
         console.log(res);
         statusImg.setAttribute('src', message.ok);
@@ -4758,8 +4857,8 @@ __webpack_require__.r(__webpack_exports__);
 var showMoreStyles = function showMoreStyles(trigger, wrapper) {
   var btn = document.querySelector(trigger);
   btn.addEventListener('click', function () {
-    Object(_services_requests__WEBPACK_IMPORTED_MODULE_3__["getResource"])('http://localhost:3000/styles').then(function (res) {
-      return createCards(res);
+    Object(_services_requests__WEBPACK_IMPORTED_MODULE_3__["getResource"])('assets/db.json').then(function (res) {
+      return createCards(res.styles);
     }).catch(function (error) {
       return fetchError(error);
     });
@@ -4781,7 +4880,7 @@ var showMoreStyles = function showMoreStyles(trigger, wrapper) {
   function fetchError(response) {
     var card = document.createElement('div');
     card.classList.add('animated', 'fadeInUp', 'col-sm-3', 'col-sm-offset-0', 'col-xs-10', 'col-xs-offset-1');
-    card.innerHTML = "\n      <div class=styles-block>\n        <img src=\"\" alt=\"card\">\n        <h4>\u041F\u0440\u043E\u0438\u0437\u043E\u0448\u043B\u0430 \u043E\u0448\u0438\u0431\u043A\u0430</h4>\n        <a href=#>Error</a>\n      </div>\n    ";
+    card.innerHTML = "\n      <div class=styles-block>\n        <h4>\u041F\u0440\u043E\u0438\u0437\u043E\u0448\u043B\u0430 \u043E\u0448\u0438\u0431\u043A\u0430</h4>\n        <a href=#>Error</a>\n      </div>\n    ";
     document.querySelector(wrapper).appendChild(card);
     console.log("Error: ".concat(response));
   }
