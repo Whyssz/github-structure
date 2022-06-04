@@ -45,25 +45,6 @@ const calc = (state) => {
   calcFunc(optionsPaint, 'change', 'options');
   calcFunc(promocode, 'input', 'promo');
 
-  /*
-    function calcFunc() {
-        sum = Math.round((+sizePaint.value) * (+materialPaint.value) + (+optionsPaint.value)); 
-
-        if (sizePaint.value == '' || materialPaint.value == '') {
-          result.textContent = 'Пожалуйсат, выберите размер и материал картины';
-        } else if (promocode.value == 'IWANTPOPART') {
-          result.textContent = Math.round(sum * 0.7);
-        } else {
-          result.textContent = sum;
-        }
-      }
-
-      sizePaint.addEventListener('change', calcFunc);
-      materialPaint.addEventListener('change', calcFunc);
-      optionsPaint.addEventListener('change', calcFunc);
-      promocode.addEventListener('input', calcFunc);
-      calcFunc();
-  */
 };
 
 export default calc;
