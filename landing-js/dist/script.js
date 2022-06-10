@@ -3099,10 +3099,10 @@ var MiniSlider =
 function (_Slider) {
   _inherits(MiniSlider, _Slider);
 
-  function MiniSlider(container, prev, next, activeClass, animate, autoPlay) {
+  function MiniSlider(container, prev, next, activeClass, animate, autoPlay, timer) {
     _classCallCheck(this, MiniSlider);
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(MiniSlider).call(this, container, prev, next, activeClass, animate, autoPlay));
+    return _possibleConstructorReturn(this, _getPrototypeOf(MiniSlider).call(this, container, prev, next, activeClass, animate, autoPlay, timer));
   }
 
   _createClass(MiniSlider, [{
@@ -3154,9 +3154,26 @@ function (_Slider) {
       });
     }
   }, {
+    key: "actionAutoplay",
+    value: function actionAutoplay(area, event) {
+      var _this3 = this;
+
+      if (event == 'mouseenter') {
+        area.addEventListener(event, function () {
+          clearInterval(_this3.timer);
+        });
+      } else {
+        area.addEventListener(event, function () {
+          _this3.timer = setInterval(function () {
+            return _this3.nextSlide();
+          }, 2000);
+        });
+      }
+    }
+  }, {
     key: "init",
     value: function init() {
-      var _this3 = this;
+      var _this4 = this;
 
       this.container.style.cssText = "\n      display: flex;\n      flex-wrap: wrap;\n      overflow: hidden;\n      align-items: flex-start;\n    ";
       this.bindSLides();
@@ -3164,28 +3181,13 @@ function (_Slider) {
 
       if (this.autoPlay) {
         var parentBtn = this.next.parentNode || this.prev.parentNode;
-        var paused = setInterval(function () {
-          return _this3.nextSlide();
+        this.timer = setInterval(function () {
+          return _this4.nextSlide();
         }, 2000);
-
-        var actionAutoplay = function actionAutoplay(area, event) {
-          if (event == 'mouseenter') {
-            area.addEventListener(event, function () {
-              clearInterval(paused);
-            });
-          } else {
-            area.addEventListener(event, function () {
-              paused = setInterval(function () {
-                return _this3.nextSlide();
-              }, 2000);
-            });
-          }
-        };
-
-        actionAutoplay(this.container, 'mouseenter');
-        actionAutoplay(parentBtn, 'mouseenter');
-        actionAutoplay(this.container, 'mouseleave');
-        actionAutoplay(parentBtn, 'mouseleave');
+        this.actionAutoplay(this.container, 'mouseenter');
+        this.actionAutoplay(parentBtn, 'mouseenter');
+        this.actionAutoplay(this.container, 'mouseleave');
+        this.actionAutoplay(parentBtn, 'mouseleave');
       }
     }
   }]);
@@ -3235,6 +3237,7 @@ var Slider = function Slider() {
   this.animate = animate;
   this.autoPlay = autoPlay;
   this.slideIndex = 1;
+  this.timer;
 };
 
 

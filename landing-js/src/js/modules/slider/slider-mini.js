@@ -1,8 +1,8 @@
 import Slider from './slider';
 
 export default class MiniSlider extends Slider {
-  constructor (container, prev, next, activeClass, animate, autoPlay) {
-    super(container, prev, next, activeClass, animate, autoPlay);
+  constructor (container, prev, next, activeClass, animate, autoPlay, timer) {
+    super(container, prev, next, activeClass, animate, autoPlay, timer);
   }
 
   decorizeSlides () {
@@ -43,6 +43,18 @@ export default class MiniSlider extends Slider {
     });
   }
 
+  actionAutoplay (area, event) {
+  if (event == 'mouseenter') {
+      area.addEventListener(event, () => {
+        clearInterval(this.timer);
+      });
+    } else {
+      area.addEventListener(event, () => {
+        this.timer = setInterval(() => this.nextSlide(), 2000);
+      });
+    }
+  }
+
   init () {
     this.container.style.cssText = `
       display: flex;
@@ -57,25 +69,12 @@ export default class MiniSlider extends Slider {
     if (this.autoPlay) {
       const parentBtn = this.next.parentNode || this.prev.parentNode;
       
-      let paused = setInterval(() => this.nextSlide(), 2000);
-
-      const actionAutoplay = (area, event) => {
+      this.timer = setInterval(() => this.nextSlide(), 2000);
     
-        if (event == 'mouseenter') {
-          area.addEventListener(event, () => {
-            clearInterval(paused);
-          });
-        } else {
-          area.addEventListener(event, () => {
-            paused = setInterval(() => this.nextSlide(), 2000);
-          });
-        }
-      };
-
-      actionAutoplay(this.container, 'mouseenter');
-      actionAutoplay(parentBtn, 'mouseenter');
-      actionAutoplay(this.container, 'mouseleave');
-      actionAutoplay(parentBtn, 'mouseleave');
+      this.actionAutoplay(this.container, 'mouseenter');
+      this.actionAutoplay(parentBtn, 'mouseenter');
+      this.actionAutoplay(this.container, 'mouseleave');
+      this.actionAutoplay(parentBtn, 'mouseleave');
     }
   }
 }
