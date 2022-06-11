@@ -6,39 +6,36 @@ export default class MiniSlider extends Slider {
   }
 
   decorizeSlides () {
-    this.slides.forEach(slide => {
+    const notSortList = Array.from(this.slides);
+    this.sortList = notSortList.filter(item => item.tagName != 'BUTTON');
+
+    this.sortList.forEach(slide => {
       slide.classList.remove(this.activeClass);
       if (this.animate) {
         slide.querySelector('.card__title').style.opacity = '0.4';
         slide.querySelector('.card__controls-arrow').style.opacity = '0';
       }
-
-      if (slide.tagName == 'BUTTON') {
-        let indexBtn = this.slides[this.slides.length - 4];
-        this.container.insertBefore(indexBtn, slide);
-      }
     });
-
-
-    this.slides[0].classList.add(this.activeClass);
+    
+    this.sortList[0].classList.add(this.activeClass);
 
     if (this.animate) {
-      this.slides[0].querySelector('.card__title').style.opacity = '1';
-      this.slides[0].querySelector('.card__controls-arrow').style.opacity = '1';
+      this.sortList[0].querySelector('.card__title').style.opacity = '1';
+      this.sortList[0].querySelector('.card__controls-arrow').style.opacity = '1';
     }
   }
 
   nextSlide() {
-    this.container.appendChild(this.slides[0]);
+    this.container.appendChild(this.sortList[0]);
     this.decorizeSlides(); 
   }
 
   bindSLides () {
     this.next.addEventListener('click', () => this.nextSlide());
-
+    
     this.prev.addEventListener('click', () => {
-      let active = this.slides[this.slides.length - 1];
-      this.container.insertBefore(active, this.slides[0]);
+      let active = this.sortList[this.sortList.length - 1];
+      this.container.insertBefore(active, this.sortList[0]);
       this.decorizeSlides();  
     });
   }
@@ -50,7 +47,7 @@ export default class MiniSlider extends Slider {
       });
     } else {
       area.addEventListener(event, () => {
-        this.timer = setInterval(() => this.nextSlide(), 2000);
+        this.timer = setInterval(() => this.nextSlide(), 5000);
       });
     }
   }

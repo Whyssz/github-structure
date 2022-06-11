@@ -10,5 +10,6 @@ export default class Slider {
     this.autoPlay = autoPlay;
     this.slideIndex = 1; 
     this.timer;
+    this.sortList;
   }
 }
