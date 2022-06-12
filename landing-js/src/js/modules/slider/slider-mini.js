@@ -1,8 +1,10 @@
 import Slider from './slider';
 
 export default class MiniSlider extends Slider {
-  constructor (container, prev, next, activeClass, animate, autoPlay, timer) {
-    super(container, prev, next, activeClass, animate, autoPlay, timer);
+  constructor (container, prev, next, activeClass, animate, autoPlay) {
+    super(container, prev, next, activeClass, animate, autoPlay);
+    this.sortList;
+    this.timer;
   }
 
   decorizeSlides () {
@@ -66,7 +68,7 @@ export default class MiniSlider extends Slider {
     if (this.autoPlay) {
       const parentBtn = this.next.parentNode || this.prev.parentNode;
       
-      this.timer = setInterval(() => this.nextSlide(), 2000);
+      this.timer = setInterval(() => this.nextSlide(), 5000);
     
       this.actionAutoplay(this.container, 'mouseenter');
       this.actionAutoplay(parentBtn, 'mouseenter');
