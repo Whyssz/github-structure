@@ -1,10 +1,8 @@
 import Slider from './slider';
 
 export default class MiniSlider extends Slider {
-  constructor (container, prev, next, activeClass, animate, autoPlay) {
-    super(container, prev, next, activeClass, animate, autoPlay);
-    this.sortList;
-    this.timer;
+  constructor (container, prev, next, activeClass, animate, autoPlay, timer, sortList) {
+    super(container, prev, next, activeClass, animate, autoPlay, timer, sortList);
   }
 
   decorizeSlides () {
@@ -55,25 +53,27 @@ export default class MiniSlider extends Slider {
   }
 
   init () {
-    this.container.style.cssText = `
+    try {
+      this.container.style.cssText = `
       display: flex;
       flex-wrap: wrap;
       overflow: hidden;
       align-items: flex-start;
-    `;
+      `;
 
-    this.bindSLides();
-    this.decorizeSlides();
-    
-    if (this.autoPlay) {
-      const parentBtn = this.next.parentNode || this.prev.parentNode;
+      this.bindSLides();
+      this.decorizeSlides();
       
-      this.timer = setInterval(() => this.nextSlide(), 5000);
-    
-      this.actionAutoplay(this.container, 'mouseenter');
-      this.actionAutoplay(parentBtn, 'mouseenter');
-      this.actionAutoplay(this.container, 'mouseleave');
-      this.actionAutoplay(parentBtn, 'mouseleave');
-    }
-  }
+      if (this.autoPlay) {
+        const parentBtn = this.next.parentNode || this.prev.parentNode;
+        
+        this.timer = setInterval(() => this.nextSlide(), 5000);
+      
+        this.actionAutoplay(this.container, 'mouseenter');
+        this.actionAutoplay(parentBtn, 'mouseenter');
+        this.actionAutoplay(this.container, 'mouseleave');
+        this.actionAutoplay(parentBtn, 'mouseleave');
+      }
+    } catch (e) {}
+  } 
 }
