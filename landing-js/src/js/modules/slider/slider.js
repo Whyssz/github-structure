@@ -9,8 +9,6 @@ export default class Slider {
     this.animate = animate;
     this.autoPlay = autoPlay;
     this.slideIndex = 1; 
-    this.sortList;
-    this.timer;
     try {
       this.additionalNext = document.querySelectorAll('.nextmodule');
       this.additionalPrev = document.querySelectorAll('.prevmodule');

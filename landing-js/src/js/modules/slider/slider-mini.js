@@ -1,8 +1,8 @@
 import Slider from './slider';
 
 export default class MiniSlider extends Slider {
-  constructor (container, prev, next, activeClass, animate, autoPlay, timer, sortList) {
-    super(container, prev, next, activeClass, animate, autoPlay, timer, sortList);
+  constructor (container, prev, next, activeClass, animate, autoPlay) {
+    super(container, prev, next, activeClass, animate, autoPlay);
   }
 
   decorizeSlides () {
@@ -41,13 +41,13 @@ export default class MiniSlider extends Slider {
   }
 
   actionAutoplay (area, event) {
-  if (event == 'mouseenter') {
+    if (event == 'mouseenter') {
       area.addEventListener(event, () => {
         clearInterval(this.timer);
       });
     } else {
       area.addEventListener(event, () => {
-        this.timer = setInterval(() => this.nextSlide(), 5000);
+        this.timer = setInterval(() => this.nextSlide(), 3000);
       });
     }
   }
@@ -67,7 +67,7 @@ export default class MiniSlider extends Slider {
       if (this.autoPlay) {
         const parentBtn = this.next.parentNode || this.prev.parentNode;
         
-        this.timer = setInterval(() => this.nextSlide(), 5000);
+        this.timer = setInterval(() => this.nextSlide(), 3000);
       
         this.actionAutoplay(this.container, 'mouseenter');
         this.actionAutoplay(parentBtn, 'mouseenter');

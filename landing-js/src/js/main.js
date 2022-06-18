@@ -40,8 +40,8 @@ window.addEventListener('DOMContentLoaded',() => {
   });
   feedSlider.init();
 
-  const player = new VideoPlay('.showup .play', '.overlay');
-  player.init();
+  new VideoPlay('.showup .play', '.overlay').init();
+  new VideoPlay('.module__video-item .play', '.overlay').init();
 
   new Difference('.officerold', '.officernew', '.officer__card-item').init();
   new Forms('form', 'assets/question.php').init();
