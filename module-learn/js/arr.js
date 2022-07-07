@@ -1,5 +1,14 @@
 /*
-    ARRY_____________________________
+  Methods
+
+  for if (of)
+  forEach
+  map
+  filter
+  reduce
+  every/some
+  sort
+  find
 
   function getTextFromUl(item) {
     const el = document.querySelector(item);
