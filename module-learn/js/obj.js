@@ -41,7 +41,17 @@ _
     let fromEnties = Object.fromEntries([['name', 'Dima'], ['age', 24]]);
     console.log(fromEnties); // {name: 'Dima', age: 24};
    
+    EXAMPLE: ENTRIES___
+    const obj = {
+      a: 1, 
+      b: 2
+    };
 
+    Object.entries(obj).forEach(([key, value]) => {
+      console.log(key, value);
+    });
+
+    
     GET VALUES FROM THE TWO OBJECT_____
 
     function userRendering(users, tableValues) {
