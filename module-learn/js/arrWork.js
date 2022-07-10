@@ -1,0 +1,20 @@
+/* 
+  length
+
+  split
+  slice
+  join
+
+  shift
+  unshif
+  pop
+  push
+
+  concat
+  fill 
+  flat
+  includes
+  keys
+  values 
+
+*/

@@ -1,0 +1,12 @@
+/*
+ hasOwnProperty 
+ isPrototypeOf 
+ propertyIsEnumerable
+ toLocaleString
+ toString
+ valueOf
+
+ Apply 
+ Call 
+ Find
+*/

@@ -1,107 +1,54 @@
 /*
-AJAX 
+  CLASSIC EASY-MODE_____ (+ use try/catch)
 
-  xhr.open('GET', 'http/')
+  async function getPosts(id) {
+    const response = await fetch(`https://jsonplaceholder.typicode.com/posts/${id}`);
 
-  xhr.send(); <-- отправка запроса
+    return await response.json();
+  }
+
+  getPosts(1)
+    .then(data => console.log(data))
+    .catch(err => console.log(err));
+
+  CLASSIC FETCH____
+
+  function getPost(id) {
+    return new Promise((res, rej) => {
+      fetch(`https://jsonplaceholder.typicode.com/posts/${id}`)
+        .then(resp => resp.json())
+        .then(post => res(post))
+        .catch(err => rej(err));
+    });
+  }
   
-  xhr.setRequestHeader('Content-Type', 'image/jpeg'); (getRequest Header)
+  getPost(1).then(post => console.log(post));
 
-  Answer = status / statusText / responseTetx
+  ADVANCE try/catch_____
 
-  expamle: 
+  function getPost(id) { // 'user-1'
+    return new Promise.resolve().then(() => {
+      const [userType, userId] = id.split('-'); // ['user', '1']
+      return fetch(`https://jsonplaceholder.typicode.com/posts/${id}`)
+        .then(resp => resp.json());
+    });
+  }
 
-  function getUsers(cb) {
+  FETCH ASYNC____
 
-  const xhr = new XMLHttpRequest();
-  xhr.open('GET', 'https://jsonplaceholder.typicode.com/users');
-
-  xhr.addEventListener('load', () => {
-    const response = JSON.parse(xhr.response);
-    cb(response);
-  });
-
-  xhr.addEventListener('error', () => {
-    console.log('error');
-  });
-
-  xhr.send();
-}
-
-function getUsersInfo(users) {
-  const allUser = users.reduce((acc, user) => {
-    acc[user.id] = user;
-    return acc;
-  }, []); 
-
-  return allUser;
-}
-
-function renderUsers(users) {
-  const container = document.querySelector('.container');
-  
-  users.forEach((user, i) => {
+  async function getPosts(id) { //async + func = Promis
+    try {
+      const response = await fetch(`https://jsonplaceholder.typicode.com/posts/${id}`);
     
-    const frame = document.createDocumentFragment();
-    const card = document.createElement('div');
-    const cardHeader = document.createElement('div');
-    const ul = document.createElement('ul');
-    //I apologize for the nightmare with the attachment, I know that you can do everything through recursion, but I do not have time to finish learning it, it is not given to hard in any way, I tried)
-    for (let key in user) {
-      if (!!user[key] && (user[key].constructor === Object)) {
-        for (let i in user[key]) {
-          if (!!user[key][i] && (user[key][i].constructor === Object)) {
-            for (let j in user[key][i]) {
-              const li = document.createElement('li');
-            
-              li.textContent = `${j} : ${user[key][i][j]}`;
-              li.classList.add('list-group-item');
-              li.style.cssText = `
-                background-color: #474747;
-                color: white;
-              `;
-              ul.appendChild(li);
-            }
-          }
-          const li = document.createElement('li');
-          
-          li.textContent = `${i} : ${user[key][i]}`;
-          li.classList.add('list-group-item');
-          li.style.backgroundColor = '#d7d7d7';
-          ul.appendChild(li);
-        }
-      } else {
-        const li = document.createElement('li');
-
-        li.textContent = `${key}: ${user[key]}`;
-        li.classList.add('list-group-item');
-        ul.appendChild(li);
-      }
+      return await response.json();
+    } catch(e) {
+      console.log(e);
+      //throw err;
+      return Promise.reject(e);
     }
-    
-    card.classList.add('card');
-    cardHeader.classList.add('card-header'); 
-    ul.classList.add('list-group', 'list-group-flush'); 
+  }
 
-    cardHeader.textContent = `User: #${i}`;
-    card.style.margin = 5 + 'px';
-
-    card.append(cardHeader, ul);
-    frame.appendChild(card);
-
-    container.appendChild(frame);
-  });
-
-  const [...li] = document.querySelectorAll('li');
-  li.forEach(item => {
-    if (item.textContent.slice(-15) === '[object Object]') { 
-      item.remove();
-    }
-  });
-}
-
-getUsers((resonse) => {
-  const usersInfo = getUsersInfo(resonse);
-  const usersRender =  renderUsers(usersInfo);
-});
-*/ 
+  getPosts(1)
+    .then(data => console.log(data))
+    .catch(err => console.log(err));
+*/

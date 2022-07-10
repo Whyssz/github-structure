@@ -1,4 +1,4 @@
-/* PROMISE
+/* PROMISE_________
 
 function http() {
   return {
@@ -99,30 +99,30 @@ getPost(5)
   .catch(err => console.log(err))
   .finally(() => console.log('finnaly, <ES11'));
 
-PROMISE ALL_______________
+  PROMISE ALL_______________
 
-const checkId = 10;
+  const checkId = 10;
 
-Promise.all([
-  getPost(checkId),
-  getPostComments(checkId),
-  getUserCreatedPost(checkId)
-])
-.then(([post, comments, user]) => console.log(post, comments, user))
-.catch(err => console.log(err));
+  Promise.all([
+    getPost(checkId),
+    getPostComments(checkId),
+    getUserCreatedPost(checkId)
+  ])
+  .then(([post, comments, user]) => console.log(post, comments, user))
+  .catch(err => console.log(err));
 
 
-PROMISE RACE_______ first answ (true/false)
-Promise.race([
-  getPost(checkId),
-  getPostComments(checkId),
-  getUserCreatedPost(checkId)
-])
+  PROMISE RACE_______ first answ (true/false)
+  Promise.race([
+    getPost(checkId),
+    getPostComments(checkId),
+    getUserCreatedPost(checkId)
+  ])
 
-PROMISE ANY_______ first ANY TRUE answ 
-Promise.any([
-  getPost(checkId),
-  getPostComments(checkId),
-  getUserCreatedPost(checkId)
-])
+  PROMISE ANY_______ first ANY TRUE answ 
+  Promise.any([
+    getPost(checkId),
+    getPostComments(checkId),
+    getUserCreatedPost(checkId)
+  ])
 */

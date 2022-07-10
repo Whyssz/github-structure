@@ -1,5 +1,5 @@
 /*
-  Methods
+  Methods______
 
   for if (of)
   forEach
@@ -79,4 +79,5 @@
     const sortList = elements.sort((prev, next) => {
     return prev.textContent > next.textContent ? -1 : 1; 
   });
-  */
+
+*/
