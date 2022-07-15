@@ -1,5 +1,3 @@
-// 'use strict';
-
 /*
 
 */
@@ -36,15 +34,3 @@ window.addEventListener('DOMContentLoaded', () => {
     item.addEventListener('mouseleave', resetColor);
   });
 });
-
-
-
-
-
-
-
-
-
-
-
-
