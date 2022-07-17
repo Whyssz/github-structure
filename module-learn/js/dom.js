@@ -22,13 +22,13 @@
   }
 
   ___
-    .firstElementChild
+    .firstElementChild 
     .nextElementSibling
     .prevoousElementSibling
-    .parentElement
-    .closest('ul')
+    .parentElement - first parent
+    .closest('ul') - return near (parent) element
     .contains('class')
-    .toggle
+    .toggle - switch-selector-trigger
     .setAttribute / hasAttribute / removeAttribute
     .getAttribute / dataset 
 
