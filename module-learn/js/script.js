@@ -33,4 +33,7 @@ window.addEventListener('DOMContentLoaded', () => {
     item.addEventListener('mouseenter', setBg);
     item.addEventListener('mouseleave', resetColor);
   });
+
+  let b = 19;
+  console.log(b++);
 });
