@@ -18,7 +18,7 @@ class App extends Component {
         {name: 'Alex A.', salary: 1200, increase: false, id: 3},
       ]     
     }
-    this.idMax = this.state.data.length
+    this.countEmployess = this.state.data.length
   }
   
   onDeleteItem = (id) => {
@@ -32,7 +32,7 @@ class App extends Component {
       name, 
       salary,
       increase: false,
-      id: ++this.idMax
+      id: ++this.countEmployess
     }
     this.setState(({data}) => ({
       data: [...data, newItem]
@@ -40,26 +40,36 @@ class App extends Component {
   }
 
   onToggleIncrease = (id) => {
-    this.setState(({data}) => {
-      const index = data.findIndex(item => item.id === id)
-      const oldItem = data[index]
-      const newItem = {...oldItem, increase: !oldItem.increase}
-      
-      const newArr = [...data.slice(0, index), newItem, ...data.slice(index + 1)]
-      return{
-        data: newArr
-      }
-    })
+    // this.setState(({data}) => {
+    //   const index = data.findIndex(item => item.id === id),
+    //         oldItem = data[index],
+    //         newItem = {...oldItem, increase: !oldItem.increase}
+    //   return {
+    //     data: [...data.slice(0, index), newItem, ...data.slice(index + 1)]
+    //   }
+    // })
+
+    this.setState(({data}) => ({
+      // data: data.map(item => item.id === id ? {...item, increase: !item.increase} : item)
+      data: data.map(item => {
+        if (item.id === id) {
+          return {...item, increase: !item.increase}
+        }
+        return item
+      })
+    }))
   }
 
   onToggleRise = (id) => {
     console.log(`This rise ${id}`)
   }
 
+  
+
   render(){
     return (    
       <div className="app">
-        <AppInfo/>
+        <AppInfo count={this.countEmployess} />
   
         <div className="search-panel">
           <SearchPanel/>

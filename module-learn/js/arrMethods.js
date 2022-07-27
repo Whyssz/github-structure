@@ -9,6 +9,7 @@
   every/some
   sort
   find
+  
 
   function getTextFromUl(item) {
     const el = document.querySelector(item);
