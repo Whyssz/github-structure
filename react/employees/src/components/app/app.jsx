@@ -13,12 +13,14 @@ class App extends Component {
     super(props)
     this.state = {
       data: [
-        {name: 'Dima S.', salary: 900, increase: false, id: 1},
-        {name: 'Olex B.', salary: 1500, increase: true, id: 2},
-        {name: 'Alex A.', salary: 1200, increase: false, id: 3},
-      ]     
+        {name: 'Dima S.', salary: 900, increase: false, rise: true, id: 1},
+        {name: 'Olex B.', salary: 1500, increase: true, rise: true, id: 2},
+        {name: 'Alex A.', salary: 1200, increase: false, rise: false, id: 3},
+        {name: 'Odim A.', salary: 3000, increase: false, rise: false, id: 4},
+      ], 
+      term: '',
+      filter: 'all' 
     }
-    this.countEmployess = this.state.data.length
   }
   
   onDeleteItem = (id) => {
@@ -32,8 +34,9 @@ class App extends Component {
       name, 
       salary,
       increase: false,
-      id: ++this.countEmployess
+      id: this.state.data.length + 1
     }
+
     this.setState(({data}) => ({
       data: [...data, newItem]
     }))
@@ -48,32 +51,60 @@ class App extends Component {
         return item
       })
     }))
-    // this.setState(({data}) => {
-    //   const index = data.findIndex(item => item.id === id),
-    //         oldItem = data[index],
-    //         newItem = {...oldItem, increase: !oldItem.increase}
-    //   return {
-    //     data: [...data.slice(0, index), newItem, ...data.slice(index + 1)]
-    //   }
-    // })
+  }
 
+  searchEmp = (list, term) => {
+    if (term.length === 0){
+      return list
+    }
+
+    const currTerm = term.toLowerCase()
+
+    const newList = list.filter(item => {
+      const name = item.name.toLowerCase()
+      return name.indexOf(currTerm) > -1
+    })
+
+    return newList
+  }
+
+  onUpdateSearch = (term) => {
+    this.setState({term})
+  }
+
+  useFilter = (list, filter) => {
+    switch(filter) {
+      case 'rise':
+        return list.filter(item => item.rise)
+      case 'increase':
+        return list.filter(item => item.increase)
+      default:
+        return list
+    }
+  }
+
+  onChangeFilter = (filter) => {
+    console.log(filter)
+    this.setState({filter})
   }
 
   render(){
-    const awardeesEmp = this.state.data.filter(item => item.increase).length
-    const employees = this.state.data.length
+    const { data, term, filter } = this.state
+    const awardeesEmp = data.filter(item => item.increase).length
+    const employees = data.length
+    const visibleDate = this.useFilter(this.searchEmp(data, term), filter)
 
     return (    
       <div className="app">
         <AppInfo increase={awardeesEmp} employees={employees}/>
   
         <div className="search-panel">
-          <SearchPanel/>
-          <AppFilter/>
+          <SearchPanel onUpdateSearch={this.onUpdateSearch}/>
+          <AppFilter filter={filter} onChangeFilter={this.onChangeFilter} />
         </div>
   
         <EmployeesList 
-          data={this.state.data}
+          data={visibleDate}
           onDelete={this.onDeleteItem}
           onToggleProp={this.onToggleProp}
         />

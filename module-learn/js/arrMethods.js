@@ -33,6 +33,9 @@
       return name.length < 5;
     });
 
+    EX-practice: 
+      const newList = list.filter(item => name.indexOf(currTerm) > -1) // ret item (no index, rule > -1)
+
     Map_____________________________
     const arr = ['Dima', 'Novik', 'Lev', 'Alex', 'Arturio'];
 

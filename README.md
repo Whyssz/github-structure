@@ -8,8 +8,10 @@ In these projects, I consolidate practical JavaScript skills before I start work
 
 ## Pet
 
-|Name|Spec|Github|Code|
+|Name|Spec|Link|GitHub|
 |:--:|:--:|:--:|:--:|
-|Makeup|html / css|[link](http://o97759zw.beget.tech/)|[code](https://github.com/Whyssz/layout-makeup)|
+|Makeup|html / css|[old site](http://o97759zw.beget.tech/)|[code](https://github.com/Whyssz/layout-makeup)|
 |To Do|js|[link](https://whyssz.github.io/pet-todo/)|[code](https://github.com/Whyssz/pet-todo)|
 |react|js / react|quiz|in coming|
+
+[reume in develope](#)

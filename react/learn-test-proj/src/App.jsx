@@ -8,7 +8,7 @@ class WhoAmI extends Component {
       years: 24,
       text: '+',
       position: ''
-    }``
+    }
   }
 
   nextYear = () => {
@@ -29,7 +29,7 @@ class WhoAmI extends Component {
     const {years, position, text} = this.state
 
     return (
-      <div>
+      <>
         <h2>My name is {name}, 
           surname - {surname}, 
           age - {years}, 
@@ -40,14 +40,14 @@ class WhoAmI extends Component {
           <input type="text" onChange={(e) => this.commitInputChange(e, 'dark')} />
         </form>
         <button onClick={this.nextYear}>{text}</button>
-      </div>
+      </>
     )
   }
 }
 
 function App() {
   return (
-    <div>
+    <div className='App'>
       <WhoAmI name='Ivan' surname='Petrichenko' links='facebook.com'/>
       <WhoAmI name='Dima' surname='Shilov' links='444'/>
     </div>
