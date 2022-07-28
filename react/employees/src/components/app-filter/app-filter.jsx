@@ -3,36 +3,32 @@ import './app-filter.css'
 
 const AppFilter = (props) => {
 
-return (
-  <div className="btn-group">
-    <button 
-      className="btn btn-light"
-      type="button"
-      data-name='all'
-      onClick={(e) => props.onChangeFilter(e.currentTarget.getAttribute('data-name'))}
-    >
-      Все сотрудники
-    </button>
-    <button 
-      className="btn btn-outline-light"
-      type="button"
-      data-name={'rise'}
-      onClick={(e) => props.onChangeFilter(e.currentTarget.getAttribute('data-name'))}
-    
-    >
-      На повышение
-    </button>
-    <button 
-      className="btn btn-outline-light"
-      type="button"
-      data-name={'increase'}
-      onClick={(e) => props.onChangeFilter(e.currentTarget.getAttribute('data-name'))}
-      
-    >
-      З/П на повышение
-    </button>
-  </div>
-)
+  const buttonsData = [
+    {name: 'all', label: 'Все сотрудники'},
+    {name: 'rise', label: 'На повышение'},
+    {name: 'increase', label: 'З/П на повышение'},
+  ]
+
+    const buttons = buttonsData.map(({name, label}) => {
+      const active = props.filter === name
+      const clazz = active ? 'btn-light' : 'btn-outline-light'
+      return (
+        <button
+          className={`btn ${clazz}`}
+          type="button"
+          key={name}
+          onClick={() => props.onChangeFilter(name)}>
+          {label}
+        </button>
+        
+      )
+    })
+
+    return (
+      <div className='btn-group'>
+        {buttons}
+      </div>
+    )
 }
 
 export default AppFilter
