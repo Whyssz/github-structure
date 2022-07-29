@@ -82,6 +82,9 @@
 
  /*
     EXPORT-IMPORT______________________
+    module.export 
+    $import
+    
     'use strict';
 
     function sayHi(){
