@@ -1,17 +1,20 @@
-## Practice based on real technical tasks 
+## Info
 
-In these projects, I consolidate practical JavaScript skills before I start working with React, and I also plan to form a pet project: ["Quiz questions - react in coming"](#) 
+The main purpose of this project (repository) is to collect in one place all the things I do (link or files themselves), what is in development/plans or scheme showing what is important
 
-* `module learn` - experiment in JavaScript
-* `module practic` - folder with ready-made solutions parsing projects  
-* `own-pet` - my own projects, completed tasks you liked, or made from scratch
+* `module learn` - the place where I try something new or save something for myself
+* `module practic` - projects made in the course of training (training, not pet)
+* `react` - rect projects and different test interactions
 
-## Pet
+## Pet - easy to view
 
 |Name|Spec|Link|GitHub|
 |:--:|:--:|:--:|:--:|
-|Makeup|html / css|[old site](http://o97759zw.beget.tech/)|[code](https://github.com/Whyssz/layout-makeup)|
-|To Do|js|[link](https://whyssz.github.io/pet-todo/)|[code](https://github.com/Whyssz/pet-todo)|
-|react|js / react|quiz|in coming|
+|Layout|`html / css`|[old site](http://o97759zw.beget.tech/)|[code](https://github.com/Whyssz/layout-makeup)|
+|To Do|`js`|[page](https://whyssz.github.io/pet-todo/)|[code](https://github.com/Whyssz/pet-todo)|
+|quiz|`react`|[spa](#)|[in coming](#)|
+|{ in plan }|`react`|[test job](#)|[in coming](#)|
 
-[reume in develope](#)
+* { name } - this sign means that the project is a test work from some company
+
+[resume in develope](#)
