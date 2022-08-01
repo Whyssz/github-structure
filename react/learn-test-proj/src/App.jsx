@@ -40,7 +40,6 @@ class WhoAmI extends Component {
   }
   
   commitInputChange = (e, color) => {
-    console.log(color);
     this.setState({
       position: e.target.value
     })
