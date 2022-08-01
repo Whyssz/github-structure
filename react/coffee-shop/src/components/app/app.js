@@ -1,14 +1,9 @@
-// import { MainPage } from "../main-page/main-page";
+import MainPage from "../main-page/main-page";
 
-import './app.scss'
+import './app.scss';
 
 const App = () => {
-  return (
-  //  <MainPage/>
-    <div className="container">
-      <h1>Hello</h1>
-    </div>
-  );
+  return <MainPage />;
 };
 
 export default App;
