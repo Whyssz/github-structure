@@ -110,20 +110,18 @@
     }
     .best-choise__content{
       margin-top: 40px;
-      display: flex;
-      flex-wrap: wrap;
+      display: grid;
+      grid-template-columns: repeat(3, 220px);
+      grid-template-rows: 240px;
+      grid-gap: 20px 35px;
       justify-content: center;
       .best-item{
+        cursor: pointer;
         padding: 20px;
-        max-width: 220px;
-        min-height: 240px;
         background: rgba(255, 255, 255, 0.65);
         border-radius: 8px;
-        margin: 20px 35px;
         img{
-          background-position: center;
-          background-size: cover;
-          background-repeat: no-repeat;
+          object-fit: cover;
           width: 150px;
           height: 130px;
         }
@@ -131,6 +129,7 @@
           font-weight: 400;
           font-size: 14px;
           line-height: 20px;
+          margin: 10px 0;
         }
         span{
           float: right;

@@ -11,6 +11,11 @@
     row-gap: 10px;
     gird-gap: r / c
 
+    align-items: stretch;
+    justify-content: center;
+
+    place-items: stretch center;
+
   }
   .avatar{
     padding: 40px;

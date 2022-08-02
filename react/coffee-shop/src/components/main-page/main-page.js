@@ -10,11 +10,11 @@ const dataItems = [
 
 const listItems = dataItems.map(({ label, price, images }) => {
   return (
-    <div key={label} className="best-item">
+    <a href='#' key={label} className="best-item">
       <img src={Images[images]} alt="preview-item" />
       <h3 className="best-item__title">{`${label}`}</h3>
       <span>{`${price}$`}</span>
-    </div>
+    </a>
   );
 });
 
