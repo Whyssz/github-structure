@@ -16,21 +16,21 @@ class MarvelService {
     const res = await this.getResource(
       `${this._apiBase}characters?limit=9&offset=220&${this._apiKey}`
     );
-    return res.data.results.map(this._transformCharactre)
+    return res.data.results.map(this._transformCharactr)
   };
 
   getCharacter = async (id) => {
     const res = await this.getResource(
       `${this._apiBase}characters/${id}?${this._apiKey}`
     );
-    return this._transformCharactre(res.data.results[0]);
+    return this._transformCharactr(res.data.results[0]);
   };
 
-  _transformCharactre = (char) => {
+  _transformCharactr = (char) => {
     return {
       name: char.name,
       description: char.description
-        ? `${char.description.slice(0, 198)}...`
+        ? `${char.description.slice(0, 150)}...`
         : "The charecter doesn't have a description",
       thumbnail: char.thumbnail.path + '.' + char.thumbnail.extension,
       homepage: char.urls[0].url,
