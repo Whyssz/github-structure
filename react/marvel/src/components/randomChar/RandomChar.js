@@ -80,7 +80,7 @@ class RandomChar extends Component {
 const View = ({ char }) => {
   const { name, description, thumbnail, wiki, homepage } = char;
   const filterImg = thumbnail.indexOf('image_not_available') > 0;
-  const stylez = filterImg ? { objectFit: 'contain' } : null;
+  const stylez = filterImg ? { objectFit: 'fill' } : null;
 
   return (
     <div className="randomchar__block">

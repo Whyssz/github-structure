@@ -35,11 +35,15 @@ class CharList extends Component {
       const stylez = filterImg ? { objectFit: 'fill' } : null;
 
 			return (
-				<li className="char__item" key={id}>
-          <img src={thumbnail} alt={name} style={stylez}/>
+        <li
+          className="char__item"
+          key={id}
+          onClick={() => this.props.onChangeSelected(id)}
+        >
+          <img src={thumbnail} alt={name} style={stylez} />
           <div className="char__name">{name}</div>
-        </li>	
-			)
+        </li>
+      );
 		});
 
 		return <ul className="char__grid">{list}</ul>;
