@@ -10,19 +10,44 @@ class CharList extends Component {
     chars: [],
     error: false,
     loading: true,
+    newItemsLoading: false,
+    offset: 1541,
+    charEnded: false
   };
 
   marvelService = new MarvelService();
 
   componentDidMount() {
-    this.marvelService
-      .getAllCharacters()
-      .then(this.onLoadedChars)
-      .catch(this.onError);
+    this.onRequest();
   }
 
-  onLoadedChars = (chars) => {
-    this.setState({ chars, loading: false });
+  onRequest = (offset) => {
+    this.onLoadingChars();
+    this.marvelService
+      .getAllCharacters(offset)
+      .then(this.onLoadedChars)
+      .catch(this.onError);
+  };
+
+  onLoadingChars = () => {
+    this.setState({
+      newItemsLoading: true,
+    });
+  };
+
+  onLoadedChars = (newCharList) => {
+    let ended = false;
+    if (newCharList.length < 9) {
+      ended = true;
+    }
+
+    this.setState(({ chars, offset }) => ({
+      chars: [...chars, ...newCharList],
+      loading: false,
+      newItemsLoading: false,
+      offset: offset + 9,
+      charEnded: ended,
+    }));
   };
 
   onError = () => {
@@ -30,11 +55,11 @@ class CharList extends Component {
   };
 
   renderList = (chars) => {
-		const list = chars.map(({ name, id, thumbnail }) => {
+    const list = chars.map(({ name, id, thumbnail }) => {
       const filterImg = thumbnail.indexOf('image_not_available') > 0;
       const stylez = filterImg ? { objectFit: 'fill' } : null;
 
-			return (
+      return (
         <li
           className="char__item"
           key={id}
@@ -44,13 +69,13 @@ class CharList extends Component {
           <div className="char__name">{name}</div>
         </li>
       );
-		});
+    });
 
-		return <ul className="char__grid">{list}</ul>;
-	};
+    return <ul className="char__grid">{list}</ul>;
+  };
 
   render() {
-    const { chars, loading, error } = this.state;
+    const { chars, loading, error, newItemsLoading, offset, charEnded } = this.state;
     const list = this.renderList(chars);
     const errorMessage = error ? <ErrorMessage /> : null;
     const spinner = loading ? <Spinner /> : null;
@@ -61,7 +86,12 @@ class CharList extends Component {
         {errorMessage}
         {spinner}
         {content}
-        <button className="button button__main button__long">
+        <button
+          disabled={newItemsLoading}
+          style={{'display': charEnded ? 'none' : 'block'}}
+          onClick={() => this.onRequest(offset)}
+          className="button button__main button__long"
+        >
           <div className="inner">load more</div>
         </button>
       </div>
@@ -70,4 +100,3 @@ class CharList extends Component {
 }
 
 export default CharList;
-

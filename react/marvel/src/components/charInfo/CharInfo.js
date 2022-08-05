@@ -1,5 +1,4 @@
 import { Component } from 'react';
-import thor from '../../resources/img/thor.jpeg';
 import MarvelService from '../../services/MarvelService';
 import ErrorMessage from '../errorMessage/ErrorMessage';
 import Spinner from '../spinner/Spinner';
@@ -71,7 +70,7 @@ const View = ({ char }) => {
   const { name, description, thumbnail, wiki, homepage, comics } = char;
   const filterImg = thumbnail.indexOf('image_not_available') > 0;
   const stylez = filterImg ? { objectFit: 'fill' } : null;
-	
+
   return (
     <>
       <div className="char__basics">
@@ -91,7 +90,7 @@ const View = ({ char }) => {
       <div className="char__descr">{description}</div>
       <div className="char__comics">Comics:</div>
       <ul className="char__comics-list">
-				{comics.length > 0 ? null : 'There is no comics with this character'}
+        {comics.length > 0 ? null : 'There is no comics with this character'}
         {comics.map((item, i) => {
           if (i >= 5) return;
           return (
