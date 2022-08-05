@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import MarvelService from '../../services/MarvelService';
+import PropTypes from 'prop-types';
 import ErrorMessage from '../errorMessage/ErrorMessage';
 import Spinner from '../spinner/Spinner';
 
@@ -12,7 +13,7 @@ class CharList extends Component {
     loading: true,
     newItemsLoading: false,
     offset: 1541,
-    charEnded: false
+    charEnded: false,
   };
 
   marvelService = new MarvelService();
@@ -75,7 +76,8 @@ class CharList extends Component {
   };
 
   render() {
-    const { chars, loading, error, newItemsLoading, offset, charEnded } = this.state;
+    const { chars, loading, error, newItemsLoading, offset, charEnded } =
+      this.state;
     const list = this.renderList(chars);
     const errorMessage = error ? <ErrorMessage /> : null;
     const spinner = loading ? <Spinner /> : null;
@@ -88,7 +90,7 @@ class CharList extends Component {
         {content}
         <button
           disabled={newItemsLoading}
-          style={{'display': charEnded ? 'none' : 'block'}}
+          style={{ display: charEnded ? 'none' : 'block' }}
           onClick={() => this.onRequest(offset)}
           className="button button__main button__long"
         >
@@ -98,5 +100,9 @@ class CharList extends Component {
     );
   }
 }
+
+CharList.propTypes = {
+  onChangeSelected: PropTypes.func.isRequired,
+};
 
 export default CharList;
