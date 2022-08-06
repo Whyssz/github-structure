@@ -1,12 +1,15 @@
 import { Container, Row, Col } from 'react-bootstrap';
 
-const BootstrapTest = () => {
+const BootstrapTest = (props) => {
   return (
     <Container>
       <Row>
-        <Col>1 of 2</Col>
-        <Col>2 of 2</Col>
-        <Col>2 of 2</Col>
+        <Col>
+          {props.left}
+        </Col>
+        <Col>
+          {props.right}
+        </Col>
       </Row>
     </Container>
   );

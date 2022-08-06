@@ -14,4 +14,17 @@
 
   immutability (неизменяемый) - запрет на мутирование элемента после внесения, (изменить старый и вставить новый).
 
-*/
+  PROPS.childred __________
+    передаёт свойства перечисленный в родителе
+    {props.children}
+    props {color, children[{...}, {...}]}
+  Modify__
+    {
+      React.Children.map(props.children, child => {
+        return React.cloneElement(child, {className: 'shadow p-3 m-3 border rounded'})
+      })
+    }
+
+
+
+*/ 

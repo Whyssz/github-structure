@@ -1,7 +1,8 @@
-import { Component } from 'react';
+import React, { Component } from 'react';
 
 import styled from 'styled-components';
 import './App.css';
+import BootstrapTest from './BootstrapTest';
 
 const EmpItem = styled.div`
   padding: 20px;
@@ -12,6 +13,12 @@ const EmpItem = styled.div`
 
 const Header = styled.h2`
   font-size: 22px;
+`
+
+const Timer = styled.h2`
+  font-size: 30px;
+  font-weight: 700;
+  padding: 10px
 `
 
 const Button = styled.button`
@@ -29,7 +36,8 @@ class WhoAmI extends Component {
     this.state = {
       years: 24,
       text: '+',
-      position: ''
+      position: '',
+      date: new Date(),
     }
   }
 
@@ -45,9 +53,21 @@ class WhoAmI extends Component {
     })
   }
 
+  componentDidMount (){
+    this.timer = setInterval(() => this.tick(), 1000)
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.timer)
+  }
+
+  tick = () => {
+    this.setState({date: new Date()})
+  }
+
   render() {
     const {name, surname, links} = this.props
-    const {years, position, text} = this.state
+    const {years, position, text, date} = this.state
     
     return (
       <EmpItem>
@@ -61,6 +81,7 @@ class WhoAmI extends Component {
           <input type="text" onChange={(e) => this.commitInputChange(e, 'dark')} />
         </form>
         <Button onClick={this.nextYear}>{text}</Button>
+        <Timer>Сейчас: {date.toLocaleTimeString()}</Timer>
       </EmpItem>
     )
   }
@@ -71,9 +92,39 @@ const Wrapper = styled.div`
   margin: 80px auto;
 `
 
+const DynamicGreating = (props) => {
+  return (
+    <div className={'mb-3 p-3 border border-' + props.color}>
+      {
+        React.Children.map(props.children, child => {
+          return React.cloneElement(child, {className: 'shadow p-3 m-3 border rounded'})
+        })
+      }
+    </div>
+  )
+}
+
 function App() {
+
   return (
     <Wrapper>
+      
+
+      <BootstrapTest
+        left = {
+          <DynamicGreating color={'primary'}>
+            <h2>Menu</h2>
+            <li>One</li>
+            <li>Two</li>
+          </DynamicGreating>
+        }
+        right = {
+          <DynamicGreating color={'primary'}>
+            <h2>It's right</h2>
+          </DynamicGreating>
+        }
+      />
+
       <WhoAmI name='Ivan' surname='Petrichenko' links='facebook.com'/>
       <WhoAmI name='Dima' surname='Shilov' links='444'/>
     </Wrapper>
