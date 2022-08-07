@@ -35,6 +35,7 @@
       )}/>
       {this.props.render(this.state.counter)}    
 
-  ref____ (cofus form)
-
+  ref____ (cofus for the form)
+    this.myRef = React.createRef();
+    this.myRef.current.focus();
 */ 
