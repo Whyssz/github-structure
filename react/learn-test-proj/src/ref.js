@@ -1,24 +1,17 @@
 import React, { Component } from 'react';
 import { Container } from 'react-bootstrap';
+import ReactDOM from 'react-dom';
 import './App.css';
 
 class Form extends Component {
-  // myRef = React.createRef();
-  // componentDidMount(){
-  // 	this.myRef.current.focus();
-  // }
-  // cilckOnTextArea = () => {
-  //   this.myRef.current.focus();
-  // };
-
   setRef = (el) => {
     this.myRef = el;
   };
 
   cilckOnTextArea = () => {
-		if (this.myRef){
-			this.myRef.focus();
-		}
+    if (this.myRef) {
+      this.myRef.focus();
+    }
   };
 
   render() {
@@ -48,11 +41,41 @@ class Form extends Component {
               rows="3"
             ></textarea>
           </div>
+          <Portal>
+            <Msg />
+          </Portal>
         </form>
       </Container>
     );
   }
 }
+
+const Portal = (props) => {
+  const node = document.createElement('div');
+  document.body.appendChild(node);
+
+  return ReactDOM.createPortal(props.children, node)
+};
+
+const Msg = (props) => {
+  return (
+    <div
+      style={{
+        display: 'flex',
+        width: '400px',
+        height: '100px',
+        backgroundColor: 'red',
+        position: 'absolute',
+        right: '0',
+        bottom: '0',
+        justifyContent: 'center',
+        alignItems: 'center',
+      }}
+    >
+      Hello
+    </div>
+  );
+};
 
 function AppToo() {
   return <Form />;
