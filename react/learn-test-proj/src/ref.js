@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom';
 import './App.css';
 
 class Form extends Component {
+
   setRef = (el) => {
     this.myRef = el;
   };
@@ -42,7 +43,7 @@ class Form extends Component {
             ></textarea>
           </div>
           <Portal>
-            <Msg />
+            <Msg/>
           </Portal>
         </form>
       </Container>
@@ -51,6 +52,7 @@ class Form extends Component {
 }
 
 const Portal = (props) => {
+  console.log(props.children)
   const node = document.createElement('div');
   document.body.appendChild(node);
 

@@ -17,7 +17,7 @@
 
   immutability (неизменяемый) - запрет на мутирование элемента после внесения, (изменить старый и вставить новый).
 
-  PROPS.childred __________ (передача готовых элементов)
+  PROPS.children __________ (передача готовых компонентов/элементов, с возможность передачей пропсов)
     передаёт свойства перечисленный в родителе
     {props.children}
     props {color, children[{...}, {...}]}
@@ -39,6 +39,10 @@
     this.myRef = React.createRef();
     this.myRef.current.focus();
 
-  
+  portal___
+    ReactDOM from 'react-dom'; 
+    const node = document.createElement('div');
+    document.body.appendChild(node);
+    return ReactDOM.createPortal(props.children, node)
 
 */ 
