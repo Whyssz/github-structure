@@ -19,8 +19,10 @@
     componentDidCatch(err, info) - предохранитель/обработчик ошибки, реализуется как обертка для ошибок
       static getDerivedStateFromError(error) - только обрабатывает ошибку без дополнительных имзменений дополнений
   }
+  _______useState
+  работа со стейтом (async/sync работает также)
 
-  useState - работа со слайдом (async/sync работает также){
+  useState - () => {
     const [slide, setSlide] = useState(0);
     function changeSlide(i){
       setSlide(slide => slid + i)
@@ -28,8 +30,10 @@
 
     Оптимизация: перереднеринг стартового значения, использовать cb или fбезвызова
   }
+  _______useEffect
+  A/U/R (lifehook) замена
 
-  useEffect - A/U/R (lifehook) {
+  useEffect - {
     useEffect(() => {
       ...
     }, [args])
@@ -44,8 +48,11 @@
       }
     }, [])
   }
-  
-  useCallback(() => { - оптимизирует перевызов/рендеринг компонента, работает как useEffect только с возможность е запускать функцию при перерендере
+  ________useCallback
+  Кеширование фенкций
+  оптимизирует перевызов/рендеринг компонента, работает как useEffect только с возможность е запускать функцию при перерендере
+
+  useCallback(() => {
     ...
     Правильно использовать с useEffect
   }, [])
@@ -68,10 +75,32 @@
 
       return (
         <>
-          {images.map((url, i) => {
+          {images.map((url, ri) => {
             return <img className="d-block w-100" src={url} key={i} alt="slide" />;
           })}
         </>
       );
     };
+  ________useMemo
+  Кеширование значений (запросы, подписки запрещены)
+
+  const count = useMemo(() => {
+    return ...
+  }, [slide])
+  useEffect(() => {
+    ....
+  }, [obj])
+
+  _______useRef
+  Такие же ссылки на элементы, но с особенностью внесения ref без перерендеренга, а также запоминанием прошлого стейта
+
+  const [text, setText] = useState('')
+
+  const myRef = useRef('')
+
+  //взаимодействие с прошлым стейтом
+  useEffect(() => {
+    myRef.current = text
+  })
+
 */
