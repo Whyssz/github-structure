@@ -103,4 +103,22 @@
     myRef.current = text
   })
 
+  ______customHook (use....)
+  Набор гибкого/объединенного функционала (повторное использование логики)
+
+    const useInputWithValidate = (initialVlaue) => {
+      const [value, setValue] = useState(initialVlaue)
+
+      const onChange = (event) => {
+        setValue(event.target.value)
+      }
+
+      const validateInput = () => {
+        return value.search(/\d/) >= 0;
+      };
+      
+      return {value, onChange, validateInput}
+    };
+
+
 */
