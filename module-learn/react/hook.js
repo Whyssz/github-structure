@@ -41,10 +41,10 @@
     will_
     useEffect(() => {
       ... 
-      () => Event
+      event
 
       return () => {
-        () => Event
+        event
       }
     }, [])
   }
