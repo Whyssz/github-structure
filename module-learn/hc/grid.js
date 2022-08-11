@@ -6,7 +6,12 @@
       grid-template-columns: repeat(2, 50%);
       grid-template-columns: repeat(3, 200px);
       grid-area: row-s / cols / row-e / col-e
-      
+    
+    auto-fill/fit - it's designed to work with minmax() 
+    repeat(auto-fill, row-length) - заполнение с переносом (с формированием vanish-col)
+    repeat(auto-fit, row-length) - заполнение с переносом (с растягиванием)
+    grid-template-columns: repeat(auto-fill, 225px);
+
     column-gap: 10px;
     row-gap: 10px;
     gird-gap: r / c
