@@ -103,6 +103,11 @@
     myRef.current = text
   })
 
+  _____useDeferredVlaue (отложенное изменение значения) 
+
+  _____useTransition (отложенный рендер)
+    const [isPending, startTransition] = useTransition();
+
   ______customHook (use....)
   Набор гибкого/объединенного функционала (повторное использование логики)
 

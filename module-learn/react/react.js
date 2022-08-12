@@ -45,4 +45,7 @@
     document.body.appendChild(node);
     return ReactDOM.createPortal(props.children, node)
 
+  batching__ (flushSync - manual change)
+		Оптимизация рендера (объелинение в 1 перерисовку) нескольких изменений в стайте
+
 */ 

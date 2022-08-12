@@ -5,6 +5,7 @@ import Spinner from '../spinner/Spinner';
 import Skeleton from '../skeleton/Skeleton';
 
 import './charInfo.scss';
+import { Link } from 'react-router-dom';
 
 const CharInfo = (props) => {
   const [char, setChar] = useState(null);
@@ -71,9 +72,9 @@ const View = ({ char }) => {
         {comics.map((item, i) => {
           if (i >= 5) return;
           return (
-            <li className="char__comics-item" key={i}>
+            <Link to={`comics/${item.resourceURI.slice(-5)}`} className="char__comics-item" key={i}>
               {item.name}
-            </li>
+            </Link>
           );
         })}
       </ul>
