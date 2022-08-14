@@ -1,6 +1,7 @@
+import { useCallback } from 'react';
 import { memo, useState } from 'react';
 import { Container } from 'react-bootstrap';
-import './App.css';
+import './App.css'; 
 
 const Form = memo((props) => {
   console.log('render')
@@ -42,9 +43,13 @@ function Memo() {
     text: 'another text',
   });
 
+  const Log = useCallback(() => {
+    console.log('woww')
+  }, [])
+
   return (
     <>
-      <Form mail={data.mail} text={data.text} />
+      <Form mail={data.mail} text={data.text} onLog={Log}/>
       <button
         onClick={() =>
           setData({
