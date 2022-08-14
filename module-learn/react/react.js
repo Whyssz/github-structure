@@ -48,4 +48,17 @@
   batching__ (flushSync - manual change)
 		Оптимизация рендера (объелинение в 1 перерисовку) нескольких изменений в стайте
 
+  context___ (getContext, createContex, contextType)
+    Передача информаации как пропсы, но не через друг друга а на прямую
+    const dataContext = createContext({...})
+    const { Provider, Consumer} = dataContext
+      Provider {main content}
+      Consumer {content - value => ...}
+    OR
+      const { Provider} = dataContext
+      ClassName.contextType = dataContext;
+    OR static 
+      
+    
+    
 */ 

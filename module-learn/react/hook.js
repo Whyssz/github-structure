@@ -30,6 +30,17 @@
 
     Оптимизация: перереднеринг стартового значения, использовать cb или fбезвызова
   }
+
+  _____useReduced
+  модификация состояния 
+    const [autoplay, dispatch] = useReducer(reduce, {startState}, initial) 
+    function reducer (state, aciton) {
+      switch (aciton.type)
+        case 'this': 
+          return {autoplay: ...}
+    }
+    onClick={() => dispatch({type: 'toggle/slow/fast'})}
+
   _______useEffect
   A/U/R (lifehook) замена
 
@@ -125,5 +136,8 @@
       return {value, onChange, validateInput}
     };
 
-
+  ______useContext(для контекта)
+    const dataContext = createContext({...});
+    const { Provider } = dataContext;
+    const context = useContext(dataContext);
 */
