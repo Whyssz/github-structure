@@ -1,4 +1,19 @@
 /*
+  List {
+    1. useState - state
+    2. useEffect - control state
+    3. useCallback - hesh func
+    4. useMemo - hesh value
+    5. useReduce - modify state
+    6. useRef - ind links el
+    7. useContext - context (++props)
+    8. useDeferredValue/useTransition - deffered render
+
+
+    end. customHook (use...)
+    https://habr.com/ru/company/ruvds/blog/554280/
+  }
+
   RULE:
     1. Вызывать только на верхнем уровне
     2. Вызываются из отдельных файлов (кастомные хуки искл)
@@ -19,7 +34,7 @@
     componentDidCatch(err, info) - предохранитель/обработчик ошибки, реализуется как обертка для ошибок
       static getDerivedStateFromError(error) - только обрабатывает ошибку без дополнительных имзменений дополнений
   }
-  _______useState
+  1. _______useState
   работа со стейтом (async/sync работает также)
 
   useState - () => {
@@ -31,17 +46,7 @@
     Оптимизация: перереднеринг стартового значения, использовать cb или fбезвызова
   }
 
-  _____useReduced
-  модификация состояния 
-    const [autoplay, dispatch] = useReducer(reduce, {startState}, initial) 
-    function reducer (state, aciton) {
-      switch (aciton.type)
-        case 'this': 
-          return {autoplay: ...}
-    }
-    onClick={() => dispatch({type: 'toggle/slow/fast'})}
-
-  _______useEffect
+  2._______useEffect
   A/U/R (lifehook) замена
 
   useEffect - {
@@ -59,7 +64,7 @@
       }
     }, [])
   }
-  ________useCallback
+  3.________useCallback
   Кеширование фенкций
   оптимизирует перевызов/рендеринг компонента, работает как useEffect только с возможность не запускать функцию при перерендере
 
@@ -92,7 +97,7 @@
         </>
       );
     };
-  ________useMemo
+  4.________useMemo
   Кеширование значений (запросы, подписки запрещены)
 
   const count = useMemo(() => {
@@ -102,7 +107,7 @@
     ....
   }, [obj])
 
-  _______useRef
+  5._______useRef
   Такие же ссылки на элементы, но с особенностью внесения ref без перерендеренга, а также запоминанием прошлого стейта
 
   const [text, setText] = useState('')
@@ -114,12 +119,29 @@
     myRef.current = text
   })
 
-  _____useDeferredVlaue (отложенное изменение значения) 
+  6. _____useReduced
+  модификация состояния 
+    const [autoplay, dispatch] = useReducer(reduce, {startState}, initial) 
+    function reducer (state, aciton) {
+      switch (aciton.type)
+        case 'this': 
+          return {autoplay: ...}
+    }
+    onClick={() => dispatch({type: 'toggle/slow/fast'})}
+
+  7.______useContext(для контекта)
+    const dataContext = createContext({...});
+    const { Provider } = dataContext;
+    const context = useContext(dataContext);
+  
+
+  8._____useDeferredVlaue (отложенное изменение значения) 
 
   _____useTransition (отложенный рендер)
     const [isPending, startTransition] = useTransition();
 
-  ______customHook (use....)
+
+  end. ______customHook (use....)
   Набор гибкого/объединенного функционала (повторное использование логики)
 
     const useInputWithValidate = (initialVlaue) => {
@@ -136,8 +158,4 @@
       return {value, onChange, validateInput}
     };
 
-  ______useContext(для контекта)
-    const dataContext = createContext({...});
-    const { Provider } = dataContext;
-    const context = useContext(dataContext);
 */
