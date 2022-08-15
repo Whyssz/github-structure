@@ -1,6 +1,6 @@
 /*
 LIBS{
-  react-trasition-grpup (animation transition)
+  react-trasition-group (animation transition)
   react-select (multy select)
   react-dnd (animation)
   react-content-loader (skeleton animation)
@@ -61,6 +61,7 @@ ONLY-LIBS{
     jest(test)
 
   react___ (classic)
+    react-transition-group (react-motion - hard-amination)
     material-ui
     awesom-font-icon
     react-router-dom (navigation)

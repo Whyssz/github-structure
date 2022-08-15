@@ -1,6 +1,7 @@
 import { memo, useState, createContext, useContext } from 'react';
 import { Container } from 'react-bootstrap';
 import './App.css';
+import { useScrollBy } from 'react-use-window-scroll';
 
 const dataContext = createContext({
   mail: 'second@example.com',
@@ -90,17 +91,21 @@ function Memo() {
     setData({...data, mail: 'change@mail.com'})
   }
 
+  const scrollBy = useScrollBy()
+
   return (
     <Provider value={data}>
       <Form text={data.text} />
       <button
-        onClick={() =>
-          setData({
-            ...data,
-            mail: 'second@example.com',
-            text: 'another text',
-          })
-        }
+        style={{marginTop: '500px', paddingBottom: '1000px'}}
+        onClick={() => scrollBy(1000,0)}
+        // onClick={() =>
+        //   setData({
+        //     ...data,
+        //     mail: 'second@example.com',
+        //     text: 'another text',
+        //   })
+        // }
       >
         Click me
       </button>

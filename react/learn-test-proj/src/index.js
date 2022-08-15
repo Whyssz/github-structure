@@ -4,8 +4,8 @@ import './index.css';
 // import BootstrapTest from './BootstrapTest'
 // import App from './App';
 // import AppToo from './Ref';
-// import Memo from './Memo';
-import Slider from './Slider';
+import Memo from './Memo';
+// import Slider from './Slider';
 
 
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -13,8 +13,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <Fragment>
-    <Slider/>
-    {/* <Memo/> */}
+    {/* <Slider/> */}
+    <Memo/>
     {/* <AppToo/> */}
     {/* <App /> */}
   </Fragment>

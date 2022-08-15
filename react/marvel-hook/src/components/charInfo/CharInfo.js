@@ -48,6 +48,7 @@ const View = ({ char }) => {
   const { name, description, thumbnail, wiki, homepage, comics } = char;
   const filterImg = thumbnail.indexOf('image_not_available') > 0;
   const stylez = filterImg ? { objectFit: 'fill' } : null;
+  const styelList = comics.length > 5 ? {height: '340px'} : null;
 
   return (
     <>
@@ -67,12 +68,16 @@ const View = ({ char }) => {
       </div>
       <div className="char__descr">{description}</div>
       <div className="char__comics">Comics:</div>
-      <ul className="char__comics-list">
+      <ul className="char__comics-list" style={styelList}>
         {comics.length > 0 ? null : 'There is no comics with this character'}
         {comics.map((item, i) => {
-          if (i >= 5) return;
+          // if (i >= 5) return;
           return (
-            <Link to={`comics/${item.resourceURI.slice(-5)}`} className="char__comics-item" key={i}>
+            <Link
+              to={`comics/${item.resourceURI.slice(-5)}`}
+              className="char__comics-item"
+              key={i}
+            >
               {item.name}
             </Link>
           );

@@ -3,7 +3,10 @@ import Spinner from '../spinner/Spinner';
 import ErrorMessage from '../errorMessage/ErrorMessage';
 import mjolnir from '../../resources/img/mjolnir.png';
 import useMarvelService from '../../services/MarvelService';
+import { CSSTransition } from 'react-transition-group';
+
 import './randomChar.scss';
+import '../../style/style.scss';
 
 const RandomChar = () => {
   const [char, setChar] = useState(null);
@@ -11,8 +14,8 @@ const RandomChar = () => {
 
   useEffect(() => {
     updateChar();
-    const timerId = setInterval(updateChar, 60000);
 
+    const timerId = setInterval(updateChar, 60000);
     return () => {
       clearInterval(timerId);
     };
@@ -58,27 +61,41 @@ const View = ({ char }) => {
   const filterImg = thumbnail.indexOf('image_not_available') > 0;
   const stylez = filterImg ? { objectFit: 'fill' } : null;
 
+  const [show, setShow] = useState(false);
+
+  useEffect(() => {
+    setShow(true);
+  }, [char]);
+
   return (
-    <div className="randomchar__block">
-      <img
-        style={stylez}
-        src={thumbnail}
-        alt="Random character"
-        className="randomchar__img"
-      />
-      <div className="randomchar__info">
-        <p className="randomchar__name">{name}</p>
-        <p className="randomchar__descr">{description}</p>
-        <div className="randomchar__btns">
-          <a href={homepage} className="button button__main">
-            <div className="inner">homepage</div>
-          </a>
-          <a href={wiki} className="button button__secondary">
-            <div className="inner">Wiki</div>
-          </a>
+    <CSSTransition
+      in={show}
+      timeout={600}
+      classNames="randomize"
+      mountOnEnter
+      unmountOnExit
+    >
+      <div className="randomchar__block">
+        <img
+          style={stylez}
+          src={thumbnail}
+          alt="Random character"
+          className="randomchar__img"
+        />
+        <div className="randomchar__info">
+          <p className="randomchar__name">{name}</p>
+          <p className="randomchar__descr">{description}</p>
+          <div className="randomchar__btns">
+            <a href={homepage} className="button button__main">
+              <div className="inner">homepage</div>
+            </a>
+            <a href={wiki} className="button button__secondary">
+              <div className="inner">Wiki</div>
+            </a>
+          </div>
         </div>
       </div>
-    </div>
+    </CSSTransition>
   );
 };
 

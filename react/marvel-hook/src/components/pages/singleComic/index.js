@@ -46,9 +46,12 @@ const SingleComic = () => {
 const View = ({ comic }) => {
   const { title, description, pageCount, thumbnail, language, price } = comic;
   let { pathname } = useLocation();
-  
-  pathname =
-    pathname.length === 12 ? pathname.slice(0, -5) : pathname.slice(0, -4);
+
+  const findPath = pathname.indexOf('comics/');
+  const url = pathname.slice(0, findPath + 6);
+
+  // pathname =
+  //   pathname.length === 12 ? pathname.slice(0, -5) : pathname.slice(0, -4);
 
   return (
     <div className="single-comic">
@@ -60,7 +63,7 @@ const View = ({ comic }) => {
         <p className="single-comic__descr">Language: {language}</p>
         <div className="single-comic__price">{price}</div>
       </div>
-      <Link to={pathname} className="single-comic__back">
+      <Link to={url} className="single-comic__back">
         Back to all
       </Link>
     </div>
