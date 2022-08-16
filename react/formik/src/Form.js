@@ -1,6 +1,7 @@
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 
+//basic settings
 // const validate = (values) => {
 //   const errors = {};
 
@@ -43,7 +44,7 @@ const Form = () => {
     }),
     onSubmit: (values) => console.log(JSON.stringify(values, null, 2)),
   });
-
+  //value/change/blur => {...getFieldProps('name')}
   return (
     <form className="form" onSubmit={formik.handleSubmit}>
       <h2>Отправить пожертвование</h2>

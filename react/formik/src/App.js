@@ -1,10 +1,11 @@
 import './app.scss';
-import Form from './Form';
+// import Form from './Form';
+import CustomForm from './Form-formic';
 
 function App() {
   return (
     <div className="app">
-        <Form/>
+      <CustomForm />
     </div>
   );
 }
