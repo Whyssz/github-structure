@@ -1,4 +1,11 @@
 /*
+main{
+  react-trasition-group
+  react-hook-form
+  ui ?
+
+}
+
 LIBS{
   react-trasition-group (animation transition)
   react-select (multy select)
@@ -9,6 +16,7 @@ LIBS{
   react-helmet (title page seo)
   react-flux (arhitecture app / fast handler err)
   react-threesixty (VR tehnology)
+  react-hook-form (add frormic) 
 }
 
 HOOK{
