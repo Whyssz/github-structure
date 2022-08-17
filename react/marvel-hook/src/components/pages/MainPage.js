@@ -1,9 +1,10 @@
+import { useState } from 'react';
 import RandomChar from '../randomChar/RandomChar';
 import CharList from '../charList/CharList';
 import CharInfo from '../charInfo/CharInfo';
 import ErrorBoundary from '../errorBoundary/ErrorBoundary';
 import decoration from '../../resources/img/vision.png';
-import { useState } from 'react';
+import AppSearch from '../appSearch/AppSearch';
 
 const MainPage = () => {
   const [selectedChar, setChar] = useState(null);
@@ -16,6 +17,9 @@ const MainPage = () => {
     <>
       <ErrorBoundary>
         <RandomChar />
+      </ErrorBoundary>
+      <ErrorBoundary>
+        <AppSearch />
       </ErrorBoundary>
       <div className="char__content">
         <ErrorBoundary>

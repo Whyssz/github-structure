@@ -8,7 +8,7 @@ import './comicsList.scss';
 
 const ComicsList = () => {
   const [comicsList, setComicsList] = useState([]);
-  const [offset, setOffset] = useState(300);
+  const [offset, setOffset] = useState(200);
   const [newItemsLoading, setNewItemLoadng] = useState(false);
   const [comicsEnded, setComicsEnded] = useState(false);
 
