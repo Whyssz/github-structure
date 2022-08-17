@@ -1,5 +1,4 @@
-// import { Link } from 'react-router-dom';
-
+import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom';
 import './singleCharLayout.scss';
 
@@ -8,6 +7,10 @@ const singleCharLayout = ({ data }) => {
 
   return (
     <div className="character-info">
+      <Helmet>
+        <meta name={name} content={`${name} information`} />
+        <title>{name}</title>
+      </Helmet>
       <div className="character-info__wrapper">
         <img src={thumbnail} alt={`Character: ${name}`} />
         <div className="main-info">
