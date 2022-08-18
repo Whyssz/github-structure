@@ -13,6 +13,13 @@ import ErrorMessage from '../errorMessage/ErrorMessage';
 
 import './appSearch.scss';
 
+const linksData = [
+  { name: 'iron', link: 1009368 },
+  { name: 'amerika', link: 1009220 },
+  { name: 'wolver', link: 1009718 },
+  { name: 'spider', link: false },
+];
+
 const AppSearch = () => {
   const [char, setChar] = useState(null);
 
@@ -33,6 +40,19 @@ const AppSearch = () => {
       <ErrorMessage />
     </div>
   );
+
+  const links = linksData.map((item, i) => {
+    return item.link ? (
+      <Link
+        to={`characters/${item.link}`}
+        className="bord-link__char"
+        key={i}
+      />
+    ) : (
+      <div className="bord-link__char broken-link" key={i}></div>
+    );
+  });
+
 
   const result = !char ? null : char.length > 0 ? (
     <div className="result-wrapper">
@@ -63,11 +83,7 @@ const AppSearch = () => {
         }}
       >
         <Form className="app__form-search">
-          <div className="bord-link">
-            <Link to="characters/1009368" className="bord-link__char"></Link>
-            <Link to="characters/1009220" className="bord-link__char"></Link>
-            <Link to="characters/1009718" className="bord-link__char"></Link>
-          </div>
+          <div className="bord-link">{links}</div>
           <h2>Or find a character by name:</h2>
           <div className="app__wrapper-search">
             <Field
