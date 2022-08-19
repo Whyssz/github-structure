@@ -45,17 +45,23 @@ input::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0; 
 }
+body{
+    overflow-x: hidden;
+}
 .app {
-    width: 1200px;
-    margin: 0 auto;
-    padding: 50px 0 70px 0;
-    position: relative;
-    .bg-decoration {
-        position: absolute;
-        right: -174px;
-        bottom: -70px;
-        z-index: -1;
-    }
+	max-width: 1200px;
+	width: 100%;
+	margin: 0 auto;
+	padding: 50px 30px 70px;
+	position: relative;
+	align-items: center;
+	.bg-decoration {
+		display: none;
+		position: absolute;
+		right: -174px;
+		bottom: -70px;
+		z-index: -1;
+	}
 }
 
 main {
@@ -122,4 +128,43 @@ main {
     transform: scale(0.7) translate(0, 100%);
     opacity: 0;
     transition: all 600ms;
+}
+
+@media (max-width: 1000px) {
+	.app{
+		padding: 30px;
+	}
+	main{
+		margin-top: 30px;
+	}
+	.button{
+		&.button__main{
+			.inner{
+				padding: 7px;
+			}
+			&::after {
+				display: none;
+			}
+		
+			&::before {
+				display: none;
+			}
+		}
+		&::after{
+			display: none;
+		}
+		&::before{
+			display: none;
+		}
+		.inner{
+			height: 30px;
+					padding: 7px;
+			&::after {
+				display: none;
+			}
+			&::before {
+				display: none;
+			}
+		}
+	}
 }

@@ -46,6 +46,11 @@
                 transform: translate(-15px, -15px) scale(1.1);
             }
         }
+        &:focus-visible{
+            img {
+                transform: translate(-15px, -15px) scale(1.1);
+            }
+        }
         img {
             transition: 0.3s transform;
             width: 200px;
@@ -72,4 +77,28 @@
         color: #fff;
         padding: 5px 5px 5px 0;
     }
+}
+
+@media (max-width: 1400px) {
+	.char__item{
+		border-radius: 0 0 15px 0;
+		&:hover{
+			border-radius: 10px;
+		}
+		&::after{
+			display: none;
+		}
+	}
+}
+
+@media (max-width: 1200px) {
+    
+}
+
+@media (max-width: 1200px) {
+    
+}
+
+@media (max-width: 1200px) {
+    
 }

@@ -2,6 +2,8 @@
 
 .app{
   .bord-link {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 50px);
     margin-bottom: 10px;
       .bord-link__char{
         width: 40px;
@@ -18,28 +20,10 @@
         &:hover{
           background-color: #00ff443d;
         }
-        &:nth-child(1):after{
-          background: url(../../resources/img/iron.png);
-          background-size: cover;
-          background-position: center;
-        }
-        &:nth-child(2):after{
-          background: url(../../resources/img/america.png);
-          background-size: cover;
-          background-position: center;
-        }
-        &:nth-child(3):after{
-          background: url(../../resources/img/ras.png);
-          background-size: cover;
-          background-position: center;
-        }
-        &:nth-child(4):after{
-          background: url(../../resources/img/spider.png);
-          background-size: cover;
-          background-position: center;
-        }
-        &::after{
+        & img{
           content: '';
+          background-size: cover;
+          background-position: center;
           position: absolute;
           width: 20px;
           height: 28px;
@@ -54,43 +38,64 @@
         }
       }
     }
-  .result-wrapper__search{
+  .result-wrapper__form-search {
     margin-top: 25px;
     font-weight: 700;
     font-size: 23px;
     line-height: 21px;
     width: auto;
-    &.success-search {
-      color: $succ;
-      position: relative;
-      transition: all .3s ease-out;
-      &::after{
-        opacity: 0;
-        visibility: hidden;
-        content: '';
-        position: absolute;
-        right: 200px;
-        top: -15px;
-        width: 50px;
-        height: 50px;
-        background: url('../../resources/img/fist.png');
-        background-size: cover;
-        transition: all .1s ease-out;
-      }
-      &:hover{
-        margin-left: 15px;
-         &::after {
-          opacity: 1;
-          visibility: visible;
-          right: -44px;
+  }
+  .result-wrapper{
+    font-weight: 700;
+    font-size: 22px;
+    line-height: 21px;
+    margin-top: 20px;
+    .result-wrapper__search {
+      &.success-search {
+        color: $succ;
+        position: relative;
+        transition: all .3s ease-out;
+  
+        &::after {
+          opacity: 0;
+          visibility: hidden;
+          content: '';
+          position: absolute;
+          right: 200px;
+          top: -15px;
+          width: 50px;
+          height: 50px;
+          background: url('../../resources/img/fist.png');
+          background-size: cover;
+          transition: all .1s ease-out;
+        }
+  
+        &:hover {
+          margin-left: 15px;
+  
+          &::after {
+            opacity: 1;
+            visibility: visible;
+            right: -44px;
+          }
+        }
+  
+        &:focus-visible {
+          margin-left: 15px;
+  
+          &::after {
+            opacity: 1;
+            visibility: visible;
+            right: -44px;
+          }
         }
       }
-    }
-    &.error-search {
-      color: $main-color;
+  
+      &.error-search {
+        color: $main-color;
+      }
     }
   }
-  
   &__form-search{
     margin-top: 35px;
     padding: 25px;

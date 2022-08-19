@@ -1,16 +1,14 @@
 import { useState, useEffect } from 'react';
-import useMarvelServices from '../../services/MarvelService';
-import ErrorMessage from '../errorMessage/ErrorMessage';
-import Spinner from '../spinner/Spinner';
-import Skeleton from '../skeleton/Skeleton';
-
-import './charInfo.scss';
 import { Link } from 'react-router-dom';
+
+import { setContent } from '../../utils/setContent';
+import useMarvelServices from '../../services/MarvelService';
+import './charInfo.scss';
 
 const CharInfo = (props) => {
   const [char, setChar] = useState(null);
 
-  const { loading, error, getCharacter, clearError } = useMarvelServices();
+  const { getCharacter, clearError, process, setProcess } = useMarvelServices();
 
   useEffect(() => {
     updateChar();
@@ -22,33 +20,23 @@ const CharInfo = (props) => {
 
     clearError();
 
-    getCharacter(charId).then(onCharLoaded);
+    getCharacter(charId)
+      .then(onCharLoaded)
+      .then(() => setProcess('confirmed'));
   };
 
   const onCharLoaded = (char) => {
     setChar(char);
   };
 
-  const skeleton = char || loading || error ? null : <Skeleton />;
-  const errorMessage = error ? <ErrorMessage /> : null;
-  const spinner = loading ? <Spinner /> : null;
-  const content = !(loading || error || !char) ? <View char={char} /> : null;
-
-  return (
-    <div className="char__info">
-      {errorMessage}
-      {spinner}
-      {skeleton}
-      {content}
-    </div>
-  );
+  return <div className="char__info">{setContent(process, View, char)}</div>;
 };
 
-const View = ({ char }) => {
-  const { name, description, thumbnail, wiki, homepage, comics } = char;
+const View = ({ data }) => {
+  const { name, description, thumbnail, wiki, homepage, comics } = data;
   const filterImg = thumbnail.indexOf('image_not_available') > 0;
   const stylez = filterImg ? { objectFit: 'fill' } : null;
-  const styelList = comics.length > 5 ? {height: '340px'} : null;
+  const styelList = comics.length > 5 ? { height: '340px' } : null;
 
   return (
     <>
@@ -71,7 +59,6 @@ const View = ({ char }) => {
       <ul className="char__comics-list" style={styelList}>
         {comics.length > 0 ? null : 'There is no comics with this character'}
         {comics.map((item, i) => {
-          // if (i >= 5) return;
           return (
             <Link
               to={`comics/${item.resourceURI.slice(-5)}`}

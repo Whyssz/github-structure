@@ -5,10 +5,10 @@ import { Helmet } from 'react-helmet';
 const Page404 = () => {
   return (
     <div>
-      <Helmet>
-        <meta name="Error" content="Something went wrong. Error" />
-        <title>Error page</title>
-      </Helmet>
+        <Helmet>
+          <meta name="Error" content="Something went wrong. Error" />
+          <title>Error page</title>
+        </Helmet>
       <ErrorMessage />
       <p style={{ textAlign: 'center', fontWeight: 'bold', fontSise: '24px' }}>
         Page doesn't exist

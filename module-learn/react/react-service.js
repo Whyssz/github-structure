@@ -17,6 +17,7 @@ LIBS{
   react-flux (arhitecture app / fast handler err)
   react-threesixty (VR tehnology)
   react-hook-form (add frormic) 
+  react-xstate (state machine)
 }
 
 HOOK{

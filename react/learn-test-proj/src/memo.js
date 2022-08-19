@@ -12,7 +12,6 @@ const dataContext = createContext({
 const { Provider } = dataContext;
 
 const Form = memo((props) => {
-  console.log('render');
 
   return (
     <Container>

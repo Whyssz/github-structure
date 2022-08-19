@@ -1,22 +1,21 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useMemo } from 'react';
 import { useScrollBy } from 'react-use-window-scroll';
-import useMarvelService from '../../services/MarvelService';
 import PropTypes from 'prop-types';
-import ErrorMessage from '../errorMessage/ErrorMessage';
-import Spinner from '../spinner/Spinner';
-import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
+import useMarvelService from '../../services/MarvelService';
+import { setContentUnic } from '../../utils/setContent';
 import './charList.scss';
 import '../../style/style.scss';
 
 const CharList = (props) => {
   const [chars, setChars] = useState([]);
-  const [offset, setOffset] = useState(1541);
+  const [offset, setOffset] = useState(1041);
   const [newItemsLoading, setNewItemLoadng] = useState(false);
   const [charEnded, setCharEnded] = useState(false);
   const scrollBy = useScrollBy();
 
-  const { loading, error, getAllCharacters } = useMarvelService();
+  const { process, setProcess, getAllCharacters } = useMarvelService();
 
   useEffect(() => {
     onRequest(offset, true);
@@ -28,12 +27,13 @@ const CharList = (props) => {
     } else {
       setNewItemLoadng(true);
       setTimeout(
-        () => scrollBy({ top: 600, left: 0, behavior: 'smooth' }),
+        () => scrollBy({ top: 800, left: 0, behavior: 'smooth' }),
         600
       );
     }
-    // initial ? setNewItemLoadng(false) : setNewItemLoadng(true);
-    getAllCharacters(offset).then(onLoadedChars);
+    getAllCharacters(offset)
+      .then(onLoadedChars)
+      .then(() => setProcess('confirmed'));
   };
 
   const onLoadedChars = (newCharList) => {
@@ -64,7 +64,7 @@ const CharList = (props) => {
       const stylez = filterImg ? { objectFit: 'fill' } : null;
 
       return (
-        <CSSTransition key={id} timeout={600} classNames="renchar">
+        <CSSTransition key={id} timeout={600} classNames="char__item">
           <li
             className="char__item"
             tabIndex={0}
@@ -94,16 +94,14 @@ const CharList = (props) => {
     );
   }
 
-  const list = renderList(chars);
-
-  const errorMessage = error ? <ErrorMessage /> : null;
-  const spinner = loading && !newItemsLoading ? <Spinner /> : null;
+  const result = useMemo(() => {
+    return setContentUnic(process, () => renderList(chars), newItemsLoading);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [process]);
 
   return (
     <div className="char__list">
-      {errorMessage}
-      {spinner}
-      {list}
+      {result}
       <button
         disabled={newItemsLoading}
         style={{ display: charEnded ? 'none' : 'block' }}

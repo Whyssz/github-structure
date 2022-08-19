@@ -12,6 +12,10 @@ import useMarvelService from '../../services/MarvelService';
 import ErrorMessage from '../errorMessage/ErrorMessage';
 
 import './appSearch.scss';
+import Amerika from '../../resources/img/america.png';
+import Spider from '../../resources/img/spider.png';
+import Iron from '../../resources/img/iron.png';
+import Wolver from '../../resources/img/ras.png';
 
 const linksData = [
   { name: 'iron', link: 1009368 },
@@ -23,7 +27,7 @@ const linksData = [
 const AppSearch = () => {
   const [char, setChar] = useState(null);
 
-  const { loading, error, clearError, getCharacterByName } = useMarvelService();
+  const { clearError, getCharacterByName, process, setProcess } = useMarvelService();
 
   const onCharLoaded = (char) => {
     setChar(char);
@@ -32,27 +36,46 @@ const AppSearch = () => {
   const updateChar = (name) => {
     clearError();
 
-    getCharacterByName(name).then(onCharLoaded);
+    getCharacterByName(name).then(onCharLoaded).then(() => setProcess('confirmed'));
   };
 
-  const errorMessage = !error ? null : (
+  const links = linksData.map((item, i) => {
+    let name = '';
+
+    switch (item.name) {
+      case 'iron':
+        name = Iron;
+        break;
+      case 'amerika':
+        name = Amerika;
+        break;
+      case 'wolver':
+        name = Wolver;
+        break;
+      case 'spider':
+        name = Spider;
+        break;
+      default:
+        name = false;
+        break;
+    }
+
+    return item.link ? (
+      <Link to={`characters/${item.link}`} className="bord-link__char" key={i}>
+        <img src={name} alt={`Hero - ${item.name}`} />
+      </Link>
+    ) : (
+      <div className="bord-link__char broken-link" key={i}>
+        <img src={name} alt={`Hero - ${item.name}`} />
+      </div>
+    );
+  });
+
+  const errorMessage = process !== 'error' ? null : (
     <div className="char__search-critical-error">
       <ErrorMessage />
     </div>
   );
-
-  const links = linksData.map((item, i) => {
-    return item.link ? (
-      <Link
-        to={`characters/${item.link}`}
-        className="bord-link__char"
-        key={i}
-      />
-    ) : (
-      <div className="bord-link__char broken-link" key={i}></div>
-    );
-  });
-
 
   const result = !char ? null : char.length > 0 ? (
     <div className="result-wrapper">
@@ -95,7 +118,7 @@ const AppSearch = () => {
             <button
               className="button button__main"
               type="submit"
-              disabled={loading}
+              disabled={process === 'loading'}
             >
               <div className="inner">FIND</div>
             </button>
