@@ -65,6 +65,7 @@ class WhoAmI extends Component {
     this.setState({date: new Date()})
   }
 
+
   render() {
     const {name, surname, links} = this.props
     const {years, position, text, date} = this.state

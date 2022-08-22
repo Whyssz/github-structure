@@ -12,7 +12,7 @@ class CharList extends Component {
     offset: 1541,
     charEnded: false,
   };
-
+  
   componentDidMount() {
     this.onRequest();
   }
