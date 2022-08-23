@@ -11,6 +11,7 @@ const update = () => {
   document.getElementById('counter').textContent = getState().value;
 };
 
+
 subscribe(update);
 
 // const bindActionCreator = (creator, dispatch) => (...args) => {
