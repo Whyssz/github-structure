@@ -7,6 +7,9 @@ main{
 }
 
 LIBS{
+  query (analog redux)
+  axios (adv fetch)
+  concurrently (many console ways)
   react-trasition-group (animation transition)
   react-select (multy select)
   react-dnd (animation)

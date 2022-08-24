@@ -1,6 +1,12 @@
 /*
   Redux - инструмент управляющий состоянием данных (state с большим количеством сущностей)
 
+  Schem:
+    action - func-action 
+      ex: export const inc = () => ({ type: 'INC' });
+    reducer - store
+    ex: const reducer = (state = initialValue, action) =>..
+
   _________bindActionCreators
 
   EX:
