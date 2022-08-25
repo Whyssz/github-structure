@@ -20,10 +20,30 @@
     }
   ],
   "filters": [
-    "all",
-    "fire",
-    "water",
-    "wind",
-    "earth"
+    {
+      "label": "Все",
+      "value": "all",
+      "clases": "btn btn-outline-dark"
+    },
+    {
+      "label": "Огонь",
+      "value": "fire",
+      "clases": "btn btn-danger"
+    },
+    {
+      "label": "Вода",
+      "value": "water",
+      "clases": "btn btn-primary "
+    },
+    {
+      "label": "Ветер",
+      "value": "wind",
+      "clases": "btn btn-success"
+    },
+    {
+      "label": "Земля",
+      "value": "earth",
+      "clases": "btn btn-secondary"
+    }
   ]
 }
