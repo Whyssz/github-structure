@@ -27,25 +27,31 @@ export const heroDeleted = (id) => {
 export const heroCreated = (hero) => {
   return {
     type: 'HERO_CREATED',
-    payload: hero
-  };
-}
-
-export const filtersFetching = () => {
-  return {
-    type: 'FILTERS_FETCHING',
+    payload: hero,
   };
 };
+
+export const filtersFetching = () => {
+	return {
+		type: 'FILTERS_FETCHING'
+	}
+}
 
 export const filtersFetched = (filters) => {
   return {
     type: 'FILTERS_FETCHED',
-    payload: filters,
+		payload: filters
   };
 };
 
 export const filtersFetchingError = () => {
-  return {
-    type: 'FILTERS_FETCHING_ERROR',
-  };
-};
+	return {
+		type: 'FILTERS_FETCHING_ERROR'
+	}
+}
+export const changedActiveFilter = (filter) => {
+	return {
+		type: 'CHANGED_ACTIVE_FILTER',
+		payload: filter
+	}
+}

@@ -34,7 +34,7 @@ const HeroesListItem = ({ name, description, element, onDelete }) => {
       </div>
       <span
         onClick={onDelete}
-        className="position-absolute cursor-pointer top-0 start-100 translate-middle badge border rounded-pill bg-light"
+        className="position-absolute top-0 start-100 translate-middle badge border rounded-pill bg-light"
       >
         <button
           type="button"

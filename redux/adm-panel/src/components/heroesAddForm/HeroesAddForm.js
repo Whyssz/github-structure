@@ -1,28 +1,26 @@
+// Реализовать создание нового героя с введенными данными. Он должен попадать
+// в общее состояние и отображаться в списке + фильтроваться
+// Уникальный идентификатор персонажа можно сгенерировать через uiid
+// Усложненная задача:
+// Персонаж создается и в файле json при помощи метода POST
+// Дополнительно:
 // Элементы <option></option> желательно сформировать на базе
 // данных из фильтров
 
-import { useState, useEffect } from 'react';
-import { v4 as uuidv4 } from 'uuid';
+import { useState } from 'react';
 import { useHttp } from '../../hooks/http.hook';
 import { useSelector, useDispatch } from 'react-redux';
+import { v4 as uuidv4 } from 'uuid';
 import { heroCreated } from '../../actions';
 
 const HeroesAddForm = () => {
   const [name, setName] = useState('');
   const [desc, setDesc] = useState('');
-  const [element, setelEment] = useState('');
+  const [element, setElement] = useState('');
 
-	const {filters} = useSelector(state => state)
+  const { filters } = useSelector((state) => state);
   const { request } = useHttp();
   const dispatch = useDispatch();
-
-  const filtersRender = () => {
-    return filters.map(({ label, value }) => (
-      <option key={value} value={value}>
-        {label}
-      </option>
-    ));
-  };
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
@@ -40,8 +38,21 @@ const HeroesAddForm = () => {
 
     setName('');
     setDesc('');
-    setelEment('');
+    setElement('');
   };
+
+  const renderOptions = (list) => {
+    return list.map(({ name, label }) => {
+      if (name === 'all') return;
+      return (
+        <option key={name} value={name}>
+          {label}
+        </option>
+      );
+    });
+  };
+
+  const options = renderOptions(filters);
 
   return (
     <form className="border p-4 shadow-lg rounded" onSubmit={onSubmitHandler}>
@@ -71,9 +82,9 @@ const HeroesAddForm = () => {
           className="form-control"
           id="text"
           placeholder="Что я умею?"
+          style={{ height: '130px' }}
           value={desc}
           onChange={(e) => setDesc(e.target.value)}
-          style={{ height: '130px' }}
         />
       </div>
 
@@ -87,10 +98,10 @@ const HeroesAddForm = () => {
           id="element"
           name="element"
           value={element}
-          onChange={(e) => setelEment(e.target.value)}
+          onChange={(e) => setElement(e.target.value)}
         >
           <option>Я владею элементом...</option>
-          {filtersRender()}
+          {options}
         </select>
       </div>
 
