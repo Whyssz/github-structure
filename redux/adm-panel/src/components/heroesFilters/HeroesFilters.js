@@ -1,4 +1,3 @@
-// Активный фильтр имеет класс active
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHttp } from '../../hooks/http.hook';
@@ -11,7 +10,7 @@ import {
 import classNames from 'classnames';
 
 const HeroesFilters = () => {
-  const { filters, activeFilter } = useSelector((state) => state);
+  const { filters, activeFilter } = useSelector((state) => state.filters);
   const { request } = useHttp();
   const dispatch = useDispatch();
 

@@ -10,17 +10,21 @@
   _________bindActionCreators
 
   EX:
-     const bindActionCreator = (creator, dispatch) => (...args) => {
-         dispatch(creator(...args))
-       }
-       cosnt incDispatch = bindActionCreator(inc, dispatch)
+    const bindActionCreator = (creator, dispatch) => (...args) => {
+        dispatch(creator(...args))
+      }
+      cosnt incDispatch = bindActionCreator(inc, dispatch)
 
-       const { incDispatch, decDispatch, rndDispatch } = bindActionCreators({
-         incDispatch: inc,
-         decDispatch: dec,
-         rndDispatch: rnd,
-       }, dispatch);
+      const { incDispatch, decDispatch, rndDispatch } = bindActionCreators({
+        incDispatch: inc,
+        decDispatch: dec,
+        rndDispatch: rnd,
+      }, dispatch);
 
-      const { inc, dec, rnd } = bindActionCreators(actions, dispatch)
+    const { inc, dec, rnd } = bindActionCreators(actions, dispatch)
+
+  _____store enchancers - modify request dispatch ()
+		ex: 
+			 
 
 */

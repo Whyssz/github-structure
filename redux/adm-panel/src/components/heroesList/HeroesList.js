@@ -10,16 +10,34 @@ import {
 import HeroesListItem from '../heroesListItem/HeroesListItem';
 import Spinner from '../spinner/Spinner';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
+import { createSelector } from 'reselect';
 
 import '../../styles/index.scss';
 
 const HeroesList = () => {
-  const { filteredHeroes, heroesLoadingStatus } = useSelector((state) => state);
+  const filteredHeroesSelector = createSelector(
+    (state) => state.heroes.heroes,
+    (state) => state.filters.activeFilter,
+    (heroes, filter) => {
+      if (filter === 'all') {
+        return heroes;
+      } else {
+        return heroes.filter((item) => item.element === filter);
+      }
+    }
+  );
+
+  const filteredHeroes = useSelector(filteredHeroesSelector);
+
+  const heroesLoadingStatus = useSelector(
+    (state) => state.heroes.heroesLoadingStatus
+  );
   const dispatch = useDispatch();
   const { request } = useHttp();
 
   useEffect(() => {
-    dispatch(heroesFetching());
+    // dispatch(heroesFetching());
+    dispatch('HEROES_FETCHING')
     request('http://localhost:3001/heroes')
       .then((data) => dispatch(heroesFetched(data)))
       .catch(() => dispatch(heroesFetchingError()));
@@ -51,11 +69,7 @@ const HeroesList = () => {
 
     return arr.map(({ id, ...props }) => {
       return (
-        <CSSTransition
-          classNames="item"
-          key={id}
-          timeout={500}
-        >
+        <CSSTransition classNames="item" key={id} timeout={500}>
           <HeroesListItem key={id} {...props} onDelete={() => onDelete(id)} />
         </CSSTransition>
       );
@@ -64,7 +78,11 @@ const HeroesList = () => {
 
   const elements = renderHeroesList(filteredHeroes);
 
-  return <TransitionGroup component="ul" className='list-items'>{elements}</TransitionGroup>;
+  return (
+    <TransitionGroup component="ul" className="list-items">
+      {elements}
+    </TransitionGroup>
+  );
 };
 
 export default HeroesList;

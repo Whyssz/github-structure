@@ -1,12 +1,3 @@
-// Реализовать создание нового героя с введенными данными. Он должен попадать
-// в общее состояние и отображаться в списке + фильтроваться
-// Уникальный идентификатор персонажа можно сгенерировать через uiid
-// Усложненная задача:
-// Персонаж создается и в файле json при помощи метода POST
-// Дополнительно:
-// Элементы <option></option> желательно сформировать на базе
-// данных из фильтров
-
 import { useState } from 'react';
 import { useHttp } from '../../hooks/http.hook';
 import { useSelector, useDispatch } from 'react-redux';
@@ -18,7 +9,9 @@ const HeroesAddForm = () => {
   const [desc, setDesc] = useState('');
   const [element, setElement] = useState('');
 
-  const { filters } = useSelector((state) => state);
+  const { filters, filtersLoadingStatus } = useSelector(
+    (state) => state.filters
+  );
   const { request } = useHttp();
   const dispatch = useDispatch();
 
@@ -41,18 +34,24 @@ const HeroesAddForm = () => {
     setElement('');
   };
 
-  const renderOptions = (list) => {
-    return list.map(({ name, label }) => {
-      if (name === 'all') return;
-      return (
-        <option key={name} value={name}>
-          {label}
-        </option>
-      );
-    });
-  };
+  const renderFilters = (filters, status) => {
+    if (status === 'loading') {
+      return <option>Загрузка элементов</option>;
+    } else if (status === 'error') {
+      return <option>Ошибка загрузки</option>;
+    }
 
-  const options = renderOptions(filters);
+    if (filters && filters.length > 0) {
+      return filters.map(({ name, label }) => {
+        if (name === 'all') return;
+        return (
+          <option key={name} value={name}>
+            {label}
+          </option>
+        );
+      });
+    }
+  };
 
   return (
     <form className="border p-4 shadow-lg rounded" onSubmit={onSubmitHandler}>
@@ -101,7 +100,7 @@ const HeroesAddForm = () => {
           onChange={(e) => setElement(e.target.value)}
         >
           <option>Я владею элементом...</option>
-          {options}
+          {renderFilters(filters, filtersLoadingStatus)}
         </select>
       </div>
 
