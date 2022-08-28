@@ -7,8 +7,8 @@ main{
 }
 
 LIBS{
-  
-  reselect = mimalization useSelector (some reducers)
+  redux-thunk ()
+  reselect - mimalization useSelector (some reducers)
   query (analog redux)
   axios (adv fetch)
   concurrently (many console ways)
