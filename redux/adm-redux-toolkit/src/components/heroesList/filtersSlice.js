@@ -12,6 +12,7 @@ export const fetchFilters = createAsyncThunk('filters/fetchFilters', () => {
   return request('http://localhost:3001/filters');
 });
 
+
 const filtersSlice = createSlice({
   name: 'filters',
   initialState,
@@ -55,7 +56,3 @@ export const {
   filtersFetchingError,
   changedActiveFilter,
 } = actions;
-// export const filtersFetching = createAction('FILTERS_FETCHING');
-// export const filtersFetched = createAction('FILTERS_FETCHED');
-// export const filtersFetchingError = createAction('FILTERS_FETCHING_ERROR');
-// export const changedActiveFilter = createAction('CHANGED_ACTIVE_FILTER');

@@ -7,8 +7,10 @@ main{
 }
 
 LIBS{
-  redux-thunk ()
-  reselect - mimalization useSelector (some reducers)
+  uuid - unic id
+  Classnames - toggle active class
+  redux-thunk - (enhancer-middleware)
+  reselect / redux - mimalization useSelector (some reducers) or redux createSleector
   query (analog redux)
   axios (adv fetch)
   concurrently (many console ways)

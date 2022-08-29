@@ -12,7 +12,8 @@ _____toolkit - tool for your comfort usage
 		3. createReducer - simplification of repetitive reducers
     4. createSlice - merge action and reducer to consolidation
     5. extraReducer - consolidation with Slice
-    6. createAsyncThunk 
+    6. createAsyncThunk + extraReduce
+    7. createEntityAdapter.getInitialState ...
 
     EX:  
       1. {
