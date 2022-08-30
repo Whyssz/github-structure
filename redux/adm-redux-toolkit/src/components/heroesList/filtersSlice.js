@@ -12,21 +12,20 @@ export const fetchFilters = createAsyncThunk('filters/fetchFilters', () => {
   return request('http://localhost:3001/filters');
 });
 
-
 const filtersSlice = createSlice({
   name: 'filters',
   initialState,
   reducers: {
-    filtersFetching: (state) => {
-      state.filtersLoadingStatus = 'loading';
-    },
-    filtersFetched: (state, action) => {
-      state.filtersLoadingStatus = 'idle';
-      state.filters = action.payload;
-    },
-    filtersFetchingError: (state) => {
-      state.filtersLoadingStatus = 'error';
-    },
+    // filtersFetching: (state) => {
+    //   state.filtersLoadingStatus = 'loading';
+    // },
+    // filtersFetched: (state, action) => {
+    //   state.filtersLoadingStatus = 'idle';
+    //   state.filters = action.payload;
+    // },
+    // filtersFetchingError: (state) => {
+    //   state.filtersLoadingStatus = 'error';
+    // },
     changedActiveFilter: (state, action) => {
       state.activeFilter = action.payload;
     },
@@ -50,6 +49,7 @@ const filtersSlice = createSlice({
 const { actions, reducer } = filtersSlice;
 
 export default reducer;
+
 export const {
   filtersFetching,
   filtersFetched,
