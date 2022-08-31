@@ -1,24 +1,38 @@
+import { useHttp } from '../../hooks/http.hook';
 import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
 
+import { heroCreated } from '../heroesList/heroesSlice';
+
 const HeroesAddForm = () => {
-  const [name, setName] = useState('');
-  const [desc, setDesc] = useState('');
-  const [element, setElement] = useState('');
+  const [heroName, setHeroName] = useState('');
+  const [heroDescr, setHeroDescr] = useState('');
+  const [heroElement, setHeroElement] = useState('');
+
+  const { filters, filtersLoadingStatus } = useSelector(
+    (state) => state.filters
+  );
+  const dispatch = useDispatch();
+  const { request } = useHttp();
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
-
     const newHero = {
       id: uuidv4(),
-      name,
-      description: desc,
-      element,
+      name: heroName,
+      description: heroDescr,
+      element: heroElement,
     };
 
-    setName('');
-    setDesc('');
-    setElement('');
+    request('http://localhost:3001/heroes', 'POST', JSON.stringify(newHero))
+      .then((res) => console.log(res, 'Отправка успешна'))
+      .then(dispatch(heroCreated(newHero)))
+      .catch((err) => console.log(err));
+
+    setHeroName('');
+    setHeroDescr('');
+    setHeroElement('');
   };
 
   const renderFilters = (filters, status) => {
@@ -30,7 +44,9 @@ const HeroesAddForm = () => {
 
     if (filters && filters.length > 0) {
       return filters.map(({ name, label }) => {
+        // eslint-disable-next-line
         if (name === 'all') return;
+
         return (
           <option key={name} value={name}>
             {label}
@@ -53,8 +69,8 @@ const HeroesAddForm = () => {
           className="form-control"
           id="name"
           placeholder="Как меня зовут?"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
+          value={heroName}
+          onChange={(e) => setHeroName(e.target.value)}
         />
       </div>
 
@@ -69,8 +85,8 @@ const HeroesAddForm = () => {
           id="text"
           placeholder="Что я умею?"
           style={{ height: '130px' }}
-          value={desc}
-          onChange={(e) => setDesc(e.target.value)}
+          value={heroDescr}
+          onChange={(e) => setHeroDescr(e.target.value)}
         />
       </div>
 
@@ -83,11 +99,11 @@ const HeroesAddForm = () => {
           className="form-select"
           id="element"
           name="element"
-          value={element}
-          onChange={(e) => setElement(e.target.value)}
+          value={heroElement}
+          onChange={(e) => setHeroElement(e.target.value)}
         >
-          <option>Я владею элементом...</option>
-          {/* {renderFilters(filters, filtersLoadingStatus)} */}
+          <option value="">Я владею элементом...</option>
+          {renderFilters(filters, filtersLoadingStatus)}
         </select>
       </div>
 

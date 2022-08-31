@@ -1,12 +1,6 @@
 {
   "heroes": [
     {
-      "id": 1,
-      "name": "Первый герой",
-      "description": "Первый герой в рейтинге!",
-      "element": "fire"
-    },
-    {
       "id": 2,
       "name": "Неизвестный герой",
       "description": "Скрывающийся в тени",
@@ -23,6 +17,12 @@
       "name": "gsfd",
       "description": "fgds",
       "element": "fire"
+    },
+    {
+      "id": "3590d0e8-d596-4a0a-aa38-d41c8df3f7df",
+      "name": "gfdsF",
+      "description": "gfds",
+      "element": ""
     }
   ],
   "filters": [
