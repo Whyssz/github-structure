@@ -1,30 +1,20 @@
 import { useHttp } from '../../hooks/http.hook';
 import { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { heroDeleted } from '../heroesList/heroesSlice';
-import { fetchHeroes } from '../../actions';
+import {
+  heroDeleted,
+  fetchHeroes,
+  filteredHeroesSelector,
+} from '../heroesList/heroesSlice';
 import Spinner from '../spinner/Spinner';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
-import { createSelector } from '@reduxjs/toolkit';
 
-import '../../styles/index.scss';
 import HeroesListItem from '../heroesListItem/HeroesListItem';
 
+import '../../styles/index.scss';
+
 const HeroesList = () => {
-  const filteredHeroesSelector = createSelector(
-    (state) => state.filters.activeFilter,
-    (state) => state.heroes.heroes,
-    (filter, heroes) => {
-      if (filter === 'all') {
-        return heroes;
-      } else {
-        return heroes.filter((item) => item.element === filter);
-      }
-    }
-  );
-
   const filteredHeroes = useSelector(filteredHeroesSelector);
-
   const heroesLoadingStatus = useSelector(
     (state) => state.heroes.heroesLoadingStatus
   );
@@ -32,7 +22,7 @@ const HeroesList = () => {
   const { request } = useHttp();
 
   useEffect(() => {
-    dispatch(fetchHeroes(request));
+    dispatch(fetchHeroes());
 
     // eslint-disable-next-line
   }, []);
