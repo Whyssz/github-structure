@@ -1,9 +1,9 @@
-const MySelect = ({ options, defaultValue, sorting, changeSort }) => {
+const MySelect = ({ options, sorting, onChange }) => {
   return (
     <select
       style={{ marginTop: 12 }}
       name={sorting}
-      onChange={(e) => changeSort(e.target.value)}
+      onChange={(e) => onChange(e.target.value)}
       defaultValue='default'
     >
       <option value="default" disabled>
