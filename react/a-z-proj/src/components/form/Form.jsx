@@ -5,7 +5,7 @@ import MyInput from '../UI/input/MyInput';
 import MyButton from '../UI/button/MyButton';
 
 const Form = ({ addPost }) => {
-  const [post, setPost] = useState({ label: '', body: '' });
+  const [post, setPost] = useState({ title: '', body: '' });
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
@@ -17,14 +17,14 @@ const Form = ({ addPost }) => {
 
     addPost(newPost);
 
-    setPost({ label: '', body: '' });
+    setPost({ title: '', body: '' });
   };
 
   return (
     <form onSubmit={onSubmitHandler}>
       <MyInput
-        value={post.label}
-        onChange={(e) => setPost({ ...post, label: e.target.value })}
+        value={post.title}
+        onChange={(e) => setPost({ ...post, title: e.target.value })}
         type="text"
         name="name"
         placeholder="Name"

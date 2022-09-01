@@ -1,16 +1,20 @@
-const PostItem = (props) => {
-  const { label, body } = props.post;
+import MyButton from '../UI/button/MyButton';
+
+const PostItem = ({ post, number, deletePost }) => {
+  const { id, title, body } = post;
 
   return (
     <div className="post">
       <div className="post-content">
         <h3>
-          {props.number + 1}. {label}
+          {number + 1}. {title}
         </h3>
         <p>{body}</p>
       </div>
       <div className="post-btn">
-        <button className="btn">Delete</button>
+        <MyButton onClick={() => deletePost(id)} className="btn">
+          Delete
+        </MyButton>
       </div>
     </div>
   );
