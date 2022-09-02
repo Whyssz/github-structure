@@ -1,33 +1,29 @@
-import { useState, useMemo } from 'react';
+import { useState, useEffect } from 'react';
+import { usePosts } from '../hook/usePosts';
 import PostFilter from '../components/filter/PostFilter';
-
 import Form from '../components/form/Form';
 import PostList from '../components/posts/PostList';
+
+import MyButton from '../components/UI/button/MyButton';
 import MyModal from '../components/UI/modal/MyModal';
+import PostService from '../API/PostService';
+import Loader from '../components/UI/loader/Loader';
+import { useFetching } from '../hook/useFetching';
 
 const App = () => {
-  const [posts, setPosts] = useState([
-    { id: 1, title: 'A-JavaSriprt', body: 'Text - b' },
-    { id: 2, title: 'C-React', body: 'Text - a' },
-    { id: 3, title: 'B-Redux', body: 'Text - c' },
-  ]);
-
+  const [posts, setPosts] = useState([]);
   const [filter, setFilter] = useState({ sort: '', search: '' });
+  const [modal, setModal] = useState(false);
+  const [fetchPosts, isPostLoading, error] = useFetching(async () => {
+    const response = await PostService.getAll();
+    setPosts(response);
+  });
 
-  const sortedPosts = useMemo(() => {
-    if (filter.sort) {
-      return [...posts].sort((a, b) =>
-        a[filter.sort].localeCompare(b[filter.sort])
-      );
-    }
-    return posts;
-  }, [posts, filter.sort]);
+  const sortedAndSearchedPosts = usePosts(posts, filter.sort, filter.search);
 
-  const searchSortedPost = useMemo(() => {
-    return sortedPosts.filter((post) =>
-      post.title.toLocaleLowerCase().includes(filter.search)
-    );
-  }, [sortedPosts, filter.search]);
+  useEffect(() => {
+    fetchPosts();
+  }, [filter]);
 
   const addPost = (newPost) => {
     setPosts([...posts, newPost]);
@@ -39,17 +35,23 @@ const App = () => {
 
   return (
     <div className="app">
-      <MyModal>
-        <Form addPost={addPost} />
+      <MyButton onClick={setModal}>Create post</MyButton>
+      <MyModal visible={modal} setVisible={setModal}>
+        <Form addPost={addPost} setModal={setModal} />
       </MyModal>
       <hr style={{ marginTop: 15 }} />
       <PostFilter filter={filter} setFilter={setFilter} />
       <hr style={{ marginTop: 15 }} />
-      <PostList
-        deletePost={deletePost}
-        posts={searchSortedPost}
-        title={'Posts list 1'}
-      />
+      {isPostLoading ? (
+        // <h1 style={{ textAlign: 'center', marginTop: 20 }}>Loading...</h1>
+        <Loader />
+      ) : (
+        <PostList
+          deletePost={deletePost}
+          posts={sortedAndSearchedPosts}
+          title={'Posts list 1'}
+        />
+      )}
     </div>
   );
 };

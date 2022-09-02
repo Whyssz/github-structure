@@ -4,7 +4,7 @@ import React from 'react';
 import MyInput from '../UI/input/MyInput';
 import MyButton from '../UI/button/MyButton';
 
-const Form = ({ addPost }) => {
+const Form = ({ addPost, setModal }) => {
   const [post, setPost] = useState({ title: '', body: '' });
 
   const onSubmitHandler = (e) => {
@@ -16,6 +16,7 @@ const Form = ({ addPost }) => {
     };
 
     addPost(newPost);
+    setModal(false);
 
     setPost({ title: '', body: '' });
   };
