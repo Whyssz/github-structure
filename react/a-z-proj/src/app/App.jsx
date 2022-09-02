@@ -3,27 +3,35 @@ import { usePosts } from '../hook/usePosts';
 import PostFilter from '../components/filter/PostFilter';
 import Form from '../components/form/Form';
 import PostList from '../components/posts/PostList';
+import { useFetching } from '../hook/useFetching';
+import { getPageCount } from '../utils/pages';
+import PostService from '../API/PostService';
 
 import MyButton from '../components/UI/button/MyButton';
 import MyModal from '../components/UI/modal/MyModal';
-import PostService from '../API/PostService';
+import Pagination from '../components/UI/pagination/Pagination';
 import Loader from '../components/UI/loader/Loader';
-import { useFetching } from '../hook/useFetching';
 
 const App = () => {
   const [posts, setPosts] = useState([]);
   const [filter, setFilter] = useState({ sort: '', search: '' });
   const [modal, setModal] = useState(false);
-  const [fetchPosts, isPostLoading, error] = useFetching(async () => {
-    const response = await PostService.getAll();
-    setPosts(response);
+  const [totalPages, setTotalPages] = useState(0);
+  const [limit, setLimit] = useState(10);
+  const [currPage, setCurrPage] = useState(1);
+
+  const [fetchPosts, isPostLoading, postError] = useFetching(async () => {
+    const response = await PostService.getAll(limit, currPage);
+    const totalCount = response.headers['x-total-count'];
+    setPosts(response.data);
+    setTotalPages(getPageCount(totalCount, limit));
   });
 
   const sortedAndSearchedPosts = usePosts(posts, filter.sort, filter.search);
 
   useEffect(() => {
     fetchPosts();
-  }, [filter]);
+  }, [currPage]);
 
   const addPost = (newPost) => {
     setPosts([...posts, newPost]);
@@ -31,6 +39,10 @@ const App = () => {
 
   const deletePost = (id) => {
     setPosts(posts.filter((post) => post.id !== id));
+  };
+
+  const changePage = (pageNum) => {
+    setCurrPage(pageNum);
   };
 
   return (
@@ -42,8 +54,12 @@ const App = () => {
       <hr style={{ marginTop: 15 }} />
       <PostFilter filter={filter} setFilter={setFilter} />
       <hr style={{ marginTop: 15 }} />
+      {postError && (
+        <h1 style={{ textAlign: 'center', marginTop: 20 }}>
+          Error # {postError.message}:
+        </h1>
+      )}
       {isPostLoading ? (
-        // <h1 style={{ textAlign: 'center', marginTop: 20 }}>Loading...</h1>
         <Loader />
       ) : (
         <PostList
@@ -52,6 +68,11 @@ const App = () => {
           title={'Posts list 1'}
         />
       )}
+      <Pagination
+        totalPages={totalPages}
+        currPage={currPage}
+        changePage={changePage}
+      />
     </div>
   );
 };
