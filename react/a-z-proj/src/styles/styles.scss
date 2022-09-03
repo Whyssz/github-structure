@@ -76,6 +76,18 @@
       font-weight: 700;
       margin: 10px;
       color: white;
+      transition: all 0.2s ease-in;
+      &:hover {
+        color: #ffa345;
+      }
     }
+  }
+}
+
+.post_comm {
+  margin: 10px 0;
+  p {
+    font-size: 20px;
+    max-width: 1300px;
   }
 }

@@ -65,7 +65,7 @@ const Posts = () => {
         <PostList
           deletePost={deletePost}
           posts={sortedAndSearchedPosts}
-          title={'Posts list 1'}
+          title={'Posts list'}
         />
       )}
       <Pagination

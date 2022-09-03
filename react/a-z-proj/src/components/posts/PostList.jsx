@@ -12,7 +12,7 @@ const PostList = ({ posts, title, deletePost }) => {
     <div className="app">
       <h1 style={{ textAlign: 'center' }}>{title}</h1>
       <TransitionGroup>
-        {posts.map((post, index) => (
+        {posts.map((post) => (
           <CSSTransition key={post.id} timeout={500} classNames="post">
             <PostItem deletePost={deletePost} post={post} />
           </CSSTransition>

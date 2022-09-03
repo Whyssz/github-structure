@@ -3,7 +3,9 @@ import MyButton from '../UI/button/MyButton';
 
 const PostItem = ({ post, deletePost }) => {
   const { id, title, body } = post;
+  //Or use hard id `/posts/${id}`, but I'm learning work with hooks =)
   const navigate = useNavigate();
+
 
   return (
     <div className="post">
