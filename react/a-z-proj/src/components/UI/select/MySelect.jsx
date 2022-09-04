@@ -1,13 +1,13 @@
-const MySelect = ({ options, sorting, onChange }) => {
+const MySelect = ({ options, name, onChange, defaultValue }) => {
   return (
     <select
       style={{ marginTop: 12 }}
-      name={sorting}
+      name={name}
       onChange={(e) => onChange(e.target.value)}
-      defaultValue='default'
+      defaultValue="default"
     >
       <option value="default" disabled>
-        Chose a salution
+        {defaultValue}
       </option>
       {options.map((option) => (
         <option key={option.value} value={option.value}>

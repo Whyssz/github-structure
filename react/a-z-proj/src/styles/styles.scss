@@ -104,3 +104,9 @@ body {
     max-width: 1300px;
   }
 }
+
+.nav_links {
+  &.active {
+    color: orange;
+  }
+}

@@ -12,7 +12,7 @@ const PostFilter = ({ filter, setFilter }) => {
       />
       <hr style={{ marginTop: 15 }} />
       <MySelect
-        defaultValue="Sorting"
+        defaultValue="Items Filters"
         name="sorting"
         value={filter.sort}
         onChange={(selectedSort) =>
