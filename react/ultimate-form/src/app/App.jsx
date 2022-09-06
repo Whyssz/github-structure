@@ -1,20 +1,26 @@
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Navigate,
+  Route,
+  Routes,
+} from 'react-router-dom';
 import Header from '../components/header/Header';
-import { AskOne } from '../components/steps/StepOne';
+import { StepFirst } from '../components/steps/StepFirst';
+import { StepSecond } from '../components/steps/StepSecond';
+import { StepThird } from '../components/steps/StepThird';
 
-const Step2 = () => <>Step 2</>;
-const Step3 = () => <>Step 3</>;
 const Result = () => <>Result</>;
 
 const App = () => {
   return (
     <>
-      <Header />
       <Router>
+          <Header />
         <Routes>
-          <Route path="/" element={<AskOne />} />
-          <Route path="/step2" element={<Step2 />} />
-          <Route path="/step3" element={<Step3 />} />
+          <Route path="/first" element={<StepFirst />} />
+          <Route path="/*" element={<Navigate to="/first" replace />} />
+          <Route path="/second" element={<StepSecond />} />
+          <Route path="/third" element={<StepThird />} />
           <Route path="/result" element={<Result />} />
         </Routes>
       </Router>

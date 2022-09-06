@@ -6,7 +6,7 @@ import { useForm } from 'react-hook-form';
 import { PrimaryButton } from '../UI/primaryBtn/PrimaryButton';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-import { useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const schema = yup.object().shape({
   firstName: yup
@@ -19,9 +19,9 @@ const schema = yup.object().shape({
     .required('This field is required'),
 });
 
-export const AskOne = () => {
-  const navigation = useLocation();
-  console.log(navigation);
+export const StepFirst = () => {
+  const navigation = useNavigate();
+
   const {
     register,
     handleSubmit,
@@ -32,7 +32,7 @@ export const AskOne = () => {
   });
 
   const onSubmit = (data) => {
-    console.log(data);
+    navigation('/second');
   };
 
   return (
