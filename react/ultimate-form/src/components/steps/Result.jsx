@@ -13,7 +13,10 @@ import {
   Typography,
 } from '@material-ui/core';
 import { InsertDriveFile } from '@material-ui/icons';
+import { useState } from 'react';
+import ReactConfetti from 'react-confetti';
 import { Link } from 'react-router-dom';
+import Swal from 'sweetalert2';
 // import { Table } from 'material-ui';
 import { useData } from '../../hooks/useData';
 import { MainContainer } from '../mainContainer/MainContainer';
@@ -29,6 +32,7 @@ const useStyles = makeStyles({
 });
 
 export const Result = () => {
+  const [success, setSuccess] = useState(false);
   const { data } = useData();
   const entries = Object.entries(data).filter(
     (entry) => entry[0] !== 'files' && entry[0] !== 'hasPhone'
@@ -36,9 +40,32 @@ export const Result = () => {
   const { files } = data;
   const styles = useStyles();
 
-	const onSubmit = () => {
-		
-	}
+  // const onSubmit = async () => {
+  //   const formData = new FormData();
+  //   if (data.files) {
+  //     data.files.forEach((file) => {
+  //       formData.append('files', file, file.name);
+  //     });
+  //   }
+
+  //   entries.forEach((entry) => {
+  //     formData.append(entry[0], entry[1]);
+  //   });
+
+  //   const res = await fetch('http://localhost:4000/', {
+  //     method: 'POST',
+  //     body: formData,
+  //   });
+
+  //   if (res.status === 200) {
+  //     Swal.fire('Great job!', "You've passed the challenge!", 'success');
+  //     setSuccess(true);
+  //   }
+  // };
+
+  // if (success) {
+  //   return <ReactConfetti />;
+  // }
 
   return (
     <MainContainer>
@@ -82,7 +109,7 @@ export const Result = () => {
           </List>
         </>
       )}
-			<PrimaryButton onClick={onSubmit}>POST</PrimaryButton>
+      {/* <PrimaryButton onClick={onSubmit}>POST</PrimaryButton> */}
       <Link to="/first">
         <PrimaryButton>Start over</PrimaryButton>
       </Link>
