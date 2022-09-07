@@ -7,6 +7,7 @@ import { PrimaryButton } from '../UI/primaryBtn/PrimaryButton';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { useNavigate } from 'react-router-dom';
+import { useData } from '../../hooks/useData';
 
 const schema = yup.object().shape({
   firstName: yup
@@ -21,18 +22,21 @@ const schema = yup.object().shape({
 
 export const StepFirst = () => {
   const navigation = useNavigate();
+  const { data, setValues } = useData();
 
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm({
+    defaultValues: { firstName: data.firstName, lastName: data.lastName },
     mode: 'onBlur',
     resolver: yupResolver(schema),
   });
 
   const onSubmit = (data) => {
     navigation('/second');
+    setValues(data);
   };
 
   return (

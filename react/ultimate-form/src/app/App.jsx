@@ -8,14 +8,13 @@ import Header from '../components/header/Header';
 import { StepFirst } from '../components/steps/StepFirst';
 import { StepSecond } from '../components/steps/StepSecond';
 import { StepThird } from '../components/steps/StepThird';
-
-const Result = () => <>Result</>;
+import { Result } from '../components/steps/Result';
 
 const App = () => {
   return (
     <>
       <Router>
-          <Header />
+        <Header />
         <Routes>
           <Route path="/first" element={<StepFirst />} />
           <Route path="/*" element={<Navigate to="/first" replace />} />

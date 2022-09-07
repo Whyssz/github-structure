@@ -8,6 +8,7 @@ import { PrimaryButton } from '../UI/primaryBtn/PrimaryButton';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import parsePhoneNumber from 'libphonenumber-js';
+import { useData } from '../../hooks/useData';
 
 const schema = yup.object().shape({
   email: yup
@@ -17,18 +18,25 @@ const schema = yup.object().shape({
 });
 
 const normalizePhoneNumber = (value) => {
-  const phoneNumber = parsePhoneNumber(value, 'RU');
-  if (!phoneNumber) return value;
+  const validate = value.replace(/[^\d]/g, '');
+  const phoneNumber = parsePhoneNumber(validate, 'RU');
+  if (!phoneNumber) return validate;
   return phoneNumber.formatNational();
 };
 
 export const StepSecond = () => {
+  const { data, setValues } = useData();
   const {
     register,
     handleSubmit,
     formState: { errors },
     watch,
   } = useForm({
+    defaultValues: {
+      email: data.email,
+      hasPhone: data.hasPhone,
+      phoneNumber: data.phoneNumber,
+    },
     mode: 'onBlur',
     resolver: yupResolver(schema),
   });
@@ -39,6 +47,7 @@ export const StepSecond = () => {
 
   const onSubmit = (data) => {
     navigation('/third');
+    setValues(data);
   };
 
   return (
@@ -60,6 +69,8 @@ export const StepSecond = () => {
         <FormControlLabel
           control={
             <Checkbox
+              defaultValue={data.hasPhone}
+              defaultChecked={data.hasPhone}
               name="hasPhone"
               {...register('hasPhone')}
               color="primary"

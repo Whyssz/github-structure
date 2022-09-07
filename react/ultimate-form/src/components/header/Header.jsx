@@ -1,6 +1,4 @@
 import { makeStyles, Typography } from '@material-ui/core';
-import { useMemo } from 'react';
-import { useNavigate } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   root: {
