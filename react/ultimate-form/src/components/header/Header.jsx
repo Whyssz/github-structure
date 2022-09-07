@@ -11,7 +11,6 @@ const useStyles = makeStyles((theme) => ({
     fontSize: '40px',
     color: 'deeppink',
     textShadow: '1px 1px darkmagenta',
-    cursor: 'pointer',
     userSelect: 'none',
   },
 }));

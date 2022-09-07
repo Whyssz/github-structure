@@ -12,11 +12,11 @@ const schema = yup.object().shape({
   firstName: yup
     .string()
     .matches(/^([^0-9]*)$/, 'Firs name should not contain numbers')
-    .required('This field is required'),
+    .required('This field must be filled in'),
   lastName: yup
     .string()
     .matches(/^([^0-9]*)$/, 'Last name should not contain numbers')
-    .required('This field is required'),
+    .required('This field must be filled in'),
 });
 
 export const StepFirst = () => {
