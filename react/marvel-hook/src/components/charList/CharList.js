@@ -66,7 +66,7 @@ const CharList = (props) => {
       return (
         <CSSTransition key={id} timeout={600} classNames="char__item">
           <li
-            className="char__item"
+            className="char__item"  
             tabIndex={0}
             ref={(el) => (itemsRefs.current[index] = el)}
             onClick={() => {

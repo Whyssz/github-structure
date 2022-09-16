@@ -22,7 +22,7 @@ const schema = yup.object().shape({
 
 export const StepFirst = () => {
   const navigation = useNavigate();
-  const { data, setValues } = useData();
+const { data, setValues } = useData();
 
   const {
     register,
