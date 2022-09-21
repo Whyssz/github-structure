@@ -3,7 +3,7 @@
 The main purpose of this project (repository) is to collect in one place all the things I do (link or files themselves), what is in development/plans or scheme showing what is important
 
 * `learn` - experimental projects with data storage
-* `js / react / redux` - places where I try and learn things on the subject =)
+* `js-ts / react / redux` - places where I try and learn things on the subject =)
 
 ## Pet - easy to view
 
