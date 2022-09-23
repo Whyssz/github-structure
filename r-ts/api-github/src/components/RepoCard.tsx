@@ -1,6 +1,28 @@
+import { useState } from "react";
+import { useActions } from "../hooks/actions";
+import { useAppSelector } from "../hooks/redux";
 import { IRepo } from "../models/modelst";
 
 export const RepoCard = ({ repo }: { repo: IRepo; }) => {
+
+  const { addFavourite, removeFavourite } = useActions();
+
+  const { favourites } = useAppSelector(state => state.gihub);
+
+  const [isFav, setIsFav] = useState(favourites.includes(repo.html_url));
+
+  const addToFavourite = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+    addFavourite(repo.html_url);
+    setIsFav(true);
+  };
+
+  const removeToFavourite = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+    removeFavourite(repo.html_url);
+    setIsFav(false);
+  };
+
   return (
     <a
       tabIndex={0}
@@ -15,6 +37,19 @@ export const RepoCard = ({ repo }: { repo: IRepo; }) => {
         Watchers: <span className="font-bold">{repo.watchers}</span>
       </p>
       <p className="text-sm font-thin">{repo?.description}</p>
+      {!isFav && <button
+        className="py-2 px-4 mr-3 bg-yellow-400 rounded hover:shadow-md transition-all hover:font-medium"
+        onClick={addToFavourite}
+      >
+        Add
+      </button>
+      }
+      {isFav && <button
+        className="py-2 px-4 mr-3 bg-red-600 text-white rounded hover:shadow-md transition-all hover:font-medium"
+        onClick={removeToFavourite}
+      >
+        Remove
+      </button>}
     </a>
   );
 };
