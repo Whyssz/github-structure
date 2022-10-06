@@ -57,4 +57,65 @@
 
 	EX: class 
 
+	class User {
+		name: string; // public name: string;
+		private nickName: string;
+		protected age: number = 20;
+		redonly pass: string || number;
+
+		constructor (name: string, nickNmae: string, age: number, pass: string || number) {
+			this.name = name;
+			this.age = age;
+			this.nickName = nickName;
+			this.pass = pass;
+		}
+
+		//or 
+
+		constructor (
+			public name: string;
+			private age: number;
+			static secret: number;
+		)
+		{
+			this.name = name;
+			this.age = age;
+		}
+
+		setAge(age: number) {
+			this.age = age;
+		}
+
+		set myAge(age: number) {
+			this.age = age;
+		}
+
+		getInfo(): string {
+			return `${this.name}`
+		}
+	}
+
+	const user = new User('Dima')
+	user.getInfo()
+
+	class OOP_______________ 
+	class User {
+    static pass: number = 123;
+
+    constructor(
+        public name: string
+    ){
+        this.name = name;
+    }
+
+    getPass() {
+        console.log(`${this.name} - ${User.pass}`)
+    }
+	}
+	const user = new User('Dima');
+	user.getPass()
+
+
+	
 */
+
