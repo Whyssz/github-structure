@@ -8,7 +8,6 @@ export const Navigation = () => {
         <Link to='/' className="mr-5 font-medium">Home</Link>
         <Link to='/favourites' className=" font-medium">Favourites</Link>
       </div>
-
     </nav>
   );
 };
