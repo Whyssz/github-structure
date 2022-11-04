@@ -1,8 +1,7 @@
 import { Card } from '../card/Card';
+import { Skeleton } from '../skeleton';
 
-import bd from '../../assets/bd.json';
-
-export const BlockCards = () => {
+export const BlockCards = ({ list, loading }) => {
   const renderList = (list) => {
     return list.map(({ id, title, price, imageUrl, sizes, types }) => (
       <Card
@@ -16,7 +15,14 @@ export const BlockCards = () => {
     ));
   };
 
-  const cardsList = renderList(bd);
+  // const cardsList = renderList(bd);
+  const cardsList = renderList(list);
 
-  return <div className="content__items">{cardsList}</div>;
+  return (
+    <div className="content__items">
+      {loading
+        ? [...new Array(6)].map((_, index) => <Skeleton key={index} />)
+        : cardsList}
+    </div>
+  );
 };

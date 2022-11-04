@@ -33,5 +33,5 @@ export const Categories = () => {
 
   const list = sortList(categories);
 
-  // return <div className="categories">{list}</div>;
+  return <div className="categories">{list}</div>;
 };

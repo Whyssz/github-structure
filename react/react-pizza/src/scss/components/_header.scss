@@ -3,11 +3,22 @@
 .header {
   border-bottom: 1px solid $gray-line;
   padding: 40px 0;
-
+  @media (max-width: 650px) {
+    //1300-1100-1050-750-650
+    padding: 20px;
+  }
   .container {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    @media (max-width: 650px) {
+      //1300-1100-1050-750-650
+      flex-direction: column;
+      .header__logo {
+        margin-right: 0;
+        margin-bottom: 15px;
+      }
+    }
   }
 
   &__logo {
