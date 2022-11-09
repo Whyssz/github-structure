@@ -1,9 +1,6 @@
 import classNames from 'classnames';
-import { useState } from 'react';
 
-export const Categories = () => {
-  const [currentCategories, setCurrentCategories] = useState(0);
-
+export const Categories = ({ value, onChangeCategory }) => {
   const categories = [
     { id: 0, name: 'Все' },
     { id: 1, name: 'Мясные' },
@@ -13,17 +10,13 @@ export const Categories = () => {
     { id: 5, name: 'Закрытые' },
   ];
 
-  const onChangeCategories = (index) => {
-    setCurrentCategories(index);
-  };
-
   const sortList = (list) => {
     const generate = list.map(({ id, name }) => {
       const classes = classNames({
-        active: id === currentCategories,
+        active: id === value,
       });
       return (
-        <li onClick={() => onChangeCategories(id)} key={id} className={classes}>
+        <li onClick={() => onChangeCategory(id)} key={id} className={classes}>
           {name}
         </li>
       );
