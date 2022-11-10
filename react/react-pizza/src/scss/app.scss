@@ -29,8 +29,7 @@ body {
   &__title {
     font-weight: 800;
     font-size: 38px;
-    margin-top: 60px;
-    margin-bottom: 50px;
+    margin: 30px;
     @media (max-width: 750px) {
       font-size: 35px;
       margin: 30px 0;
@@ -40,7 +39,7 @@ body {
   &__items {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: repeat(2, 1fr);
+    // grid-template-rows: repeat(2, auto);
     grid-column-gap: 11px;
 
     @media (max-width: 1440px) {
@@ -91,7 +90,7 @@ body {
   .content__items {
     display: block;
   }
-  
+
   &__top {
     display: flex;
     justify-content: space-between;

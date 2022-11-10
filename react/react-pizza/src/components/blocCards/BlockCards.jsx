@@ -1,7 +1,8 @@
 import { Card } from '../card/Card';
+import { Pagination } from '../pagination/Pagination';
 import { Skeleton } from '../skeleton';
 
-export const BlockCards = ({ list, loading }) => {
+export const BlockCards = ({ list, loading, setCurrentPage }) => {
   const renderList = (list) => {
     return list.map(({ id, title, price, imageUrl, sizes, types }) => (
       <Card
@@ -19,10 +20,13 @@ export const BlockCards = ({ list, loading }) => {
   const cardsList = renderList(list);
 
   return (
-    <div className="content__items">
-      {loading
-        ? [...new Array(6)].map((_, index) => <Skeleton key={index} />)
-        : cardsList}
+    <div style={{ display: 'flex', flexDirection: 'column' }}>
+      <div className="content__items">
+        {loading
+          ? [...new Array(6)].map((_, index) => <Skeleton key={index} />)
+          : cardsList}
+      </div>
+      <Pagination onChangePage={(num) => setCurrentPage(num)} />
     </div>
   );
 };
