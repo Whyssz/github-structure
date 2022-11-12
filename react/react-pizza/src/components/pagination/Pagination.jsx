@@ -7,8 +7,8 @@ export const Pagination = ({ onChangePage }) => {
     <ReactPaginate
       breakLabel="..."
       className={styles.main}
-      nextLabel=">"
       previousLabel="<"
+      nextLabel=">"
       onPageChange={(e) => onChangePage(e.selected + 1)}
       pageCount={3}
       pageRangeDisplayed={4}

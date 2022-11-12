@@ -1,11 +1,14 @@
+import { useSearch } from '../../contex/searchContext';
 import styles from './search.module.scss';
 
-export const Search = ({ value, setValue }) => {
+export const Search = () => {
+  const { searchValue, setSearchValue } = useSearch();
+
   return (
     <div className={styles.main}>
       <input
-        value={value}
-        onChange={(e) => setValue(e.target.value)}
+        value={searchValue}
+        onChange={(e) => setSearchValue(e.target.value)}
         type="search"
         className={styles.input}
         placeholder="Поиск пиццы..."

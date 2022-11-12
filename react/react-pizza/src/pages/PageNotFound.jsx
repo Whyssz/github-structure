@@ -1,4 +1,4 @@
-import { NotFoundMessage } from '../notFoundMessage/NotFoundMessage';
+import { NotFoundMessage } from '../components/notFoundMessage/NotFoundMessage';
 
 export const PageNotFound = () => {
   return (
