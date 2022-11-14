@@ -1,14 +1,27 @@
+import { useEffect, useState } from 'react';
 import { useSearch } from '../../contex/searchContext';
+import { useDebounce } from '../../hooks/useDebounce';
 import styles from './search.module.scss';
 
 export const Search = () => {
-  const { searchValue, setSearchValue } = useSearch();
+  const [value, setValue] = useState('');
+  const searchDebounce = useDebounce(value);
+
+  const { setSearchValue } = useSearch();
+
+  const onSearch = (value) => {
+    setValue(value);
+  };
+
+  useEffect(() => {
+    setSearchValue(searchDebounce);
+  }, [searchDebounce]);
 
   return (
     <div className={styles.main}>
       <input
-        value={searchValue}
-        onChange={(e) => setSearchValue(e.target.value)}
+        value={value}
+        onChange={(e) => onSearch(e.target.value)}
         type="search"
         className={styles.input}
         placeholder="Поиск пиццы..."

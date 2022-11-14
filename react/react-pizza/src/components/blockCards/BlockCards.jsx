@@ -1,8 +1,9 @@
+import { useMemo } from 'react';
 import { Card } from '../card/Card';
 import { Pagination } from '../pagination/Pagination';
 import { Skeleton } from '../skeleton';
 
-export const BlockCards = ({ list, loading, setCurrentPage }) => {
+export const BlockCards = ({ list, loading }) => {
   const renderList = (list) => {
     return list.map(({ id, title, price, imageUrl, sizes, types }) => (
       <Card
@@ -16,8 +17,9 @@ export const BlockCards = ({ list, loading, setCurrentPage }) => {
     ));
   };
 
-  // const cardsList = renderList(bd);
-  const cardsList = renderList(list);
+  const cardsList = useMemo(() => {
+    return renderList(list);
+  }, [list]);
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column' }}>
@@ -26,7 +28,7 @@ export const BlockCards = ({ list, loading, setCurrentPage }) => {
           ? [...new Array(6)].map((_, index) => <Skeleton key={index} />)
           : cardsList}
       </div>
-      <Pagination onChangePage={(num) => setCurrentPage(num)} />
+      <Pagination />
     </div>
   );
 };
