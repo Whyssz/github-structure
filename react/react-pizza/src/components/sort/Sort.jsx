@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setSort } from '../../redux/reducers/filterSlice';
 
-const sortList = [
+export const sortList = [
   { name: 'популярности 🠗', sortProperty: 'rating' },
   { name: 'популярности 🠕', sortProperty: '-rating' },
   { name: 'цене 🠗', sortProperty: 'price' },
@@ -13,7 +13,7 @@ const sortList = [
 export const Sort = () => {
   const [open, setOpen] = useState(false);
 
-  const { name: value, sortProperty } = useSelector((state) => state.filter.sort);
+  const { name, sortProperty } = useSelector((state) => state.filter.sort);
   const dispatch = useDispatch();
 
   const choiceSort = (sort) => {
@@ -37,7 +37,7 @@ export const Sort = () => {
           />
         </svg>
         <b>Сортировка по:</b>
-        <span onClick={() => setOpen(!open)}>{value}</span>
+        <span onClick={() => setOpen(!open)}>{name}</span>
       </div>
       {open && (
         <div className="sort__popup">
