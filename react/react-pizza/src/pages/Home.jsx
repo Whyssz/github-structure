@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import qs from 'qs';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -24,6 +25,38 @@ export const Home = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  const itemsList = (list) => {
+    setItems(list);
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    if (window.location.search) {
+      const params = qs.parse(window.location.search.substring(1));
+
+      const sort = sortList.find(
+        (obj) => obj.sortProperty === params.sortProperty
+      );
+
+      dispatch(setFilter({ ...params, sort }));
+
+      isSearch.current = true;
+    }
+  }, []);
+
+  useEffect(() => {
+    if (isDone.current) {
+      const queryString = qs.stringify({
+        sortProperty: sort.sortProperty,
+        categoryId,
+        currPage,
+      });
+      navigate(`?${queryString}`);
+    }
+
+    isDone.current = true;
+  }, [categoryId, sort, currPage]);
+
   useEffect(() => {
     window.scrollTo(0, 0);
 
@@ -34,45 +67,7 @@ export const Home = () => {
     }
 
     isSearch.current = false;
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [categoryId, sort, searchValue, currPage]);
-
-  useEffect(() => {
-    if (isDone.current) {
-      const queryString = qs.stringify(
-        {
-          sortProperty: sort.sortProperty,
-          categoryId,
-          currPage,
-        },
-        { addQueryPrefix: true }
-      );
-      navigate(queryString);
-      // navigate(`?${queryString}`);
-    }
-
-    isDone.current = true;
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [categoryId, sort, currPage]);
-  useEffect(() => {
-    if (window.location.search) {
-      const params = qs.parse(window.location.search);
-      // const params = qs.parse(window.location.search.substring(1));
-
-      const sort = sortList.find(
-        (obj) => obj.sortProperty === params.sortProperty
-      );
-
-      dispatch(setFilter({ ...params, sort }));
-    }
-
-    isSearch.current = true;
-  }, []);
-
-  const itemsList = (list) => {
-    setItems(list);
-    setLoading(false);
-  };
 
   return (
     <>
