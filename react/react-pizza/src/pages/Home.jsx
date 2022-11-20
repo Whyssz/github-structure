@@ -69,6 +69,9 @@ export const Home = () => {
     isSearch.current = false;
   }, [categoryId, sort, searchValue, currPage]);
 
+  const totalPrice = useSelector(state => state.cart.totalPrice)
+  console.log(totalPrice);
+
   return (
     <>
       <Header />

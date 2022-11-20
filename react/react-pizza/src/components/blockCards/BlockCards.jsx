@@ -9,6 +9,7 @@ export const BlockCards = ({ list, loading }) => {
     return list.map(({ id, title, price, imageUrl, sizes, types }) => (
       <Card
         key={id}
+        id={id}
         title={title}
         price={price}
         image={imageUrl}

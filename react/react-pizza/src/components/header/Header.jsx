@@ -5,7 +5,10 @@ import IMG from '../../assets/img';
 import '../../scss/app.scss';
 
 export const Header = () => {
-  const { totalPrice, items } = useSelector((state) => state.cart);
+  const { items, totalPrice } = useSelector((state) => state.cart);
+  const countPizzas = items.reduce((sum, obj) => {
+    return sum + obj.count;
+  }, 0);
 
   return (
     <div className="header">
@@ -50,7 +53,7 @@ export const Header = () => {
                 strokeLinejoin="round"
               />
             </svg>
-            <span>{items.length}</span>
+            <span>{countPizzas}</span>
           </Link>
         </div>
       </div>
