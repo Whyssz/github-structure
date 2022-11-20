@@ -70,7 +70,6 @@ export const Home = () => {
   }, [categoryId, sort, searchValue, currPage]);
 
   const totalPrice = useSelector(state => state.cart.totalPrice)
-  console.log(totalPrice);
 
   return (
     <>

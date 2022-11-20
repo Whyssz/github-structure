@@ -28,7 +28,6 @@ const cartSlice = createSlice({
       }, 0);
     },
     removeItem(state, action) {
-      console.log(action.payload);
       state.items = state.items.filter((obj) => obj.id !== action.payload);
     },
     clearItems(state) {

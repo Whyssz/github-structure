@@ -27,7 +27,9 @@ export const CartItem = ({ id, count, title, price, size, type, imageUrl }) => {
       </div>
       <div className="cart__item-info">
         <h3>{title}</h3>
-        <p>{type}, 26 см.</p>
+        <p>
+          {type}, {size} см.
+        </p>
       </div>
       <div className="cart__item-count">
         <button

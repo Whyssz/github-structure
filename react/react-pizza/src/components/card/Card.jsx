@@ -21,7 +21,7 @@ export const Card = ({ id, title, price, image, sizes, types }) => {
       price,
       imageUrl: image,
       type: typeNames[activeType],
-      size: activeSize,
+      size: sizes[activeSize],
     };
     dispatch(changeItem(item));
   };
