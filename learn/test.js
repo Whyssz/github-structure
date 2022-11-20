@@ -20,4 +20,5 @@ const personFilter = (filter, person) => {
   return newObj;
 };
 
+const test = [['one'], ['two'], ['tree']];
 console.log(personFilter(filterForPerson, personN));

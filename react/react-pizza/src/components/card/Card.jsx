@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-export const Card = ({ title, price, image, sizes, types }) => {
+export const Card = ({ id, title, price, image, sizes, types }) => {
   const [activeType, setActiveType] = useState(0);
   const [activeSize, setActiveSize] = useState(0);
 
