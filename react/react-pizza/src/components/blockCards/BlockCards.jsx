@@ -4,9 +4,9 @@ import { Card } from '../card/Card';
 import { Pagination } from '../pagination/Pagination';
 import { Skeleton } from '../skeleton';
 
-export const BlockCards = ({ list, loading }) => {
+export const BlockCards = ({ loading, list }) => {
   const renderList = (list) => {
-    return list.map(({ id, title, price, imageUrl, sizes, types }) => (
+    return list?.map(({ id, title, price, imageUrl, sizes, types }) => (
       <Card
         key={id}
         id={id}
@@ -26,9 +26,13 @@ export const BlockCards = ({ list, loading }) => {
   return (
     <div style={{ display: 'flex', flexDirection: 'column' }}>
       <div className="content__items">
-        {loading
-          ? [...new Array(6)].map((_, index) => <Skeleton key={index} />)
-          : cardsList}
+        {loading === 'loading' ? (
+          [...new Array(6)].map((_, index) => <Skeleton key={index} />)
+        ) : loading === 'idle' ? (
+          cardsList
+        ) : (
+          <div>Error</div>
+        )}
       </div>
       <Pagination />
     </div>

@@ -1,13 +1,15 @@
 import axios from 'axios';
-import { useCallback, useState } from 'react';
 
 export const useHttp = () => {
-  const [loading, setLoading] = useState(true);
-  
-  const request = useCallback(async (url) => {
-    setLoading(true);
-    return await axios.get(url);
-  }, []);
+  const request = async (url) => {
+    try {
+      const { data } = await axios.get(url);
 
-  return { request, loading, setLoading };
+      return data;
+    } catch (e) {
+      throw e;
+    }
+  };
+
+  return { request };
 };
