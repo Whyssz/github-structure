@@ -9,15 +9,14 @@ import { Header } from '../components/header/Header';
 import { Search } from '../components/search/Search';
 import { sortList } from '../components/sort/Sort';
 import { useSearch } from '../contex/searchContext';
-import { setFilter } from '../redux/reducers/filterSlice';
+import { selectFilter, setFilter } from '../redux/reducers/filterSlice';
 import { fetchPizza } from '../redux/reducers/pizzaSlice';
 
 export const Home = () => {
   const isSearch = useRef(false);
   const isDone = useRef(false);
 
-  // const { loading, setLoading } = useServices();
-  const { categoryId, currPage, sort } = useSelector((state) => state.filter);
+  const { categoryId, currPage, sort } = useSelector(selectFilter);
   const { items, status } = useSelector((state) => state.pizza);
   const { searchValue } = useSearch();
   const navigate = useNavigate();
@@ -60,13 +59,11 @@ export const Home = () => {
     isDone.current = true;
   }, [categoryId, sort, currPage]);
 
-
-
   useEffect(() => {
     window.scrollTo(0, 0);
 
     if (!isSearch.current) {
-      const url = generatePizzaURL()
+      const url = generatePizzaURL();
       dispatch(fetchPizza(url));
     }
 

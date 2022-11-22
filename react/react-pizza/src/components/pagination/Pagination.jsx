@@ -1,11 +1,11 @@
 import ReactPaginate from 'react-paginate';
 import { useDispatch, useSelector } from 'react-redux';
-import { setCurrPage } from '../../redux/reducers/filterSlice';
+import { selectFilter, setCurrPage } from '../../redux/reducers/filterSlice';
 
 import styles from './paginaiton.module.scss';
 
 export const Pagination = () => {
-  const { currPage } = useSelector((state) => state.filter);
+  const { currPage } = useSelector(selectFilter);
   const dispatch = useDispatch();
 
   const onChangePage = (value) => {

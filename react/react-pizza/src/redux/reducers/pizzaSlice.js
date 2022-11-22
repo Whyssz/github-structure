@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { useHttp } from '../../hooks/http.hook';
 
+//thunkAPI - add more func
 export const fetchPizza = createAsyncThunk('pizza/fetchPizza', (url) => {
   const { request } = useHttp();
   return request(url);
@@ -31,6 +32,7 @@ const pizzaSlice = createSlice({
       });
   },
 });
+
 
 export const { setItems } = pizzaSlice.actions;
 export default pizzaSlice.reducer;

@@ -1,6 +1,7 @@
 import { useMemo } from 'react';
 
 import { Card } from '../card/Card';
+import { ErrorMessage } from '../errorMessage';
 import { Pagination } from '../pagination/Pagination';
 import { Skeleton } from '../skeleton';
 
@@ -31,7 +32,7 @@ export const BlockCards = ({ loading, list }) => {
         ) : loading === 'idle' ? (
           cardsList
         ) : (
-          <div>Error</div>
+          <ErrorMessage />
         )}
       </div>
       <Pagination />

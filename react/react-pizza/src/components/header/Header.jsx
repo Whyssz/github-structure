@@ -1,11 +1,12 @@
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { selectCart } from '../../redux/reducers/cartSlice';
 
-import IMG from '../../assets/img';
 import '../../scss/app.scss';
+import IMG from '../../assets/img';
 
 export const Header = () => {
-  const { items, totalPrice } = useSelector((state) => state.cart);
+  const { items, totalPrice } = useSelector(selectCart);
   const countPizzas = items.reduce((sum, obj) => {
     return sum + obj.count;
   }, 0);

@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import { useDispatch, useSelector } from 'react-redux';
-import { setCategoryId } from '../../redux/reducers/filterSlice';
+import { selectFilter, setCategoryId } from '../../redux/reducers/filterSlice';
 
 const categories = [
   { id: 0, name: 'Все' },
@@ -12,7 +12,7 @@ const categories = [
 ];
 
 export const Categories = () => {
-  const { categoryId } = useSelector((state) => state.filter);
+  const { categoryId } = useSelector(selectFilter);
   const dispatch = useDispatch();
 
   const sortList = (list) => {

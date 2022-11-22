@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { changeItem } from '../../redux/reducers/cartSlice';
+import { changeItem, selectCartById } from '../../redux/reducers/cartSlice';
 
 const typeNames = ['тонкое', 'традиционное'];
 
@@ -9,9 +9,7 @@ export const Card = ({ id, title, price, image, sizes, types }) => {
   const [activeSize, setActiveSize] = useState(0);
 
   const dispatch = useDispatch();
-  const cartCount = useSelector((state) =>
-    state.cart.items.find((obj) => obj.id === id)
-  );
+  const cartCount = useSelector(selectCartById(id));
   const addedCount = cartCount ? cartCount.count : 0;
 
   const onClickAdd = () => {

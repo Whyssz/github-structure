@@ -2,13 +2,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { CartItem } from '../components/cart/CartItem';
 import { Header } from '../components/header/Header';
-import { clearItems } from '../redux/reducers/cartSlice';
+import { clearItems, selectCart } from '../redux/reducers/cartSlice';
 import { EmptyCart } from './EmptyCart';
 
 export const Cart = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { items, totalPrice } = useSelector((state) => state.cart);
+  const { items, totalPrice } = useSelector(selectCart);
 
   const countPizzas = items.reduce((sum, obj) => {
     return sum + obj.count;
