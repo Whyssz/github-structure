@@ -14,7 +14,6 @@ export const Sort = () => {
   const [open, setOpen] = useState(false);
   const sortRef = useRef();
   const { name, sortProperty } = useSelector(selectFilter).sort;
-  // const { name, sortProperty } = useSelector((state) => state.filter.sort);
   const dispatch = useDispatch();
 
   const choiceSort = (sort) => {

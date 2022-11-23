@@ -8,7 +8,6 @@ import { ContentTop } from '../components/contentTop/ContentTop';
 import { Header } from '../components/header/Header';
 import { Search } from '../components/search/Search';
 import { sortList } from '../components/sort/Sort';
-import { useSearch } from '../contex/searchContext';
 import { selectFilter, setFilter } from '../redux/reducers/filterSlice';
 import { fetchPizza } from '../redux/reducers/pizzaSlice';
 
@@ -16,12 +15,11 @@ export const Home = () => {
   const isSearch = useRef(false);
   const isDone = useRef(false);
 
-  const { categoryId, currPage, sort } = useSelector(selectFilter);
+  const { categoryId, currPage, sort, searchValue } = useSelector(selectFilter);
   const { items, status } = useSelector((state) => state.pizza);
-  const { searchValue } = useSearch();
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
+  
   const generatePizzaURL = () => {
     const _url = 'https://6364bf4e7b209ece0f4ce574.mockapi.io/items?';
     const categoryBy = categoryId > 0 ? `&category=${categoryId}` : '';

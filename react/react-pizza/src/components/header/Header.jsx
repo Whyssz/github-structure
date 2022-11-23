@@ -1,9 +1,9 @@
 import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { selectCart } from '../../redux/reducers/cartSlice';
 
-import '../../scss/app.scss';
 import IMG from '../../assets/img';
+import '../../scss/app.scss';
 
 export const Header = () => {
   const { items, totalPrice } = useSelector(selectCart);
@@ -11,7 +11,7 @@ export const Header = () => {
     return sum + obj.count;
   }, 0);
 
-  const checkURL = window.location.pathname === '/cart';
+  const location = useLocation();
 
   return (
     <div className="header">
@@ -24,8 +24,8 @@ export const Header = () => {
           </div>
         </Link>
         <div className="header__cart">
-          {!checkURL ? (
-            <Link to="cart" className="button button--cart">
+          {location.pathname !== '/cart' ? (
+            <Link to="/cart" className="button button--cart">
               <span>{totalPrice} ₽</span>
               <div className="button__delimiter"></div>
               <svg

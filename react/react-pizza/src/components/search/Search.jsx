@@ -1,20 +1,22 @@
 import { useEffect, useState } from 'react';
-import { useSearch } from '../../contex/searchContext';
+import { useDispatch } from 'react-redux';
 import { useDebounce } from '../../hooks/useDebounce';
+import { setSearchValue } from '../../redux/reducers/filterSlice';
+
 import styles from './search.module.scss';
 
 export const Search = () => {
   const [value, setValue] = useState('');
-  const searchDebounce = useDebounce(value);
 
-  const { setSearchValue } = useSearch();
+  const dispatch = useDispatch();
+  const searchDebounce = useDebounce(value);
 
   const onSearch = (value) => {
     setValue(value);
   };
 
   useEffect(() => {
-    setSearchValue(searchDebounce);
+    dispatch(setSearchValue(searchDebounce));
   }, [searchDebounce]);
 
   return (

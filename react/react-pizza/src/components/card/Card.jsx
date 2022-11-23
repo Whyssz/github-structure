@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { changeItem, selectCartById } from '../../redux/reducers/cartSlice';
 
 const typeNames = ['тонкое', 'традиционное'];
@@ -27,7 +28,9 @@ export const Card = ({ id, title, price, image, sizes, types }) => {
   return (
     <div className="pizza-block">
       <img className="pizza-block__image" src={image} alt="Pizza" />
-      <h4 className="pizza-block__title">{title}</h4>
+      <Link to={`/pizza/${id}`}>
+        <h4 className="pizza-block__title">{title}</h4>
+      </Link>
       <div className="pizza-block__selector">
         <ul>
           {types.map((type) => (
