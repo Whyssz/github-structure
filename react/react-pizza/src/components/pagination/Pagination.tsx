@@ -8,9 +8,9 @@ export const Pagination = () => {
   const { currPage } = useSelector(selectFilter);
   const dispatch = useDispatch();
 
-  const onChangePage = (value) => {
+  const onChangePage = (value: number) => {
     dispatch(setCurrPage(value));
-  };
+};
 
   return (
     <ReactPaginate
@@ -22,7 +22,6 @@ export const Pagination = () => {
       pageCount={3}
       forcePage={currPage - 1}
       pageRangeDisplayed={4}
-      renderOnZeroPageCount={null}
     />
   );
 };

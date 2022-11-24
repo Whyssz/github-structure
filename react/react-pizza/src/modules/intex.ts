@@ -1,3 +1,5 @@
+//TS ex:
+
 export interface UserState {
   users: any[];
   loading: boolean;
@@ -13,24 +15,13 @@ export enum UsersActionTypes {
 interface FetchUsersAction {
   type: UsersActionTypes.FETCH_USERS;
 }
-
 interface FetchUsersSuccessAction {
   type: UsersActionTypes.FETCH_USERS_SUCCESS;
   payload: any[];
 }
-
 interface FetchUsersErrorAction {
   type: UsersActionTypes.FETCH_USERS_ERROR;
   payload: string;
 }
 
 export type UserAction = FetchUsersAction | FetchUsersSuccessAction | FetchUsersErrorAction;
-
-
-/* OR this
-  type UnicId = string;
-
-  interface User {
-    id: UnicId;
-  }
-*/

@@ -1,7 +1,7 @@
 import { Categories } from '../categories/Categories';
 import { Sort } from '../sort/Sort';
 
-export const ContentTop = () => {
+export const ContentTop: React.FC = () => {
   return (
     <>
       <div className="content__top">

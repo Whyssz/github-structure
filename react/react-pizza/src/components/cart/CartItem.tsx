@@ -1,10 +1,20 @@
 import { useDispatch } from 'react-redux';
 import { changeItem, removeItem } from '../../redux/reducers/cartSlice';
 
-export const CartItem = ({ id, count, title, price, size, type, imageUrl }) => {
+interface CartItemProps {
+  id: string;
+  count: number;
+  title: string;
+  price: number;
+  size: number;
+  type: number;
+  imageUrl: string;
+};
+
+export const CartItem: React.FC<CartItemProps> = ({ id, count, title, price, size, type, imageUrl }) => {
   const dispatch = useDispatch();
 
-  const onChange = (value) => {
+  const onChange = (value: number) => {
     dispatch(
       changeItem({
         id,
@@ -33,7 +43,6 @@ export const CartItem = ({ id, count, title, price, size, type, imageUrl }) => {
       </div>
       <div className="cart__item-count">
         <button
-          disabled=""
           className="button button--outline button--circle cart__item-count-minus"
           onClick={() => onChange(-1)}
         >

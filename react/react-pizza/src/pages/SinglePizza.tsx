@@ -3,8 +3,12 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { Header } from '../components/header/Header';
 import { useHttp } from '../hooks/http.hook';
 
-export const SinglePizza = () => {
-  const [item, setItem] = useState();
+export const SinglePizza: React.FC = () => {
+  const [item, setItem] = useState<{
+    imageUrl: string;
+    title: string;
+    price: string;
+  }>();
 
   const navigate = useNavigate();
   const params = useParams();

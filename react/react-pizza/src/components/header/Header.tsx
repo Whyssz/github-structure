@@ -5,10 +5,10 @@ import { selectCart } from '../../redux/reducers/cartSlice';
 import IMG from '../../assets/img';
 import '../../scss/app.scss';
 
-export const Header = () => {
+export const Header: React.FC = () => {
   const { items, totalPrice } = useSelector(selectCart);
-  const countPizzas = items.reduce((sum, obj) => {
-    return sum + obj.count;
+  const countPizzas = items.reduce((sum: number, item: any) => {
+    return sum + item.count;
   }, 0);
 
   const location = useLocation();

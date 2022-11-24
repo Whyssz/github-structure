@@ -9,17 +9,17 @@ import { Header } from '../components/header/Header';
 import { Search } from '../components/search/Search';
 import { sortList } from '../components/sort/Sort';
 import { selectFilter, setFilter } from '../redux/reducers/filterSlice';
-import { fetchPizza } from '../redux/reducers/pizzaSlice';
+import { fetchPizza, selectPizza } from '../redux/reducers/pizzaSlice';
 
-export const Home = () => {
+export const Home: React.FC = () => {
   const isSearch = useRef(false);
   const isDone = useRef(false);
 
   const { categoryId, currPage, sort, searchValue } = useSelector(selectFilter);
-  const { items, status } = useSelector((state) => state.pizza);
+  const { items, status } = useSelector(selectPizza);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  
+
   const generatePizzaURL = () => {
     const _url = 'https://6364bf4e7b209ece0f4ce574.mockapi.io/items?';
     const categoryBy = categoryId > 0 ? `&category=${categoryId}` : '';
@@ -62,6 +62,7 @@ export const Home = () => {
 
     if (!isSearch.current) {
       const url = generatePizzaURL();
+      // @ts-ignore
       dispatch(fetchPizza(url));
     }
 

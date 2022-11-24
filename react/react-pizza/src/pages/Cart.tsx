@@ -5,12 +5,12 @@ import { Header } from '../components/header/Header';
 import { clearItems, selectCart } from '../redux/reducers/cartSlice';
 import { EmptyCart } from './EmptyCart';
 
-export const Cart = () => {
+export const Cart: React.FC = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { items, totalPrice } = useSelector(selectCart);
 
-  const countPizzas = items.reduce((sum, obj) => {
+  const countPizzas = items.reduce((sum: number, obj: any) => {
     return sum + obj.count;
   }, 0);
 
@@ -104,7 +104,7 @@ export const Cart = () => {
             </div>
           </div>
           <div className="content__items">
-            {items.map((item) => (
+            {items.map((item: any) => (
               <CartItem key={item.id} {...item} />
             ))}
           </div>

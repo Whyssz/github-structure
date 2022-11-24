@@ -3,9 +3,18 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { changeItem, selectCartById } from '../../redux/reducers/cartSlice';
 
+interface CardProps {
+  id: string;
+  title: string;
+  price: number;
+  image: string;
+  sizes: any[];
+  types: any[];
+}
+
 const typeNames = ['тонкое', 'традиционное'];
 
-export const Card = ({ id, title, price, image, sizes, types }) => {
+export const Card: React.FC<CardProps> = ({ id, title, price, image, sizes, types }) => {
   const [activeType, setActiveType] = useState(0);
   const [activeSize, setActiveSize] = useState(0);
 

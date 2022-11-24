@@ -5,13 +5,13 @@ import { setSearchValue } from '../../redux/reducers/filterSlice';
 
 import styles from './search.module.scss';
 
-export const Search = () => {
+export const Search: React.FC = () => {
   const [value, setValue] = useState('');
 
   const dispatch = useDispatch();
   const searchDebounce = useDebounce(value);
 
-  const onSearch = (value) => {
+  const onSearch = (value: string) => {
     setValue(value);
   };
 

@@ -1,4 +1,4 @@
-export const ErrorMessage = () => {
+export const ErrorMessage: React.FC = () => {
   return (
     <div>
       <h2>

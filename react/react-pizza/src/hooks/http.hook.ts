@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export const useHttp = () => {
-  const request = async (url) => {
+  const request = async (url: string) => {
     try {
       const { data } = await axios.get(url);
 

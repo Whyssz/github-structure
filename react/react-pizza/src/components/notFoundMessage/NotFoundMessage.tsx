@@ -1,6 +1,6 @@
 import styles from './notFoundMessage.module.scss';
 
-export const NotFoundMessage = () => {
+export const NotFoundMessage: React.FC = () => {
   return (
     <div className={styles.nf_wrapper}>
       <h1>

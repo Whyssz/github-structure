@@ -5,8 +5,22 @@ import { ErrorMessage } from '../errorMessage';
 import { Pagination } from '../pagination/Pagination';
 import { Skeleton } from '../skeleton';
 
-export const BlockCards = ({ loading, list }) => {
-  const renderList = (list) => {
+interface BlockCardsProps  {
+  loading: string;
+  list: any[];
+};
+
+interface PizzaList  {
+  id: string;
+  title: string;
+  price: number;
+  imageUrl: string;
+  sizes: number[];
+  types: number[];
+};
+
+export const BlockCards: React.FC<BlockCardsProps> = ({ loading, list }) => {
+  const renderList = (list: PizzaList[]) => {
     return list?.map(({ id, title, price, imageUrl, sizes, types }) => (
       <Card
         key={id}

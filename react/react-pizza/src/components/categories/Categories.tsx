@@ -2,7 +2,12 @@ import classNames from 'classnames';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectFilter, setCategoryId } from '../../redux/reducers/filterSlice';
 
-const categories = [
+interface CategoriesType {
+  id: number;
+  name: string;
+};
+
+const categories: CategoriesType[] = [
   { id: 0, name: 'Все' },
   { id: 1, name: 'Мясные' },
   { id: 2, name: 'Вегетарианская' },
@@ -11,11 +16,11 @@ const categories = [
   { id: 5, name: 'Закрытые' },
 ];
 
-export const Categories = () => {
+export const Categories: React.FC = () => {
   const { categoryId } = useSelector(selectFilter);
   const dispatch = useDispatch();
 
-  const sortList = (list) => {
+  const sortList = (list: CategoriesType[]) => {
     const generate = list.map(({ id, name }) => {
       const classes = classNames({
         active: id === categoryId,
