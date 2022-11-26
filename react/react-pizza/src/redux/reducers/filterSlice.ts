@@ -7,13 +7,19 @@ export interface FilterSlice {
   currPage: number;
   sort: SortFilter;
 }
-
-export type SortFilter = {
+export interface SortFilter {
   name: string;
-sortProperty: 'rating' | 'title' | 'price' | '-rating' | '-price';
+  sortProperty: SortProperty;
 };
 
-// type ActionSort = 'rating' | 'title' | 'price' | '-rating' | '-price';
+export enum SortProperty {
+  RATING_DESC = 'rating',
+  RATING_INC = '-rating',
+  PRICE_DESC = 'price',
+  PRICE_INC = '-price',
+  TITLE_CIRILIC = 'title',
+}
+
 
 const initialState: FilterSlice = {
   searchValue: '',
@@ -21,7 +27,7 @@ const initialState: FilterSlice = {
   currPage: 1,
   sort: {
     name: 'популярности',
-    sortProperty: 'rating',
+    sortProperty: SortProperty.RATING_DESC,
   },
 };
 

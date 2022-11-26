@@ -1,6 +1,6 @@
-import { useEffect, useRef, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { selectFilter, setSort, SortFilter } from '../../redux/reducers/filterSlice';
+import { memo, useEffect, useRef, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { setSort, SortFilter, SortProperty } from '../../redux/reducers/filterSlice';
 
 
 type PopupClick = MouseEvent & {
@@ -8,18 +8,22 @@ type PopupClick = MouseEvent & {
 };
 
 export const sortList: SortFilter[] = [
-  { name: 'популярности 🠗', sortProperty: 'rating' },
-  { name: 'популярности 🠕', sortProperty: '-rating' },
-  { name: 'цене 🠗', sortProperty: 'price' },
-  { name: 'цене 🠕', sortProperty: '-price' },
-  { name: 'алфавиту', sortProperty: 'title' },
+  { name: 'популярности 🠗', sortProperty: SortProperty.RATING_DESC },
+  { name: 'популярности 🠕', sortProperty: SortProperty.RATING_INC },
+  { name: 'цене 🠗', sortProperty: SortProperty.PRICE_DESC },
+  { name: 'цене 🠕', sortProperty: SortProperty.PRICE_INC },
+  { name: 'алфавиту', sortProperty: SortProperty.TITLE_CIRILIC },
 ];
 
-export const Sort: React.FC = () => {
+interface SortProps {
+  value: SortFilter;
+}
+
+export const Sort: React.FC<SortProps> = memo(({ value }) => {
   const [open, setOpen] = useState(false);
 
   const sortRef = useRef();
-  const { name, sortProperty } = useSelector(selectFilter).sort;
+
   const dispatch = useDispatch();
 
   const choiceSort = (sort: SortFilter) => {
@@ -39,6 +43,23 @@ export const Sort: React.FC = () => {
     return () => document.body.removeEventListener('click', handleClickOutside);
   }, []);
 
+  const generateList = (list: SortFilter[]) => {
+    const newList = list.map(obj => {
+      return (<li
+        key={obj.name}
+        onClick={() => choiceSort(obj)}
+        className={value.sortProperty === obj.sortProperty ? 'active' : ''}
+      >
+        {obj.name}
+      </li>);
+    });
+
+
+    return <ul>{newList}</ul>;
+  };
+
+  const list = generateList(sortList);
+
   return (
     <div ref={sortRef} className="sort">
       <div className="sort__label">
@@ -55,23 +76,13 @@ export const Sort: React.FC = () => {
           />
         </svg>
         <b>Сортировка по:</b>
-        <span onClick={() => setOpen(!open)}>{name}</span>
+        <span onClick={() => setOpen(!open)}>{value.name}</span>
       </div>
       {open && (
         <div className="sort__popup">
-          <ul>
-            {sortList.map((obj) => (
-              <li
-                key={obj.name}
-                onClick={() => choiceSort(obj)}
-                className={sortProperty === obj.sortProperty ? 'active' : ''}
-              >
-                {obj.name}
-              </li>
-            ))}
-          </ul>
+          {list}
         </div>
       )}
     </div>
   );
-};
+});

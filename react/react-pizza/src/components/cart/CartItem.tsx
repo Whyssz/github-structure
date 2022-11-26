@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import { useDispatch } from 'react-redux';
 import { CartItems, changeItem, removeItem } from '../../redux/reducers/cartSlice';
 
@@ -21,6 +22,9 @@ export const CartItem: React.FC<CartItems> = ({ id, count, title, price, size, t
       dispatch(removeItem(id));
     }
   };
+  // const classes = classNames({
+  //   active: id === categoryId,
+  // });
 
   return (
     <div className="cart__item">
@@ -35,7 +39,12 @@ export const CartItem: React.FC<CartItems> = ({ id, count, title, price, size, t
       </div>
       <div className="cart__item-count">
         <button
-          className="button button--outline button--circle cart__item-count-minus"
+          disabled={count === 1}
+          className={
+            classNames("button button--outline button--circle cart__item-count-minus", {
+              'cart__item-count-minus--disabled': count === 1
+            })
+          }
           onClick={() => onChange(-1)}
         >
           <svg

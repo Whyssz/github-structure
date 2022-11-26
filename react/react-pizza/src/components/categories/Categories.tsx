@@ -1,6 +1,7 @@
 import classNames from 'classnames';
-import { useDispatch, useSelector } from 'react-redux';
-import { selectFilter, setCategoryId } from '../../redux/reducers/filterSlice';
+import { memo } from 'react';
+import { useDispatch } from 'react-redux';
+import { setCategoryId } from '../../redux/reducers/filterSlice';
 
 interface CategoriesType {
   id: number;
@@ -16,8 +17,11 @@ const categories: CategoriesType[] = [
   { id: 5, name: 'Закрытые' },
 ];
 
-export const Categories: React.FC = () => {
-  const { categoryId } = useSelector(selectFilter);
+interface CatergoriesId {
+  categoryId: number;
+}
+
+export const Categories: React.FC<CatergoriesId> = memo(({ categoryId }) => {
   const dispatch = useDispatch();
 
   const sortList = (list: CategoriesType[]) => {
@@ -41,4 +45,4 @@ export const Categories: React.FC = () => {
   const list = sortList(categories);
 
   return <div className="categories">{list}</div>;
-};
+});

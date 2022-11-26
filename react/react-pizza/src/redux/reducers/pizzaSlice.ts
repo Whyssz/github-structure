@@ -12,7 +12,6 @@ export enum PizzaStatus {
   FETCH_LOADING = 'loading',
   FETCH_ERROR = 'error',
 }
-
 export interface Pizza {
   id: string;
   title: string;
@@ -24,7 +23,7 @@ export interface Pizza {
 };
 
 //thunkAPI - add more func
-export const fetchPizza = createAsyncThunk('pizza/fetchPizza', (url: string) => {
+export const fetchPizza = createAsyncThunk<Pizza[], string>('pizza/fetchPizza', (url) => {
   const { request } = useHttp();
   return request(url);
 });

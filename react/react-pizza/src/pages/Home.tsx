@@ -4,10 +4,10 @@ import { useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { BlockCards } from '../components/blockCards/BlockCards';
-import { ContentTop } from '../components/contentTop/ContentTop';
+import { Categories } from '../components/categories/Categories';
 import { Header } from '../components/header/Header';
 import { Search } from '../components/search/Search';
-import { sortList } from '../components/sort/Sort';
+import { Sort, sortList } from '../components/sort/Sort';
 import { FilterSlice, selectFilter, setFilter } from '../redux/reducers/filterSlice';
 import { fetchPizza, selectPizza } from '../redux/reducers/pizzaSlice';
 import { useAppDispatch } from '../redux/store';
@@ -75,7 +75,11 @@ export const Home: React.FC = () => {
     <>
       <Header />
       <div className="container" style={{ marginTop: 30 }}>
-        <ContentTop />
+        <div className="content__top">
+          <Categories categoryId={categoryId}/>
+          <Sort value={sort} />
+        </div>
+        <h2 className="content__title">Все пиццы</h2>
         <Search />
         <BlockCards list={items} loading={status} />
       </div>
