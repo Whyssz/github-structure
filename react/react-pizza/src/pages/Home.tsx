@@ -1,15 +1,16 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import qs from 'qs';
 import { useEffect, useRef } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { BlockCards } from '../components/blockCards/BlockCards';
 import { ContentTop } from '../components/contentTop/ContentTop';
 import { Header } from '../components/header/Header';
 import { Search } from '../components/search/Search';
 import { sortList } from '../components/sort/Sort';
-import { selectFilter, setFilter } from '../redux/reducers/filterSlice';
+import { FilterSlice, selectFilter, setFilter } from '../redux/reducers/filterSlice';
 import { fetchPizza, selectPizza } from '../redux/reducers/pizzaSlice';
+import { useAppDispatch } from '../redux/store';
 
 export const Home: React.FC = () => {
   const isSearch = useRef(false);
@@ -18,7 +19,8 @@ export const Home: React.FC = () => {
   const { categoryId, currPage, sort, searchValue } = useSelector(selectFilter);
   const { items, status } = useSelector(selectPizza);
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
+  //or const dispatch = useDispatch<AppDispatch>();
 
   const generatePizzaURL = () => {
     const _url = 'https://6364bf4e7b209ece0f4ce574.mockapi.io/items?';
@@ -32,13 +34,14 @@ export const Home: React.FC = () => {
 
   useEffect(() => {
     if (window.location.search) {
+      //lh as unknown as ...
       const params = qs.parse(window.location.search.substring(1));
 
       const sort = sortList.find(
         (obj) => obj.sortProperty === params.sortProperty
       );
 
-      dispatch(setFilter({ ...params, sort }));
+      dispatch(setFilter({ ...params, sort } as FilterSlice));
 
       isSearch.current = true;
     }
@@ -62,7 +65,6 @@ export const Home: React.FC = () => {
 
     if (!isSearch.current) {
       const url = generatePizzaURL();
-      // @ts-ignore
       dispatch(fetchPizza(url));
     }
 

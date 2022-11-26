@@ -3,26 +3,29 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { Header } from '../components/header/Header';
 import { useHttp } from '../hooks/http.hook';
 
+interface SingleItem {
+  title: string;
+  price: number;
+  imageUrl: string;
+}
+
 export const SinglePizza: React.FC = () => {
-  const [item, setItem] = useState<{
-    imageUrl: string;
-    title: string;
-    price: string;
-  }>();
+  const [item, setItem] = useState<SingleItem>();
 
   const navigate = useNavigate();
   const params = useParams();
-  const { request } = useHttp();
+  const { singleRequest } = useHttp();
 
   const generateUrl = `https://6364bf4e7b209ece0f4ce574.mockapi.io/items/${params.id}`;
 
   useEffect(() => {
-    request(generateUrl)
+    singleRequest(generateUrl)
       .then(setItem)
       .catch((err) => {
         alert(err.message);
         navigate('/');
       });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

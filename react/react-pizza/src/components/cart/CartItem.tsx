@@ -1,17 +1,9 @@
 import { useDispatch } from 'react-redux';
-import { changeItem, removeItem } from '../../redux/reducers/cartSlice';
+import { CartItems, changeItem, removeItem } from '../../redux/reducers/cartSlice';
 
-interface CartItemProps {
-  id: string;
-  count: number;
-  title: string;
-  price: number;
-  size: number;
-  type: number;
-  imageUrl: string;
-};
 
-export const CartItem: React.FC<CartItemProps> = ({ id, count, title, price, size, type, imageUrl }) => {
+
+export const CartItem: React.FC<CartItems> = ({ id, count, title, price, size, type, imageUrl }) => {
   const dispatch = useDispatch();
 
   const onChange = (value: number) => {
@@ -20,7 +12,7 @@ export const CartItem: React.FC<CartItemProps> = ({ id, count, title, price, siz
         id,
         count: value,
         change: true,
-      })
+      } as CartItems)
     );
   };
 

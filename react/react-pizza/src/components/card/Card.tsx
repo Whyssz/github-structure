@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { changeItem, selectCartById } from '../../redux/reducers/cartSlice';
+import { CartItems, changeItem, selectCartById } from '../../redux/reducers/cartSlice';
 
 interface CardProps {
   id: string;
@@ -23,14 +23,16 @@ export const Card: React.FC<CardProps> = ({ id, title, price, image, sizes, type
   const addedCount = cartCount ? cartCount.count : 0;
 
   const onClickAdd = () => {
-    const item = {
+    const item: CartItems = {
       id,
       title,
       price,
       imageUrl: image,
       type: typeNames[activeType],
       size: sizes[activeSize],
+      count: 0,
     };
+
     dispatch(changeItem(item));
   };
 

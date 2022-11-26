@@ -1,13 +1,13 @@
 import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectFilter, setSort } from '../../redux/reducers/filterSlice';
+import { selectFilter, setSort, SortFilter } from '../../redux/reducers/filterSlice';
 
-interface SortItem {
-  name: string;
-  sortProperty: string;
+
+type PopupClick = MouseEvent & {
+  path: Node[];
 };
 
-export const sortList: SortItem[] = [
+export const sortList: SortFilter[] = [
   { name: 'популярности 🠗', sortProperty: 'rating' },
   { name: 'популярности 🠕', sortProperty: '-rating' },
   { name: 'цене 🠗', sortProperty: 'price' },
@@ -18,17 +18,17 @@ export const sortList: SortItem[] = [
 export const Sort: React.FC = () => {
   const [open, setOpen] = useState(false);
 
-  const sortRef = useRef<HTMLDivElement>();
+  const sortRef = useRef();
   const { name, sortProperty } = useSelector(selectFilter).sort;
   const dispatch = useDispatch();
 
-  const choiceSort = (sort: SortItem) => {
+  const choiceSort = (sort: SortFilter) => {
     dispatch(setSort(sort));
     setOpen(false);
   };
 
   useEffect(() => {
-    const handleClickOutside = (event: any) => {
+    const handleClickOutside = (event: PopupClick) => {
       if (!event.path.includes(sortRef.current)) {
         setOpen(false);
       }
