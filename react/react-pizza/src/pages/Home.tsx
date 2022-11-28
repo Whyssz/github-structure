@@ -2,11 +2,6 @@ import qs from "qs";
 import { useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { BlockCards } from "../components/blockCards/BlockCards";
-import { Categories } from "../components/categories/Categories";
-import { Header } from "../components/header/Header";
-import { Search } from "../components/search/Search";
-import { Sort, sortList } from "../components/sort/Sort";
 import { selectFilter } from "../redux/filter/selectors";
 import { setFilter } from "../redux/filter/slice";
 import { FilterSlice } from "../redux/filter/types";
@@ -14,8 +9,10 @@ import { selectPizza } from "../redux/pizza/selectors";
 import { fetchPizza } from "../redux/pizza/slice";
 import { useAppDispatch } from "../redux/store";
 
+import { BlockCards, Categories, Header, Search, Sort, sortList } from "../components";
 
-export const Home: React.FC = () => {
+
+const Home: React.FC = () => {
   const isSearch = useRef(false);
   const isDone = useRef(false);
 
@@ -89,3 +86,4 @@ export const Home: React.FC = () => {
     </>
   );
 };
+export default Home;

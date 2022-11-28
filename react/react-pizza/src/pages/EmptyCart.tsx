@@ -1,9 +1,9 @@
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
-import IMG from '../assets/img';
+import {IMG} from '../assets/img';
 
-export const EmptyCart: React.FC = () => {
+const EmptyCart: React.FC = () => {
 
   useEffect(() => {
     localStorage.clear();
@@ -32,3 +32,4 @@ export const EmptyCart: React.FC = () => {
     </>
   );
 };
+export default EmptyCart;

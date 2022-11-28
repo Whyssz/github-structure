@@ -1,9 +1,15 @@
-import { NotFoundMessage } from '../components/notFoundMessage/NotFoundMessage';
+import { Header } from '../components/header';
+import { NotFoundMessage } from '../components/notFoundMessage';
 
-export const PageNotFound: React.FC = () => {
+const PageNotFound: React.FC = () => {
   return (
-    <div className="container">
-      <NotFoundMessage />
-    </div>
+    <>
+      <Header />
+      <div className="container">
+        <NotFoundMessage />
+      </div>
+    </>
   );
 };
+
+export default PageNotFound;

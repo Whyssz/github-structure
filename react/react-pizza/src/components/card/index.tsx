@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import { selectCartById } from "../../redux/cart/selectors";
 import { changeItem } from "../../redux/cart/slice";
 import { CartItems } from "../../redux/cart/types";
+
+
 interface CardProps {
   id: string;
   title: string;

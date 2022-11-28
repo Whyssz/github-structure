@@ -1,9 +1,10 @@
 import { useMemo } from "react";
 import { Pizza } from "../../redux/pizza/types";
-import { Card } from "../card/Card";
+import { Card } from "../card";
 import { ErrorMessage } from "../errorMessage";
-import { Pagination } from "../pagination/Pagination";
+import { Pagination } from "../pagination";
 import { Skeleton } from "../skeleton";
+
 interface BlockCardsProps {
   loading: string;
   list: Pizza[];

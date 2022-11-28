@@ -1,21 +1,19 @@
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { CartItem } from "../components/cart/CartItem";
-import { Header } from "../components/header/Header";
+import { Header } from "../components";
+import { CartItem } from "../components/cart";
 import { selectCart } from "../redux/cart/selectors";
 import { clearItems } from "../redux/cart/slice";
 import { CartItems } from "../redux/cart/types";
-import { EmptyCart } from "./EmptyCart";
+
+import EmptyCart from "./EmptyCart";
 
 
-export const Cart: React.FC = () => {
+
+const Cart: React.FC = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { items, totalPrice } = useSelector(selectCart);
-
-  const countPizzas = items.reduce((sum: number, obj: any) => {
-    return sum + obj.count;
-  }, 0);
+  const { items, totalPrice, totalCount } = useSelector(selectCart);
 
   const onClickClear = () => {
     if (window.confirm('Вы действительно хотите очистить корзину?')) {
@@ -114,7 +112,7 @@ export const Cart: React.FC = () => {
           <div className="cart__bottom">
             <div className="cart__bottom-details">
               <span>
-                Всего пицц: <b>{countPizzas} шт.</b>
+                Всего пицц: <b>{totalCount} шт.</b>
               </span>
               <span>
                 Сумма заказа: <b>{totalPrice} ₽</b>
@@ -152,3 +150,5 @@ export const Cart: React.FC = () => {
     </>
   );
 };
+
+export default Cart;

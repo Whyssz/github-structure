@@ -1,5 +1,6 @@
 export interface CartSlice {
   totalPrice: number;
+  totalCount: number;
   items: CartItems[];
 }
 

@@ -3,17 +3,12 @@ import { useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
 import { selectCart } from "../../redux/cart/selectors";
-import { CartItems } from "../../redux/cart/types";
 
-import IMG from '../../assets/img/index';
+import { IMG } from '../../assets/img/index';
 
 export const Header: React.FC = () => {
-  const { items, totalPrice } = useSelector(selectCart);
+  const { items, totalPrice, totalCount } = useSelector(selectCart);
   const isMounted = useRef(false);
-
-  const countPizzas = items.reduce((sum: number, item: CartItems) => {
-    return sum + item.count;
-  }, 0);
 
   const location = useLocation();
 
@@ -70,7 +65,7 @@ export const Header: React.FC = () => {
                   strokeLinejoin="round"
                 />
               </svg>
-              <span>{countPizzas}</span>
+              <span>{totalCount}</span>
             </Link>
           ) : (
             <div className="button button--cart">
@@ -105,7 +100,7 @@ export const Header: React.FC = () => {
                   strokeLinejoin="round"
                 />
               </svg>
-              <span>{countPizzas}</span>
+              <span>{totalCount}</span>
             </div>
           )}
         </div>
