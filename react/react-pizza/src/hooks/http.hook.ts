@@ -1,7 +1,5 @@
 import axios from 'axios';
 
-
-
 export const useHttp = () => {
   const request = async (url: string) => {
     try {

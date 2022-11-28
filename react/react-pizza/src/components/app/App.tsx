@@ -1,4 +1,3 @@
-
 import { AppRouter } from '../../router';
 
 import '../../scss/app.scss';

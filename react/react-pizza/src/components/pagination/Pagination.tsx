@@ -1,6 +1,8 @@
+
 import ReactPaginate from 'react-paginate';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectFilter, setCurrPage } from '../../redux/reducers/filterSlice';
+import { selectFilter } from '../../redux/filter/selectors';
+import { setCurrPage } from '../../redux/filter/slice';
 
 import styles from './paginaiton.module.scss';
 
@@ -10,7 +12,7 @@ export const Pagination = () => {
 
   const onChangePage = (value: number) => {
     dispatch(setCurrPage(value));
-};
+  };
 
   return (
     <ReactPaginate

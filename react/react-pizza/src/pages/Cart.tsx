@@ -1,9 +1,12 @@
-import { useDispatch, useSelector } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom';
-import { CartItem } from '../components/cart/CartItem';
-import { Header } from '../components/header/Header';
-import { CartItems, clearItems, selectCart } from '../redux/reducers/Cart/slice';
-import { EmptyCart } from './EmptyCart';
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { CartItem } from "../components/cart/CartItem";
+import { Header } from "../components/header/Header";
+import { selectCart } from "../redux/cart/selectors";
+import { clearItems } from "../redux/cart/slice";
+import { CartItems } from "../redux/cart/types";
+import { EmptyCart } from "./EmptyCart";
+
 
 export const Cart: React.FC = () => {
   const navigate = useNavigate();

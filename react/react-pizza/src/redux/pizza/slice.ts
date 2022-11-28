@@ -1,27 +1,7 @@
-import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { useHttp } from '../../hooks/http.hook';
-import { RootState } from '../store';
+import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { useHttp } from "../../hooks/http.hook";
+import { Pizza, PizzaState, PizzaStatus } from "./types";
 
-interface PizzaState {
-  status: PizzaStatus;
-  items: Pizza[];
-};
-
-export enum PizzaStatus {
-  FETCH_IDLE = 'idle',
-  FETCH_LOADING = 'loading',
-  FETCH_ERROR = 'error',
-}
-export interface Pizza {
-  id: string;
-  title: string;
-  price: number;
-  imageUrl: string;
-  sizes: number[];
-  types: number[];
-  rating: number;
-  change?: boolean;
-};
 
 //thunkAPI - add more func
 export const fetchPizza = createAsyncThunk<Pizza[], string>('pizza/fetchPizza', (url) => {
@@ -44,7 +24,7 @@ const pizzaSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-    .addCase(fetchPizza.pending, (state) => {
+      .addCase(fetchPizza.pending, (state) => {
         state.status = PizzaStatus.FETCH_LOADING;
         state.items = [];
       })
@@ -59,7 +39,6 @@ const pizzaSlice = createSlice({
   },
 });
 
-export const selectPizza = (state: RootState) => state.pizza;
 
 export const { setItems } = pizzaSlice.actions;
 export default pizzaSlice.reducer;

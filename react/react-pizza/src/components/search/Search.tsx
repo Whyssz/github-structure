@@ -1,6 +1,7 @@
+
 import { useEffect, useState } from 'react';
 import { useDebounce } from '../../hooks/useDebounce';
-import { setSearchValue } from '../../redux/reducers/filterSlice';
+import { setSearchValue } from '../../redux/filter/slice';
 import { useAppDispatch } from '../../redux/store';
 
 import styles from './search.module.scss';

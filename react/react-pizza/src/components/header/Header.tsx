@@ -1,10 +1,11 @@
-import { useSelector } from 'react-redux';
-import { Link, useLocation } from 'react-router-dom';
-import { CartItems, selectCart } from '../../redux/reducers/Cart/slice';
 
-import { useEffect, useRef } from 'react';
-import IMG from '../../assets/img';
-import '../../scss/app.scss';
+import { useEffect, useRef } from "react";
+import { useSelector } from "react-redux";
+import { Link, useLocation } from "react-router-dom";
+import { selectCart } from "../../redux/cart/selectors";
+import { CartItems } from "../../redux/cart/types";
+
+import IMG from '../../assets/img/index';
 
 export const Header: React.FC = () => {
   const { items, totalPrice } = useSelector(selectCart);

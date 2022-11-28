@@ -1,4 +1,3 @@
-
 import { Cart } from './Cart';
 import { EmptyCart } from './EmptyCart';
 import { Home } from './Home';

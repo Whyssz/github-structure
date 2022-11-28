@@ -1,8 +1,7 @@
-import classNames from 'classnames';
-import { memo } from 'react';
-import { useDispatch } from 'react-redux';
-import { setCategoryId } from '../../redux/reducers/filterSlice';
-
+import classNames from "classnames";
+import { memo } from "react";
+import { useDispatch } from "react-redux";
+import { setCategoryId } from "../../redux/filter/slice";
 interface CategoriesType {
   id: number;
   name: string;

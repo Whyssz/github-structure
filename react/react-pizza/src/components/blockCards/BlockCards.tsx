@@ -1,11 +1,9 @@
-import { useMemo } from 'react';
-import { Pizza } from '../../redux/reducers/pizzaSlice';
-
-import { Card } from '../card/Card';
-import { ErrorMessage } from '../errorMessage';
-import { Pagination } from '../pagination/Pagination';
-import { Skeleton } from '../skeleton';
-
+import { useMemo } from "react";
+import { Pizza } from "../../redux/pizza/types";
+import { Card } from "../card/Card";
+import { ErrorMessage } from "../errorMessage";
+import { Pagination } from "../pagination/Pagination";
+import { Skeleton } from "../skeleton";
 interface BlockCardsProps {
   loading: string;
   list: Pizza[];
@@ -29,7 +27,7 @@ export const BlockCards: React.FC<BlockCardsProps> = ({ loading, list }) => {
   const cardsList = useMemo(() => {
     return renderList(list);
   }, [list]);
-  
+
   return (
     <div style={{ display: 'flex', flexDirection: 'column' }}>
       <div className="content__items">

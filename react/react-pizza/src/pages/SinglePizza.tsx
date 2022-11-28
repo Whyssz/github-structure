@@ -1,8 +1,8 @@
-import { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
-import { Header } from '../components/header/Header';
-import { useHttp } from '../hooks/http.hook';
-import { Pizza } from '../redux/reducers/pizzaSlice';
+import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { Header } from "../components/header/Header";
+import { useHttp } from "../hooks/http.hook";
+import { Pizza } from "../redux/pizza/types";
 
 export const SinglePizza: React.FC = () => {
   const [item, setItem] = useState<Pizza>();

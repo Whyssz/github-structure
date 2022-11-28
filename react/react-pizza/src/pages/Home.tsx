@@ -1,18 +1,18 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-import qs from 'qs';
-import { useEffect, useRef } from 'react';
-import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import { FilterSlice, selectFilter, setFilter } from '../redux/reducers/filterSlice';
-import { fetchPizza, selectPizza } from '../redux/reducers/pizzaSlice';
-import { useAppDispatch } from '../redux/store';
-
-import { BlockCards } from '../components/blockCards/BlockCards';
-import { Categories } from '../components/categories/Categories';
-import { Header } from '../components/header/Header';
-import { Search } from '../components/search/Search';
-import { Sort, sortList } from '../components/sort/Sort';
-
+import qs from "qs";
+import { useEffect, useRef } from "react";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { BlockCards } from "../components/blockCards/BlockCards";
+import { Categories } from "../components/categories/Categories";
+import { Header } from "../components/header/Header";
+import { Search } from "../components/search/Search";
+import { Sort, sortList } from "../components/sort/Sort";
+import { selectFilter } from "../redux/filter/selectors";
+import { setFilter } from "../redux/filter/slice";
+import { FilterSlice } from "../redux/filter/types";
+import { selectPizza } from "../redux/pizza/selectors";
+import { fetchPizza } from "../redux/pizza/slice";
+import { useAppDispatch } from "../redux/store";
 
 
 export const Home: React.FC = () => {
