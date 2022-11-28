@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { CartItems, changeItem, selectCartById } from '../../redux/reducers/cartSlice';
+import { CartItems, changeItem, selectCartById } from '../../redux/reducers/Cart/slice';
 
 interface CardProps {
   id: string;

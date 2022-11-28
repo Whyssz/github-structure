@@ -1,25 +1,13 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { RootState } from '../store';
+import { calcTotalPrice } from '../../../utils/calcTotalPrice';
+import { getCartFromLS } from '../../../utils/getCartFromLS';
+import { CartItems, CartSlice } from './types';
 
-interface CartSlice {
-  totalPrice: number;
-  items: CartItems[];
-}
+const cartData = getCartFromLS();
 
-export type CartItems = {
-  id: string;
-  title: string;
-  price: number;
-  imageUrl: string;
-  size: string;
-  type: string;
-  count: number;
-  change?: boolean;
-};
-
-const initialState: CartSlice = {
-  totalPrice: 0,
-  items: [],
+export const initialState: CartSlice = {
+  totalPrice: cartData.price,
+  items: cartData.items,
 };
 
 const cartSlice = createSlice({
@@ -40,9 +28,7 @@ const cartSlice = createSlice({
         });
       }
 
-      state.totalPrice = state.items.reduce((sum, obj) => {
-        return sum + obj.price * obj.count;
-      }, 0);
+      calcTotalPrice(state.items);
     },
     removeItem(state, action: PayloadAction<string>) {
       state.items = state.items.filter((obj) => obj.id !== action.payload);
@@ -54,13 +40,10 @@ const cartSlice = createSlice({
     clearItems(state) {
       state.items = [];
       state.totalPrice = 0;
+      localStorage.clear();
     },
   },
 });
-
-export const selectCart = (state: RootState) => state.cart;
-export const selectCartById = (id: string) => (state: RootState) =>
-  state.cart.items.find((obj) => obj.id === id);
 
 export const { changeItem, removeItem, clearItems } = cartSlice.actions;
 export default cartSlice.reducer;

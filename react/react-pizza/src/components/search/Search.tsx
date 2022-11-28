@@ -1,14 +1,14 @@
 import { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
 import { useDebounce } from '../../hooks/useDebounce';
 import { setSearchValue } from '../../redux/reducers/filterSlice';
+import { useAppDispatch } from '../../redux/store';
 
 import styles from './search.module.scss';
 
 export const Search: React.FC = () => {
   const [value, setValue] = useState('');
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const searchDebounce = useDebounce(value);
 
   const onSearch = (value: string) => {
@@ -17,7 +17,7 @@ export const Search: React.FC = () => {
 
   useEffect(() => {
     dispatch(setSearchValue(searchDebounce));
-  }, [searchDebounce]);
+  }, [dispatch, searchDebounce]);
 
   return (
     <div className={styles.main}>

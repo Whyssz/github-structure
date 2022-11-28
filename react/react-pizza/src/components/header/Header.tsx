@@ -1,17 +1,29 @@
 import { useSelector } from 'react-redux';
 import { Link, useLocation } from 'react-router-dom';
-import { selectCart } from '../../redux/reducers/cartSlice';
+import { CartItems, selectCart } from '../../redux/reducers/Cart/slice';
 
+import { useEffect, useRef } from 'react';
 import IMG from '../../assets/img';
 import '../../scss/app.scss';
 
 export const Header: React.FC = () => {
   const { items, totalPrice } = useSelector(selectCart);
-  const countPizzas = items.reduce((sum: number, item: any) => {
+  const isMounted = useRef(false);
+
+  const countPizzas = items.reduce((sum: number, item: CartItems) => {
     return sum + item.count;
   }, 0);
 
   const location = useLocation();
+
+  useEffect(() => {
+    if (isMounted.current) {
+      const json = JSON.stringify(items);
+      localStorage.setItem('cart', json);
+    }
+
+    isMounted.current = true;
+  }, [items]);
 
   return (
     <div className="header">

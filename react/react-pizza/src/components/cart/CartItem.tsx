@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import { useDispatch } from 'react-redux';
-import { CartItems, changeItem, removeItem } from '../../redux/reducers/cartSlice';
+import { CartItems, changeItem, removeItem } from '../../redux/reducers/Cart/slice';
 
 
 

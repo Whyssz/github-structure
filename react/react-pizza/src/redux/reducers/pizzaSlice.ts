@@ -20,6 +20,7 @@ export interface Pizza {
   sizes: number[];
   types: number[];
   rating: number;
+  change?: boolean;
 };
 
 //thunkAPI - add more func
@@ -43,7 +44,7 @@ const pizzaSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(fetchPizza.pending, (state) => {
+    .addCase(fetchPizza.pending, (state) => {
         state.status = PizzaStatus.FETCH_LOADING;
         state.items = [];
       })

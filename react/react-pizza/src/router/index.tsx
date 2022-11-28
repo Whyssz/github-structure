@@ -1,19 +1,17 @@
 import { Route, Routes } from 'react-router-dom';
-
-import { Cart } from '../pages/Cart';
-import { EmptyCart } from '../pages/EmptyCart';
-import { Home } from '../pages/Home';
-import { PageNotFound } from '../pages/PageNotFound';
-import { SinglePizza } from '../pages/SinglePizza';
+import { routers } from '../pages';
 
 export const AppRouter = () => {
+
+  const routs = routers.map(route => (
+    < Route key={route.path} path={route.path} element={route.element} />
+  ));
+
   return (
     <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/cart" element={<Cart />} />
-      <Route path="/pizza/:id" element={<SinglePizza />} />
-      <Route path="/empty-cart" element={<EmptyCart />} />
-      <Route path="*" element={<PageNotFound />} />
+      {routs}
+      {/* < Route path='/' element={<Home />} /> */}
+
     </Routes>
   );
-};
+};;

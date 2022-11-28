@@ -1,8 +1,14 @@
+import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 import IMG from '../assets/img';
 
 export const EmptyCart: React.FC = () => {
+  
+  useEffect(() => {
+    localStorage.clear();
+  }, []);
+
   return (
     <>
       <div className="content">

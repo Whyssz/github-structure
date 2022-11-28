@@ -3,14 +3,17 @@ import qs from 'qs';
 import { useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { FilterSlice, selectFilter, setFilter } from '../redux/reducers/filterSlice';
+import { fetchPizza, selectPizza } from '../redux/reducers/pizzaSlice';
+import { useAppDispatch } from '../redux/store';
+
 import { BlockCards } from '../components/blockCards/BlockCards';
 import { Categories } from '../components/categories/Categories';
 import { Header } from '../components/header/Header';
 import { Search } from '../components/search/Search';
 import { Sort, sortList } from '../components/sort/Sort';
-import { FilterSlice, selectFilter, setFilter } from '../redux/reducers/filterSlice';
-import { fetchPizza, selectPizza } from '../redux/reducers/pizzaSlice';
-import { useAppDispatch } from '../redux/store';
+
+
 
 export const Home: React.FC = () => {
   const isSearch = useRef(false);
@@ -34,7 +37,7 @@ export const Home: React.FC = () => {
 
   useEffect(() => {
     if (window.location.search) {
-      //lh as unknown as ...
+      //lh (as unknown as ...)
       const params = qs.parse(window.location.search.substring(1));
 
       const sort = sortList.find(
@@ -76,7 +79,7 @@ export const Home: React.FC = () => {
       <Header />
       <div className="container" style={{ marginTop: 30 }}>
         <div className="content__top">
-          <Categories categoryId={categoryId}/>
+          <Categories categoryId={categoryId} />
           <Sort value={sort} />
         </div>
         <h2 className="content__title">Все пиццы</h2>
