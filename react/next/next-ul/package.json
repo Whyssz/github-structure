@@ -1,0 +1,17 @@
+{
+  "name": "next-start",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "next dev"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "next": "^13.0.6",
+    "react-dom": "^18.2.0",
+    "rect": "^1.2.1"
+  }
+}
