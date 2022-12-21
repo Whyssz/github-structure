@@ -1,12 +1,18 @@
 import dotenv from 'dotenv';
 import express from 'express';
+import mongoose from 'mongoose';
 import morgan from 'morgan';
 import colors from 'colors';
+// import colors from 'colors';
 
+import { connectDB } from './config/db.js';
 import userRoutes from './routes/userRoutes.js';
 
 // controller for all
 dotenv.config();
+mongoose.set('strictQuery', false);
+
+connectDB();
 
 const app = express();
 
