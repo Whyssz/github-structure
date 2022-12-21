@@ -3,7 +3,7 @@ import mongoose from 'mongoose';
 
 const userSchema = mongoose.Schema(
   {
-    name: string,
+    name: String,
     password: {
       type: String,
       required: true,
@@ -23,7 +23,7 @@ const userSchema = mongoose.Schema(
   }
 );
 
-userSchema.methods.matchPAssword = async function (enteredPassword) {
+userSchema.methods.matchPassword = async function (enteredPassword) {
   return await bcrypt.compare(enteredPassword, this.password);
 };
 

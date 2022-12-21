@@ -4,8 +4,11 @@ import mongoose from 'mongoose';
 import morgan from 'morgan';
 import colors from 'colors';
 // import colors from 'colors';
-
+// Config
 import { connectDB } from './config/db.js';
+// Middleware
+import { errorHandler, notFound } from './middleware/errorMiddleware.js';
+// Routes
 import userRoutes from './routes/userRoutes.js';
 
 // controller for all
@@ -23,6 +26,9 @@ if (process.env.NODE_ENV === 'development') app.use(morgan('dev'));
 app.use(express.json());
 
 app.use('/api/users', userRoutes);
+
+app.use(notFound);
+app.use(errorHandler);
 
 const PORT = process.env.PORT || 5000;
 
