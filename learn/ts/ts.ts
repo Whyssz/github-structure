@@ -7,11 +7,12 @@
     5. undefained 
     6. object
     7*. symbol
-    8*. bigint
 
-	void - инчего не возвращает
-	never - возвразает ошибку или постоянно выполняется
-
+	void - ничего не возвращает (ничего или игнорирование ответа)
+	never - возвращает ошибку или постоянно выполняется (throw err or infinity)
+	union - несколько типов одновременно (string | number)
+	
+	interface
 	enum 
 	type
 
@@ -20,6 +21,18 @@
 	(function(Directions){
 		...
 	})(Direction || (Directions = {}));
+*/
+
+/*
+	const obj = {
+		name: 'Dima',
+		age: 24,
+		option: 'easy' | 'hard' = 'easy'
+	}
+  // PROPS => const test = ({obj: {name: string, age?: number}}): void | string => {
+	const test = (obj: {name: string, age?: number}) => {
+		return `My name: ${obj.name}`
+	}
 */
 
 /*
