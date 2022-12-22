@@ -27,6 +27,7 @@ app.use(express.json());
 
 app.use('/api/users', userRoutes);
 
+// middleware config
 app.use(notFound);
 app.use(errorHandler);
 
