@@ -24,6 +24,6 @@ const exerciseLogSchema = mongoose.Schema(
   }
 );
 
-const ExerciseLog = mongoose.model('ExerciseLog', exerciseLogSchema);
+const ExerciseLog = mongoose.model('ExerciseLog  ', exerciseLogSchema);
 
 export default ExerciseLog;

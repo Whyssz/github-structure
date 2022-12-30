@@ -14,3 +14,12 @@ export const addNewWorkout = asyncHandler(async (req, res) => {
 
   res.json(workout);
 });
+
+// @desc   Get workout
+// @route  GET /api/workouts/:id
+// @access Private
+export const getWorkout = asyncHandler(async (req, res) => {
+  const workout = await Workout.findById(req.params.id).populate('exercises');
+
+  res.json(workout);
+});
