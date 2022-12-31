@@ -19,7 +19,12 @@ export const addNewWorkout = asyncHandler(async (req, res) => {
 // @route  GET /api/workouts/:id
 // @access Private
 export const getWorkout = asyncHandler(async (req, res) => {
-  const workout = await Workout.findById(req.params.id).populate('exercises');
+  const workout = await Workout.findById(req.params.id)
+    .populate('exercises')
+    .lean();
 
-  res.json(workout);
+  const minutes = Math.round(workout.exercises.length * 3.7);
+
+  // res.json({ ...workout.toObject(), minutes });
+  res.json({ ...workout, minutes });
 });
