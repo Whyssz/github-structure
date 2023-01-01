@@ -1,7 +1,7 @@
 import asyncHandler from 'express-async-handler';
 import ExerciseLog from '../../../models/exercise/exerciseLogModel.js';
 
-// @desc   Update exerciseLog
+// @desc   Update exercise log
 // @route  PUT /api/exercises/log/:id
 // @access Private
 export const updateExerciseLog = asyncHandler(async (req, res) => {
@@ -24,6 +24,26 @@ export const updateExerciseLog = asyncHandler(async (req, res) => {
   newTimes[timeIndex][key] = value;
 
   currentLog.times = newTimes;
+
+  const updatedLog = await currentLog.save();
+
+  res.json(updatedLog);
+});
+
+// @desc   Update status complete of the exercise
+// @route  PUT /api/exercises/log/complete
+// @access Private
+export const updateCompletedExercises = asyncHandler(async (req, res) => {
+  const { logId, completed } = req.body;
+
+  const currentLog = await ExerciseLog.findById(logId);
+
+  if (!currentLog) {
+    res.status(404);
+    throw new Error('Данный лог не найден!');
+  }
+
+  currentLog.completed = completed;
 
   const updatedLog = await currentLog.save();
 
