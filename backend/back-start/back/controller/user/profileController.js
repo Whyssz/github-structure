@@ -1,4 +1,5 @@
 import asyncHandler from 'express-async-handler';
+import ExerciseLog from '../../models/exercise/exerciseLogModel.js';
 import User from '../../models/userModel.js';
 
 /*
@@ -8,6 +9,13 @@ import User from '../../models/userModel.js';
 */
 export const getUserProfile = asyncHandler(async (req, res) => {
   const user = await User.findById(req.user._id).select('-password');
+
+  const exerciseLogByUser = await ExerciseLog.find({
+    user: user._id,
+    completed: true,
+  });
+
+  
 
   res.json(user);
 });
