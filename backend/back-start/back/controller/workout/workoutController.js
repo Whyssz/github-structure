@@ -67,3 +67,12 @@ export const deleteWorkout = asyncHandler(async (req, res) => {
 
   res.json({ message: 'Workout has been removed' });
 });
+
+// @desc   Get workouts
+// @route  GET /api/workouts
+// @access Private
+export const getWorkouts = asyncHandler(async (req, res) => {
+  const workouts = await Workout.find({}).populate('exercises');
+
+  res.json(workouts);
+});
