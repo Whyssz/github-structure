@@ -4,5 +4,5 @@ import { TypegooseModuleOptions } from 'nestjs-typegoose';
 export const getMongodbConfig = async (
   configService: ConfigService
 ): Promise<TypegooseModuleOptions> => ({
-  uri: configService.get(''),
+  uri: configService.get('MONGO_URI'),
 });
