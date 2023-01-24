@@ -11,9 +11,9 @@ import { AuthService } from './auth.service';
     TypegooseModule.forFeature([
       {
         typegooseClass: UserModel,
-        schemaOptions: {
-          collection: 'User',
-        },
+        // schemaOptions: {
+        //   collection: 'User',
+        // },
       },
     ]),
     ConfigModule,
