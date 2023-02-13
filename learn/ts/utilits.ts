@@ -1,19 +1,31 @@
 /*
   1. Readonly<User>
+  2. Required<Props> - все поля обязательные для заполнения
+  2*. Partial - например для обновления профиля может случится, что нужно будет обновить только 1 поле из 5
   
-  2. Required<Props>
-
   3. Record<K, T>
     interface PageInfo {
       title: string
     }
 
-    type Page = 'home' | 'about' | 'contact'
+    type Page = 'home' | 'about' | 'contact' 
+    OR 
+    enum Info{
+      home: 'home',
+      about: 'about',
+      contact: 'contact'
+    }
+    type Page = Info;
 
-    const x: Recodr<Page, PageInfo> = {
+    const x: Record<Page, PageInfo> = {
       about: {title: 'home'},
       contact: {title: 'contact'},
       home: {title: 'home'},
+    }
+    OR
+    type ArrData = Record<number, ArrNumb[]>
+    function backArrNumbs(num: number):ArrData  {
+      return [number, number] 
     }
 
   4. Pick // Выборочная подстановка свойств
@@ -32,4 +44,3 @@
 
   10. InstanceType<T>
 */
-

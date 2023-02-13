@@ -17,4 +17,4 @@ The main purpose of this project (repository) is to collect in one place all the
 
 <!-- * { name } - this sign means that the project is a test work from some company -->
 
-[resume in develope](#)
+[resume/cv](https://docs.google.com/document/d/1T5u8k_leCZFGqRg73p4v0FB2TWrmob5RhczIkXgzU3s/edit)

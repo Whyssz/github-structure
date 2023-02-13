@@ -12,4 +12,8 @@ export class UserController {
 	async getProfile(@User('_id') _id: string) {
 		return this.userService.byId(_id);
 	}
+
+	// @UsePipes(new ValidationPipe())
+	// @Put('profile')
+	// @Auth()
 }
