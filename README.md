@@ -2,19 +2,19 @@
 
 The main purpose of this project (repository) is to collect in one place all the things I do (link or files themselves), what is in development/plans or scheme showing what is important
 
-* `learn` - experimental projects with data storage
-* `js-ts / react / redux` - places where I try and learn things on the subject =)
+## Preview
+[website](http://o97759zw.beget.tech)
 
-## Pet - easy to view
+[resume/cv](https://docs.google.com/document/d/1T5u8k_leCZFGqRg73p4v0FB2TWrmob5RhczIkXgzU3s/edit)
 
-|Name|Spec|Link|GitHub|
+<!-- |Name|Spec|Link|GitHub|
 |:--:|:--:|:--:|:--:|
-|Layout|`html/css/js/jq`|[site](http://o97759zw.beget.tech/)|[code](https://github.com/Whyssz/layout-makeup)|
+|Layout|`html/css/js/jq`|[site](http://o97759zw.beget.tech)|[code](https://github.com/Whyssz/layout-makeup)|
 |To Do|`js`|[page](https://whyssz.github.io/pet-todo/)|[code](https://github.com/Whyssz/pet-todo)|
 |Comics|`react`|[spa](https://marvel-comics-course.herokuapp.com/marvel/)|[code](https://github.com/Whyssz/marvel)|
-|Quiz|`react`|[spa](https://whyssz.github.io/quiz-app/)|[code](https://github.com/Whyssz/quiz-app)|
+|Quiz|`react`|[spa](https://whyssz.github.io/quiz-app/)|[code](https://github.com/Whyssz/quiz-app)| -->
 <!-- |{ tests x2+ }|`react`|[test job](#)|[in coming](#)| -->
 
 <!-- * { name } - this sign means that the project is a test work from some company -->
 
-[resume/cv](https://docs.google.com/document/d/1T5u8k_leCZFGqRg73p4v0FB2TWrmob5RhczIkXgzU3s/edit)
+

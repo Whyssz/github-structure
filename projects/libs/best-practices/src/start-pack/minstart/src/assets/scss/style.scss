@@ -1,0 +1,26 @@
+//Global settings
+@import "global";
+@import "fonts";
+@import "vars";
+@import "icomoon";
+
+//Blocks @import "./blocks/html/main";
+// @import "./blocks/main/main";
+body{
+  background-color: gray;
+}
+h1{
+  // font-family: 'InterBold';
+  color: #ededed;
+}
+
+//rule img/icon only - ../img (@img)
+// div{
+//   &:after{ <-- 
+//     background: url(@img/icons/arrow.png);
+//   }
+// }
+
+
+//Media
+@import "media";
