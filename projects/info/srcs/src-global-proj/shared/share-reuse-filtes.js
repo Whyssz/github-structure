@@ -1,3 +1,0 @@
-/*
-  api / config / lib / ui
-*/

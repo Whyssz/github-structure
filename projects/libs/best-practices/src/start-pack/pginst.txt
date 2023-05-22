@@ -1,8 +1,0 @@
-
-json 
-"editor.cursorBlinking": "expand",
-  "editor.cursorStyle": "line",
-  "editor.cursorWidth": 2,
-  "editor.cursorSmoothCaretAnimation": true,
-
-https://github.com/hainproject/hain/releases

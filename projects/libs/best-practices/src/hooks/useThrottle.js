@@ -1,46 +1,46 @@
 /*
-	this - context in file "interview"
-	react-window
-	useThrottle
 	useObserver
 */
-function throttle(fn, delay) {
-	let isThrottled = false;
-	let savedArgs;
-	let savedThis;
+// debounce - схлопывает вызовы
+// throttle - вызывает функцию в определённый интервал
 
-	function wrapper() {
-		if (isThrottled) {
+function throttle(fn, ms) {
+	let isWaiting = false;
+	let savedThis;
+	let savedArgs;
+
+	return function wrapper() {
+		if (isWaiting) {
 			savedArgs = arguments;
 			savedThis = this;
 			return;
 		}
 
 		fn.apply(this, arguments);
-
-		isThrottled = true;
+		isWaiting = true;
 
 		setTimeout(() => {
-			isThrottled = false;
+			isWaiting = false;
+			
 			if (savedArgs) {
 				wrapper.apply(savedThis, savedArgs);
-				savedArgs = savedArgs = null;
+				savedThis = savedArgs = null;
 			}
-		}, delay);
-	}
-
-	return wrapper;
-}
-
-// throttle();
-
-function debounce(fn, delay) {
-	return function () {
-		console.log(this);
-		const fnCall = () => {
-			return console.log(this, 'this');
-			// fn.apply(this, )
-		};
+		}, ms);
 	};
 }
-debounce()();
+
+const f = throttle(console.log, 500);
+f(1);
+f(2);
+setTimeout(() => f(3), 1100);
+setTimeout(() => f(4), 2000);
+
+function debounce(fn, delay) {
+	let timer;
+	return function () {
+		clearTimeout(timer);
+		// timer = setTimeout(() => fn.apply(this, arguments), delay);
+		timer = setTimeout(() => fn(...arguments), delay);
+	};
+}
