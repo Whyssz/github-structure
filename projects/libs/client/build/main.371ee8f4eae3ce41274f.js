@@ -1,0 +1,1 @@
+(()=>{"use strict";console.log(6),"".concat(6)})();

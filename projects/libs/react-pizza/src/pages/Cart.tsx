@@ -8,8 +8,6 @@ import { CartItems } from "../redux/cart/types";
 
 import EmptyCart from "./EmptyCart";
 
-
-
 const Cart: React.FC = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
