@@ -47,6 +47,13 @@
 		],
 		"no-trailing-spaces": "off",
 		"i18next/no-literal-string": ["error", { "markupOnly": true }],
+		"max-len": [
+			"error",
+			{
+				"code": 80,
+				"ignoreComments": true
+			}
+		],
 
 		// thorough check
 		"eslint no-extra-boolean-cast": [
