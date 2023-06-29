@@ -1,15 +1,15 @@
-import { FC } from 'react';
+import { type FC } from 'react';
 import { Link, LinkProps } from 'react-router-dom';
 import { AppLinkTheme } from 'shared/config/themeConfig/theme.config';
 import { classNames } from 'shared/lib/classNames';
 import styles from './AppLink.module.scss';
 
-interface AppLink extends LinkProps {
+interface AppLinkProps extends LinkProps {
 	className?: string;
 	theme?: AppLinkTheme;
 }
 
-export const AppLink: FC<AppLink> = props => {
+export const AppLink: FC<AppLinkProps> = props => {
 	const {
 		to,
 		className,

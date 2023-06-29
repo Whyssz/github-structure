@@ -1,9 +1,7 @@
 declare const __IS_DEV__: boolean;
 
 declare module '*.scss' {
-	interface IClassNames {
-		[className: string]: string;
-	}
+	type IClassNames = Record<string, string>;
 	const classNames: IClassNames;
 	export = classNames;
 }

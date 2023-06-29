@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { type FC } from 'react';
 import { AppLinkTheme } from 'shared/config/themeConfig/theme.config';
 import { classNames } from 'shared/lib/classNames';
 import { AppLink } from 'shared/ui/AppLink/AppLink';

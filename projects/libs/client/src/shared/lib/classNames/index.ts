@@ -9,7 +9,7 @@ export const classNames = (
 		cls,
 		...additional.filter(Boolean),
 		...Object.entries(mods).reduce((acc, [key, value]) => {
-			if (Boolean(value)) {
+			if (Boolean(value) && value !== '') {
 				return acc.concat(key);
 			}
 			return acc;

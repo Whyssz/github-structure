@@ -5,15 +5,15 @@ import { buildPlugins } from './buildPlugins';
 import { buildResolvers } from './buildResolvers';
 import { BuildOptions } from './types/config';
 
-export function buildWebpackConfig(
+export function buildWebpackConfig (
 	options: BuildOptions
 ): webpack.Configuration {
-	const { paths, mode, isDev } = options; 
+	const { paths, mode, isDev } = options;
 
 	return {
-		mode: mode,
+		mode,
 		entry: paths.entry,
-		output: { 
+		output: {
 			filename: '[name].[contenthash].js',
 			path: paths.build,
 			clean: true,

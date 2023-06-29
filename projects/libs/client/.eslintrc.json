@@ -1,0 +1,57 @@
+{
+	"env": {
+		"browser": true,
+		"es2021": true
+	},
+	"extends": ["standard-with-typescript", "plugin:react/recommended"],
+	"parserOptions": {
+		"project": ["./tsconfig.json"],
+		"ecmaVersion": "latest",
+		"sourceType": "module",
+		"ecmaFeatures": {
+			"jsx": true
+		}
+	},
+	"plugins": ["react"],
+	"rules": {
+		"react/react-in-jsx-scope": "off",
+		"react/jsx-filename-extension": [
+			1,
+			{ "extensions": [".js", ".jsx", ".tsx"] }
+		],
+		"import/no-unresolved": "off",
+		"semi": "off",
+		"@typescript-eslint/member-delimiter-style": "off",
+		"indent": [2, "tab"],
+		"no-tabs": 0,
+		"@typescript-eslint/indent": "off",
+		"@typescript-eslint/semi": ["error", "always"],
+		"import/prefer-default-export": "off",
+		"@typescript-eslint/no-unused-vars": "off",
+		"no-unused-vars": "warn",
+		"comma-dangle": "off",
+		"@typescript-eslint/comma-dangle": "off",
+		"@typescript-eslint/consistent-type-imports": "off",
+		"@typescript-eslint/space-before-function-paren": "warn",
+		"@typescript-eslint/naming-convention": "off",
+		"@typescript-eslint/explicit-function-return-type": "off",
+		"@typescript-eslint/no-misused-promises": [
+			"error",
+			{
+				"checksVoidReturn": false
+			}
+		],
+		"no-trailing-spaces": "off",
+
+		"eslint no-extra-boolean-cast": [
+			"off",
+			{ "enforceForLogicalOperands": true }
+		],
+		// only imports/type
+		"@typescript-eslint/strict-boolean-expressions": "off",
+		"@typescript-eslint/prefer-nullish-coalescing": "off"
+	},
+	"globals": {
+		"__IS_DEV__": true
+	}
+}

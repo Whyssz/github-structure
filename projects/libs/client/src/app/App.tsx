@@ -1,4 +1,4 @@
-import { FC, Suspense } from 'react';
+import { Suspense, type FC } from 'react';
 import { classNames } from 'shared/lib/classNames';
 import { Navbar } from 'widgets/Navbar';
 import { Sidebar } from 'widgets/Sidebar';
@@ -7,8 +7,7 @@ import { AppRouter } from './providers/router';
 
 const App: FC = () => {
 	const { theme } = useTheme();
-	const x = 1;
-	
+
 	return (
 		<div className={classNames('app', { hovered: true, red: false }, [theme])}>
 			<Suspense fallback=''>
