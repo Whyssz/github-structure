@@ -1,44 +1,25 @@
-import { AboutPage } from 'pages/AboutPage';
-import { HomePage } from 'pages/HomePage';
 import { FC, Suspense } from 'react';
-import { Link, Route, Routes } from 'react-router-dom';
 import { classNames } from 'shared/lib/classNames';
+import { Navbar } from 'widgets/Navbar';
+import { Sidebar } from 'widgets/Sidebar';
 import { useTheme } from './providers/ThemeProvider';
+import { AppRouter } from './providers/router';
 
 const App: FC = () => {
-	const { theme, toggleTheme } = useTheme();
-
+	const { theme } = useTheme();
+	const x = 1;
+	
 	return (
-		<div
-			className={classNames('app', { hovered: true, red: false }, [
-				theme,
-				'check',
-			])}
-		>
-			<button onClick={toggleTheme}>Click</button>
-
-			<Link to='/'>Home</Link>
-			<Link to='/about'>About</Link>
-
-			{/* <AppRouter /> */}
-			<Routes>
-				<Route
-					path='/'
-					element={
-						<Suspense fallback={<div>Loading</div>}>
-							<HomePage />
-						</Suspense>
-					}
-				/>
-				<Route
-					path='/about'
-					element={
-						<Suspense fallback={<div>Loading</div>}>
-							<AboutPage />
-						</Suspense>
-					}
-				/>
-			</Routes>
+		<div className={classNames('app', { hovered: true, red: false }, [theme])}>
+			<Suspense fallback=''>
+				<Navbar />
+				<div className='content-page'>
+					<Sidebar />
+					<div className='page-wrapper'>
+						<AppRouter />
+					</div>
+				</div>
+			</Suspense>
 		</div>
 	);
 };
