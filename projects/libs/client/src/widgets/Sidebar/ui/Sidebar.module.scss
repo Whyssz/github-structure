@@ -5,9 +5,11 @@
 	background-color: var(--inverted-bg-color);
 	transition: width 0.3s;
 }
+
 .collapsed {
 	width: var(--sidebar-width-collapsed);
 }
+
 .switchers {
 	position: absolute;
 	bottom: 10px;

@@ -3,7 +3,11 @@
 		"browser": true,
 		"es2021": true
 	},
-	"extends": ["standard-with-typescript", "plugin:react/recommended"],
+	"extends": [
+		"standard-with-typescript",
+		"plugin:react/recommended",
+		"plugin:i18next/recommended"
+	],
 	"parserOptions": {
 		"project": ["./tsconfig.json"],
 		"ecmaVersion": "latest",
@@ -12,7 +16,7 @@
 			"jsx": true
 		}
 	},
-	"plugins": ["react"],
+	"plugins": ["react", "@typescript-eslint", "i18next"],
 	"rules": {
 		"react/react-in-jsx-scope": "off",
 		"react/jsx-filename-extension": [
@@ -42,12 +46,14 @@
 			}
 		],
 		"no-trailing-spaces": "off",
+		"i18next/no-literal-string": ["error", { "markupOnly": true }],
 
+		// thorough check
 		"eslint no-extra-boolean-cast": [
 			"off",
 			{ "enforceForLogicalOperands": true }
 		],
-		// only imports/type
+		// only import/type
 		"@typescript-eslint/strict-boolean-expressions": "off",
 		"@typescript-eslint/prefer-nullish-coalescing": "off"
 	},
