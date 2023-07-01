@@ -6,7 +6,9 @@ describe('classNames', () => {
 	});
 	test('with additional class', () => {
 		const expected = 'first-class second class';
-		expect(classNames('first-class', {}, ['second class'])).toBe(expected);
+		expect(classNames('first-class', {}, ['second class'])).toBe(
+			expected
+		);
 	});
 	test('with mods true', () => {
 		const expected = 'first-class second class active';
@@ -25,9 +27,11 @@ describe('classNames', () => {
 	test('with mods undefined', () => {
 		const expected = 'first-class second class hovered';
 		expect(
-			classNames('first-class', { hovered: true, active: undefined }, [
-				'second class',
-			])
+			classNames(
+				'first-class',
+				{ hovered: true, active: undefined },
+				['second class']
+			)
 		).toBe(expected);
 	});
 });

@@ -2,9 +2,9 @@ import { type FC } from 'react';
 import { useTranslation } from 'react-i18next';
 
 const MainPage: FC = () => {
-	const { t } = useTranslation('main');
+	const { t } = useTranslation();
 
-	return <div>{t('Главная страница')}</div>;
+	return <div>{t('Страница главная')}</div>;
 };
 
 export default MainPage;

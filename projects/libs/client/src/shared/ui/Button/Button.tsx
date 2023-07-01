@@ -6,7 +6,8 @@ export enum ButtonStyle {
 	CLEAR = 'clear',
 }
 
-interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+interface ButtonProps
+	extends ButtonHTMLAttributes<HTMLButtonElement> {
 	className?: string;
 	theme?: ButtonStyle;
 }
@@ -20,7 +21,10 @@ export const Button: FC<ButtonProps> = ({
 	return (
 		<button
 			type='button'
-			className={classNames(styles.Button, {}, [className, styles[theme]])}
+			className={classNames(styles.Button, {}, [
+				className,
+				styles[theme],
+			])}
 			{...rest}
 		>
 			{children}

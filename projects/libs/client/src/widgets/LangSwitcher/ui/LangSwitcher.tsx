@@ -8,7 +8,9 @@ interface LangSwitcherProps {
 	className?: string;
 }
 
-export const LangSwitcher: FC<LangSwitcherProps> = ({ className }) => {
+export const LangSwitcher: FC<LangSwitcherProps> = ({
+	className,
+}) => {
 	const { t, i18n } = useTranslation();
 
 	const onToggle = async () => {
@@ -17,7 +19,10 @@ export const LangSwitcher: FC<LangSwitcherProps> = ({ className }) => {
 
 	return (
 		<Button
-			className={classNames(styles.LangSwitcher, {}, [className, styles.lang])}
+			className={classNames(styles.LangSwitcher, {}, [
+				className,
+				styles.color,
+			])}
 			onClick={onToggle}
 			theme={ButtonStyle.CLEAR}
 		>

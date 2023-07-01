@@ -36,7 +36,7 @@
 		"comma-dangle": "off",
 		"@typescript-eslint/comma-dangle": "off",
 		"@typescript-eslint/consistent-type-imports": "off",
-		"@typescript-eslint/space-before-function-paren": "warn",
+		"@typescript-eslint/space-before-function-paren": "off",
 		"@typescript-eslint/naming-convention": "off",
 		"@typescript-eslint/explicit-function-return-type": "off",
 		"@typescript-eslint/no-misused-promises": [
@@ -51,6 +51,8 @@
 			"error",
 			{
 				"code": 80,
+				"ignorePattern": "^import\\s.+\\sfrom\\s.+;$",
+				"ignoreUrls": true,
 				"ignoreComments": true
 			}
 		],
