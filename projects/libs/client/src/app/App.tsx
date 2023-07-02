@@ -4,6 +4,7 @@ import { Navbar } from 'widgets/Navbar';
 import { Sidebar } from 'widgets/Sidebar';
 import { useTheme } from './providers/ThemeProvider';
 import { AppRouter } from './providers/router';
+
 const App: FC = () => {
 	const { theme } = useTheme();
 

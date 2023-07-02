@@ -1,8 +1,9 @@
-import { classNames } from './index';
+import { classNames } from '.';
 
 describe('classNames', () => {
 	test('with only first param', () => {
-		expect(classNames('single')).toBe('single');
+		const expected = 'first-class';
+		expect(classNames('first-class', {}, [])).toBe(expected);
 	});
 	test('with additional class', () => {
 		const expected = 'first-class second class';
