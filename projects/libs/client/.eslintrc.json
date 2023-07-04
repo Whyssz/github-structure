@@ -21,6 +21,7 @@
 	"plugins": ["react", "@typescript-eslint", "i18next"],
 	"ignorePatterns": [
 		".eslintrc.json",
+		"config/storybook",
 		"babel.config.json",
 		"/config/jest/*"
 	],
@@ -67,6 +68,7 @@
 				"ignoreComments": true
 			}
 		],
+		"react/display-name": "off",
 
 		// thorough check
 		"eslint no-extra-boolean-cast": [
